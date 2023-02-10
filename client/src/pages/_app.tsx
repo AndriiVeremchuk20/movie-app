@@ -1,37 +1,47 @@
 import ChangeThemeButton from "@/components/changeThemeButton";
 import "@/styles/globals.css";
-import { QueryClientProvider, useMutation } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useMutation,
+} from "@tanstack/react-query";
 import type { AppProps } from "next/app";
-import queryClient from "@/api/client";
 import { Header } from "@/components/header";
-// import auth from "@/api/requests/auth";
-// import { useEffect } from "react";
-// import { useAtom } from "jotai";
-// import { appUserAtom } from "@/atom";
+import { useAtom } from "jotai";
+import { appUserAtom } from "@/atom";
+import auth from "@/api/requests/auth";
+import { useEffect } from "react";
 
-export default function App({ Component, pageProps }: AppProps) {
-  
-  // const [,setAppUser] = useAtom(appUserAtom);
-  // const mut = useMutation(auth.authentication, {
-  //   onSuccess(data){
-  //     console.log(data);
-  //     setAppUser(data.user)
-  //   },
-  //   onError(e){
-  //     console.log(e);
-  //   }
-  // });
+const AppWrapper = (props: any) => {
+  return <QueryClientProvider client={new QueryClient()} {...props} />;
+};
 
-  // useEffect(()=>{
-  //   mut.mutate();
-  // },[])
+const AppInner = ({ Component, pageProps }: AppProps) => {
+  const [, setAppUser] = useAtom(appUserAtom);
+  const authMutate = useMutation(auth.authentication, {
+    onSuccess(data) {
+      console.log(data);
+      setAppUser(data.user);
+    },
+    onError(e) {
+      console.log(e);
+    },
+  });
 
+  useEffect(() => {
+    authMutate.mutate();
+  }, []);
+
+  return <Component {...pageProps} />;
+};
+
+export default function App(props: AppProps) {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Header/>
-        <Component {...pageProps} />
-      </QueryClientProvider>
+      <Header />
+      <AppWrapper>
+        <AppInner {...props} />
+      </AppWrapper>
       <ChangeThemeButton />
     </>
   );

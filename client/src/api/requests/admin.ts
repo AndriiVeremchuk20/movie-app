@@ -1,8 +1,10 @@
 import { User } from "@/types/user";
+import Token from "@/utils/token";
 import client from ".";
 
 const paths = {
   getUsers: "/admin/users",
+  postMovie: "/admin/movie",
 };
 
 const getUsers =async () => {
@@ -10,28 +12,21 @@ const getUsers =async () => {
     return response.data;
 }
 
-//   const registration = async (body: RegistrationRequestBody) => {
-//     const response = await client.post<ResponseMessage>(paths.registration, body);
-//     return response.data;
-//   };
+const addMovie =async (body:FormData) => {
+  const token = Token.get();
+  const response = await client.post<any>(paths.postMovie, body, {
+    headers: {
+      Authorization:  `Bearer ${token}`,
+      "Content-Type": "multipart/form-data"
+    }
+  });
 
-//   const login = async (body: LoginRequestBody) => {
-//     const response = await client.post<LoginResponseData>(paths.login, body);
-//     Token.set(response.data.token);
-//     return response.data;
-//   };
-
-//   const authentication = async () => {
-//     const token = Token.get();
-//     const response = await client.get<LoginResponseData>(paths.auth, {
-//       headers: { Authorization: `Bearer ${token}` },
-//     });
-//     Token.set(response.data.token);
-//     return response.data;
-//   };
+  return response.data;
+}
 
 const admin = {
     getUsers,
+    addMovie,
 };
 
 export default admin;

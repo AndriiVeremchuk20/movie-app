@@ -89,6 +89,7 @@ const Login = () => {
           )}
         </div>
         <button
+          disabled={isLoading}
           className="w-full bg-lime-400 dark:bg-lime-500 my-3 py-2 hover:bg-lime-500 dark:hover:bg-lime-600"
           type="submit"
         >

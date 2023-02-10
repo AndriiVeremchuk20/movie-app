@@ -38,7 +38,7 @@ route.post(
       const { firstName, lastName, email } = req.body;
       const password = hashPassword(req.body.password);
       const age = parseInt(req.body.age);
-
+    
       const newUser = await prisma.user.create({
         data: {
           firstName,

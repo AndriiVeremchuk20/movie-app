@@ -6,20 +6,6 @@ import Head from "next/head";
 import { useEffect } from "react";
 
 export default function Home() {
-  const [,setUser] = useAtom(appUserAtom);
-  const userAuthentication = useMutation(auth.authentication, {
-    onSuccess(data) {
-      console.log(data);
-      setUser(data.user);
-    },
-    onError(e) {
-      console.log(e);
-    },
-  });
-
-  useEffect(() => {
-    userAuthentication.mutate();
-  }, []);
 
   return (
     <>
