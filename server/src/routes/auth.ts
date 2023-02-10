@@ -5,7 +5,7 @@ import prisma from "../../prisma";
 import registrationMiddleware from "../middleware/registration";
 import authMiddleware from "../middleware/auth";
 import { generateAccessTocken } from "../utils/token";
-import { Role } from "@prisma/client";
+//import { Role } from "@prisma/client"; // use to set admin
 
 const route = Router();
 

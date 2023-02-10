@@ -1,11 +1,28 @@
-import auth from "@/api/requests/auth";
-import { appUserAtom } from "@/atom";
+
+import moviesApi from "@/api/movies";
+import { appUserAtom, moviesAtom } from "@/atom";
+import MoviesList from "@/components/moviesList";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
 import { useEffect } from "react";
 
 export default function Home() {
+  const [moviesList, setMoviesList] = useAtom(moviesAtom);
+
+  const getMoviesMutation = useMutation(moviesApi.getMovies, {
+    onSuccess(data){
+      console.log(data);
+      setMoviesList(data);
+    },
+    onError(e){
+      console.log(e);
+    }
+  });
+
+  useEffect(()=>{
+    getMoviesMutation.mutate();
+  },[])
 
   return (
     <>
@@ -15,9 +32,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="h-screen min-h-200 max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
-        <div className="w-3/4">
-
+      <div className="min-h-200 max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
+        <div className="h-auto w-3/4 mt-36 pb-10 mb-10 bg-purple-900">
+          <MoviesList moviesList={moviesList}/>
         </div>
       </div>
     </>

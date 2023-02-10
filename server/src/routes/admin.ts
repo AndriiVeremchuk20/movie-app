@@ -53,8 +53,8 @@ route.post("/movie", async (req: Request, res: Response) => {
       data: {
         name,
         description,
-        posterPath: posterPath.slice(1),
-        moviePath: moviePath.slice(1),
+        posterPath: posterPath.slice(8),
+        moviePath: moviePath.slice(8),
       },
     });
 

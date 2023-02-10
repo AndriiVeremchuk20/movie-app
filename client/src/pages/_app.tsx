@@ -9,7 +9,7 @@ import type { AppProps } from "next/app";
 import { Header } from "@/components/header";
 import { useAtom } from "jotai";
 import { appUserAtom } from "@/atom";
-import auth from "@/api/requests/auth";
+import auth from "@/api/auth";
 import { useEffect } from "react";
 
 const AppWrapper = (props: any) => {

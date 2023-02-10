@@ -1,4 +1,4 @@
-import auth from "@/api/requests/auth";
+import auth from "@/api/auth";
 import { appUserAtom } from "@/atom";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";

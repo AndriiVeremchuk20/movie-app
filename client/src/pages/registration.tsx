@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BiShow, BiHide } from "react-icons/bi";
-import auth from "../api/requests/auth";
+import auth from "../api/auth";
 
 type Inputs = {
   firstName: string;

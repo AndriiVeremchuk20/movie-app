@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const PORT = 5000;
-const BASE_URL = `http://localhost:${PORT}`;
+export const BASE_URL = `http://localhost:${PORT}`;
 
 const client = axios.create({
   baseURL: BASE_URL,
