@@ -4,5 +4,5 @@ export interface Movie {
     description: string;
     moviePath: string;
     posterPath: string;
-    postedAt: string;    
+    year: string;    
 }

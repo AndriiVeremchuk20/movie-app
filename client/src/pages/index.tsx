@@ -32,8 +32,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-200 max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
-        <div className="h-auto w-3/4 mt-36 pb-10 mb-10 bg-purple-900">
+      <div className="min-h-screen max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
+        <div className="h-auto w-3/4 mt-36 pb-10 mb-10 bg-sky-800 flex justify-center">
           <MoviesList moviesList={moviesList}/>
         </div>
       </div>

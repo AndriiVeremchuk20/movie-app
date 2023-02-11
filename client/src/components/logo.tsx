@@ -6,7 +6,7 @@ export const Logo = () => {
   const route = useRouter();
 
   const onLogoClick = useCallback(() => {
-    route.push("/");
+    route.replace("/");
   }, []);
 
   return (

@@ -18,7 +18,7 @@ export const UserIcon = () => {
   const onLogoutClick = useCallback(()=>{
     setUser(null);
     Token.clear();
-  }, [])
+  }, [user]);
 
   if (user) {
     return (

@@ -12,7 +12,7 @@ const MoviesList: React.FC<PropsMoviesList> = ({ moviesList }) => {
   }
 
   return (
-    <div className={`w-full grid grid-cols-4 gap-4`}>
+    <div className={`grid grid-flow-row-dense grid-cols-5 gap-3 mt-3`}>
       {moviesList.map((movie) => (
         <MoviesCard key={movie.id} movie={movie} />
       ))}
