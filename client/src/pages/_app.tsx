@@ -38,8 +38,8 @@ const AppInner = ({ Component, pageProps }: AppProps) => {
 export default function App(props: AppProps) {
   return (
     <>
-      <Header />
       <AppWrapper>
+      <Header />
         <AppInner {...props} />
       </AppWrapper>
       <ChangeThemeButton />

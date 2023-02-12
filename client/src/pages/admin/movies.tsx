@@ -1,4 +1,4 @@
-import admin from "@/api/requests/admin";
+import admin from "@/api/admin";
 import { useMutation } from "@tanstack/react-query";
 import React, { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

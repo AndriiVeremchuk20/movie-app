@@ -3,6 +3,7 @@ import { Movie } from "./types/movie";
 
 const paths = {
     getMovies: "/media/",
+    searchMovies: "/media/search?search_query="
 }
 
 const getMovies = async () => { 
@@ -15,9 +16,15 @@ const getMoviesById = async (id: string) => {
     return response.data;
 }
 
+const searchMovies =async (keyWord: string) => {
+    const response = await client.get<Array<Movie>>(`${paths.searchMovies}${keyWord}`);
+    return response.data;
+}
+
 const movies = {
     getMovies,
     getMoviesById,
+    searchMovies,
 }
 
 export default movies;
