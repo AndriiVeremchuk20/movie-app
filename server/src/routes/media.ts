@@ -27,10 +27,6 @@ route.get("/search", async (req: Request, res: Response) => {
     });
 
     res.status(200).send(results);
-
-    res.status(200).send({msg: "All good"});
-
-
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

@@ -1,28 +1,44 @@
-
 import moviesApi from "@/api/movies";
 import { appUserAtom, moviesAtom } from "@/atom";
 import MoviesList from "@/components/moviesList";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Home() {
   const [moviesList, setMoviesList] = useAtom(moviesAtom);
+  const router = useRouter();
+  const { query } = router.query;
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
-    onSuccess(data){
+    onSuccess(data) {
       console.log(data);
       setMoviesList(data);
     },
-    onError(e){
+    onError(e) {
       console.log(e);
-    }
+    },
   });
 
-  useEffect(()=>{
-    getMoviesMutation.mutate();
-  },[])
+  const searchMutation = useMutation(moviesApi.searchMovies, {
+    onSuccess(data) {
+      console.log(data);
+      setMoviesList(data);
+    },
+    onError(e) {
+      console.log(e);
+    },
+  });
+
+  useEffect(() => {
+    if (query && query.length > 0 && !Array.isArray(query)) {
+      searchMutation.mutate(query);
+    } else {
+      getMoviesMutation.mutate();
+    }
+  }, [query]);
 
   return (
     <>
@@ -33,8 +49,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
-        <div className="h-auto w-3/4 mt-36 pb-10 mb-10 bg-emerald-500  dark:bg-sky-800 flex justify-center">
-          <MoviesList moviesList={moviesList}/>
+        <div className="h-auto md:w-3/4 w-screen mt-36 pb-10 mb-10 bg-emerald-500 dark:bg-sky-800 flex justify-center">
+          <div>
+          {
+            query?<div className="text-2xl m-2">{`Results for "${query}" :`}</div>:null
+          }  
+          <MoviesList moviesList={moviesList} />
+          </div>
         </div>
       </div>
     </>
