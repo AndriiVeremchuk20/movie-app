@@ -1,6 +1,8 @@
 import auth from "@/api/auth";
+import { ResponseError } from "@/api/types/error";
 import { appUserAtom } from "@/atom";
 import { useMutation } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,6 +17,7 @@ type Inputs = {
 
 const Login = () => {
   const [showPassword, setStowPassword] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [, setAppUser] = useAtom(appUserAtom);
   const route = useRouter();
 
@@ -31,6 +34,10 @@ const Login = () => {
       route.push("/");
     },
     onError(e) {
+      if(isAxiosError(e)&&e.response){
+        const error = e.response.data as ResponseError;
+        setErrorMessage(error.msg);
+      }
       console.log(e);
     },
   });
@@ -47,7 +54,8 @@ const Login = () => {
     <div className="h-screen bg-lime-600 dark:bg-indigo-900 flex">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`bg-slate-200 dark:bg-slate-400 h-auto w-auto m-auto flex flex-col p-6 border-solid border-2 border-indigo-900 rounded shadow-2xl`}
+        className={`bg-slate-200 dark:bg-slate-400 h-auto w-96 m-auto flex 
+        flex-col p-6 border-solid border-2 border-indigo-900 rounded shadow-2xl`}
       >
         <div className="text-3xl font-mono font-bold">Login</div>
         <div className="flex flex-col">
@@ -100,6 +108,9 @@ const Login = () => {
           <Link href={"registration"} className="text-indigo-600 underline">
             Registration
           </Link>
+        </div>
+        <div className={`w-full h-auto text-xl bg-red-700 text-white`}>
+            {errorMessage}
         </div>
       </form>
     </div>
