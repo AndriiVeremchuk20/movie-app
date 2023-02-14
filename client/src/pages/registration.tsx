@@ -1,4 +1,6 @@
+import { ResponseError } from "@/api/types/error";
 import { useMutation } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
@@ -18,7 +20,7 @@ type Inputs = {
 const Registration = () => {
   const [showPassword, setStowPassword] = useState<boolean>(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
-  const [message, setMessage] = useState<String>("");
+  const [message, setMessage] = useState<string>("");
   const router = useRouter();
 
   const {
@@ -35,8 +37,11 @@ const Registration = () => {
         setMessage(data.msg);
         router.push("/login");
       },
-      onError(e: {response: {data: {msg: String}} }) {
-        setMessage(e.response.data.msg);
+      onError(e) {
+        if(isAxiosError(e)&&e.response){
+          const resMessage = e.response.data as ResponseError;
+          setMessage(resMessage.msg);
+        }
         console.log(e);
       },
     }
