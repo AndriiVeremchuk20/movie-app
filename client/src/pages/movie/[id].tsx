@@ -32,7 +32,7 @@ const MoviePage = () => {
         <div className={`w-3/4  mt-32 flex flex-col`}>
           <MovieInfo movie={currentMovie} />
           <div className={`w-full h-auto my-10`}>
-            <Video subPath={currentMovie.moviePath} />
+            <Video id={currentMovie.id} videoPath={currentMovie.moviePath}/>
           </div>
 
         </div>

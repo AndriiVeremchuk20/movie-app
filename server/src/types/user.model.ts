@@ -1,6 +1,6 @@
-import { Prisma, Role } from "@prisma/client";
+import { Role } from "@prisma/client";
 
 export interface UserModel {
-  id: Prisma.IntFilter;
+  id: string;
   roles: Role;
 }

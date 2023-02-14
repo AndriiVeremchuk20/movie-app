@@ -11,6 +11,7 @@ import { useAtom } from "jotai";
 import { appUserAtom } from "@/atom";
 import auth from "@/api/auth";
 import { useEffect } from "react";
+import Footer from "@/components/footer";
 
 const AppWrapper = (props: any) => {
   return <QueryClientProvider client={new QueryClient()} {...props} />;
@@ -41,6 +42,7 @@ export default function App(props: AppProps) {
       <AppWrapper>
       <Header />
         <AppInner {...props} />
+        <Footer/>
       </AppWrapper>
       <ChangeThemeButton />
     </>

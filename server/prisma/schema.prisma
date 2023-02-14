@@ -11,48 +11,62 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  role      Role     @default(USER)
-  firstName String
-  lastName  String
-  age       Int
-  email     String   @unique
-  password  String
-  reviews   Review[]
-  Like      Like[]
-  // theme
-  // lang
-  // watched movies
-  
+  id         String    @id @default(cuid())
+  role       Role      @default(USER)
+  firstName  String
+  lastName   String
+  age        Int
+  email      String    @unique
+  password   String
+  reviews    Review[]
+  likes      Like[]
+  dislikes   Dislike[]
+  watchLater Movie[]   @relation("watchLater")
+  viewed     Movie[]   @relation("viewed")
 }
 
 model Movie {
-  id          Int      @id @default(autoincrement())
-  posterPath  String
-  moviePath   String 
-  name        String
-  description String
-  year        DateTime @default(now())
-  reviews     Review[]
-  
+  id           String    @id @default(cuid())
+  posterPath   String
+  moviePath    String
+  name         String
+  description  String
+  postedAt     DateTime  @default(now())
+  likes        Like[]
+  dislike      Dislike[]
+  Review       Review[]
+  watchLater   User?     @relation("watchLater", fields: [watchLaterId], references: [id])
+  viewed       User?     @relation("viewed", fields: [viewedId], references: [id])
+  watchLaterId String?
+  viewedId     String?
 }
 
 model Like {
-  id       Int    @id @default(autoincrement())
-  user     User   @relation(fields: [userId], references: [id])
-  userId   Int
-  review   Review @relation(fields: [reviewId], references: [id])
-  reviewId Int
+  id String @id @default(cuid())
+
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId String
+}
+
+model Dislike {
+  id String @id @default(cuid())
+
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId String
 }
 
 model Review {
-  id        Int      @id @default(autoincrement())
+  id String @id @default(cuid())
+
   posted_at DateTime @default(now())
   Movie     Movie    @relation(fields: [movieId], references: [id])
+  movieId   String
   User      User     @relation(fields: [userId], references: [id])
-  movieId   Int
-  userId    Int
-  likes     Like[]
+  userId    String
 }
 
 enum Role {

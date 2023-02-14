@@ -18,7 +18,7 @@ const MovieInfo: React.FC<PropsMovieInfo> = ({movie}) => {
     <div className={` w-3/4 divide-y mx-5`}>
       <div className={`flex justify-between mx-3 my-2 mt-4`}>
         <div className="text-3xl font-bold">{movie.name}</div>
-        <div className="text-sm">{movie.year.slice(0, 10)}</div>
+        <div className="text-sm">{movie.postedAt.slice(0, 10)}</div>
       </div>
       <div className="text-justify overflow-y-auto">
         <div className={`my-5`}>{movie.description}</div>

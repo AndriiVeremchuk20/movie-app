@@ -5,7 +5,7 @@ const route = Router();
 
 route.get("/", async (req: Request, res: Response) => {
   try {
-    const movies = await prisma.movie.findMany({orderBy: [{year: "desc"}]});
+    const movies = await prisma.movie.findMany({orderBy: [{postedAt: "desc"}]});
     res.status(200).send(movies);
   } catch (e) {
     console.log(e);
@@ -40,7 +40,7 @@ route.get("/:id", async (req: Request, res: Response) => {
 
     try {
       const movie = await prisma.movie.findFirstOrThrow({
-        where: { id: parseInt(id) },
+        where: { id: id },
       });
 
       res.status(200).send(movie);
