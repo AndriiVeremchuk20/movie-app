@@ -1,3 +1,4 @@
+import { Dislike, Like } from "@/types/like";
 import Token from "@/utils/token";
 import client from "./";
 
@@ -8,7 +9,7 @@ const paths = {
 
 const likeMovie = async (movieId: string) => {
   const token = Token.get();
-  const response = await client.post(
+  const response = await client.post<Like>(
     paths.like,
     { movieId: movieId },
     {
@@ -21,7 +22,7 @@ const likeMovie = async (movieId: string) => {
 
 const dislikeMovie = async (movieId: string) => {
   const token = Token.get();
-  const response = await client.post(
+  const response = await client.post<Dislike>(
     paths.dislike,
     { movieId: movieId },
     {
@@ -33,7 +34,7 @@ const dislikeMovie = async (movieId: string) => {
 
 const deleteLike = async (movieId: string) => {
   const token = Token.get();
-  const response = await client.delete(`${paths.like}/${movieId}`, {
+  const response = await client.delete<Like>(`${paths.like}/${movieId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
@@ -41,7 +42,7 @@ const deleteLike = async (movieId: string) => {
 
 const deleteDislike = async (movieId: string) => {
   const token = Token.get();
-  const response = await client.delete(`${paths.dislike}/${movieId}`, {
+  const response = await client.delete<Dislike>(`${paths.dislike}/${movieId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;

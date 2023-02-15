@@ -52,7 +52,7 @@ route.get("/:id", async (req: Request, res: Response) => {
           posterPath: true,
           moviePath: true,
           likes: true,
-          dislike: true,
+          dislikes: true,
         }
       });
 
