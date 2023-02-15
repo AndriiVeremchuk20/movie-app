@@ -5,7 +5,10 @@ const route = Router();
 
 route.get("/", async (req: Request, res: Response) => {
   try {
-    const movies = await prisma.movie.findMany({orderBy: [{postedAt: "desc"}]});
+    const movies = await prisma.movie.findMany({
+      select: { name: true, postedAt: true, posterPath: true, id: true },
+      orderBy: [{ postedAt: "desc" }],
+    });
     res.status(200).send(movies);
   } catch (e) {
     console.log(e);
@@ -20,10 +23,11 @@ route.get("/search", async (req: Request, res: Response) => {
 
     const results = await prisma.movie.findMany({
       where: {
-         name:{
+        name: {
           contains: `${search_query ?? ""}`,
-         } 
-      }
+        },
+      },
+      select: { name: true, postedAt: true, posterPath: true, id: true },
     });
 
     res.status(200).send(results);
@@ -33,7 +37,6 @@ route.get("/search", async (req: Request, res: Response) => {
   }
 });
 
-
 route.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -41,6 +44,16 @@ route.get("/:id", async (req: Request, res: Response) => {
     try {
       const movie = await prisma.movie.findFirstOrThrow({
         where: { id: id },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          postedAt: true,
+          posterPath: true,
+          moviePath: true,
+          likes: true,
+          dislike: true,
+        }
       });
 
       res.status(200).send(movie);

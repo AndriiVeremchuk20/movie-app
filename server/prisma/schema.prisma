@@ -20,7 +20,7 @@ model User {
   password   String
   reviews    Review[]
   likes      Like[]
-  dislikes   Dislike[]
+  dislikes   Dislike[] 
   watchLater Movie[]   @relation("watchLater")
   viewed     Movie[]   @relation("viewed")
 }
@@ -43,25 +43,26 @@ model Movie {
 
 model Like {
   id String @id @default(cuid())
-
   user    User   @relation(fields: [userId], references: [id])
   userId  String
   movie   Movie  @relation(fields: [movieId], references: [id])
   movieId String
+
+  @@unique([userId, movieId])  
 }
 
 model Dislike {
   id String @id @default(cuid())
-
   user    User   @relation(fields: [userId], references: [id])
   userId  String
   movie   Movie  @relation(fields: [movieId], references: [id])
   movieId String
+
+  @@unique([userId, movieId])  
 }
 
 model Review {
   id String @id @default(cuid())
-
   posted_at DateTime @default(now())
   Movie     Movie    @relation(fields: [movieId], references: [id])
   movieId   String

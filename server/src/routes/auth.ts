@@ -38,7 +38,7 @@ route.post(
       const { firstName, lastName, email } = req.body;
       const password = hashPassword(req.body.password);
       const age = parseInt(req.body.age);
-    
+
       const newUser = await prisma.user.create({
         data: {
           firstName,
@@ -68,7 +68,7 @@ route.post(
   async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
-      
+
       try {
         const loginUser = await prisma.user.findFirstOrThrow({
           where: {
@@ -108,6 +108,16 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
     try {
       const currUser = await prisma.user.findFirstOrThrow({
         where: { id: id },
+        select: {
+          firstName: true,
+          lastName: true,
+          age: true,
+          id: true,
+          role: true,
+          likes: true,
+          dislikes: true,
+          email: true,
+        },
       });
       const token = generateAccessTocken(currUser.id, currUser.role);
       res.status(201).send({
@@ -117,13 +127,14 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           lastName: currUser.lastName,
           age: currUser.age,
           email: currUser.email,
+          likes: currUser.likes,
+          dislikes: currUser.dislikes,
         },
       });
     } catch (e) {
       console.log(e);
       res.status(404).send({ msg: "User not found" });
     }
-    
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

@@ -1,5 +1,5 @@
 import client from "."
-import { Movie } from "./types/movie";
+import { Movie } from "../types/movie";
 
 const paths = {
     getMovies: "/media/",

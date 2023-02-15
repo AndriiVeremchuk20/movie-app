@@ -1,6 +1,5 @@
 import getMediaPath from "@/utils/getMediaPath";
 import React from "react";
-import AddToFavoriteButton from "./addToFavoriteButton";
 import DownloadButton from "./downloadButton";
 import LikeDislikeButton from "./likeDislikeButton";
 import ShareButton from "./shareButton";
@@ -20,7 +19,7 @@ const Video: React.FC<PropsVideo> = ({ id, videoPath }) => {
         className={`bg-black text-white flex text-xl font-bold justify-around rounded-b-lg pb-4 pt-1`}
       >
         <div>
-          <LikeDislikeButton />
+          <LikeDislikeButton movieId={id} />
         </div>
         <div>
           <DownloadButton id={id} movieURL={getMediaPath(videoPath)} />
