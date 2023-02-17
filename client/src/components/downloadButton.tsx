@@ -8,7 +8,7 @@ interface PropDownloadButton {
 
 const DownloadButton: React.FC<PropDownloadButton> = ({id, movieURL}) => {
     return(
-        <a className={`text-3xl`} href={movieURL} download>
+        <a className={`text-3xl focus:text-green-600`} href={movieURL} download>
             <RiDownloadFill/>
         </a>
     )

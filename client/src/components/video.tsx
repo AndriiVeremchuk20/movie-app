@@ -1,9 +1,9 @@
 import { currentMovieAtom } from "@/atom";
 import getMediaPath from "@/utils/getMediaPath";
 import { useAtom } from "jotai";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DownloadButton from "./downloadButton";
-import LikeDislikeButton from "./likeButton";
+import LikeButton from "./likeButton";
 import ShareButton from "./shareButton";
 
 const Video = () => {
@@ -17,15 +17,15 @@ const Video = () => {
         <source src={getMediaPath(movie.moviePath)} type="video/mp4" />
       </video>
       <div
-        className={`bg-black text-white flex text-xl font-bold justify-around rounded-b-lg pb-4 pt-1`}
+        className={`bg-black text-white flex text-xl font-bold justify-around rounded-b-lg py-4`}
       >
-        <div>
-          <LikeDislikeButton id={movie.id} numLikes={movie.likes}/>
+        <div className="hover:animate-pulse">
+          <LikeButton />
         </div>
-        <div>
+        <div className="hover:animate-pulse">
           <DownloadButton id={movie.id} movieURL={getMediaPath(movie.moviePath)} />
         </div>
-        <div>
+        <div className="hover:animate-pulse">
           <ShareButton />
         </div>
       </div>
