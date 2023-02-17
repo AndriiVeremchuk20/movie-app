@@ -1,59 +1,52 @@
 import like from "@/api/likeDislike";
 import { appUserAtom, currentMovieAtom } from "@/atom";
-import { Like } from "@/types/like";
-import { Movie } from "@/types/movie";
-import { User } from "@/types/user";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import React, { useCallback, useEffect, useState } from "react";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 
-const LikeDislikeButton = () => {
-  const [movie, setMovie] = useAtom(currentMovieAtom);
+interface PropLikeDislikeButton {
+  id: string;
+  numLikes: number;
+  numDislikes: number;
+}
+
+const LikeDislikeButton: React.FC<PropLikeDislikeButton> = ({
+  id,
+  numLikes,
+  numDislikes,
+}) => {
   const [user, setUser] = useAtom(appUserAtom);
+  const [likes, setLikes] = useState<number>(numLikes);
+  const [dislikes, setDislikes] = useState<number>(numDislikes);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isDisliked, setIsDisliked] = useState<boolean>(false);
 
   const likeMutation = useMutation(like.likeMovie, {
     onSuccess(data) {
       setIsLiked(true);
+      setLikes(prev=>prev+1);
+      setDislikes(prev=>prev-1);
       setIsDisliked(false);
-      setUser((prev) => {
-        if (prev) {
-          return { ...prev, likes: [...prev.likes, data] };
-        }
-        return null;
-      });
-      setMovie((prev) => {
-        if (prev) {
-          return { ...prev, likes: [...prev.likes, data] };
-        }
-        return null;
-      });
+      if (user) {
+        setUser(() => ({ ...user, likes: [...user.likes, data]}));
+      }
     },
-    onError(e) {
+    onError() {
       alert("Oh! Something is wrong... please try again later.");
     },
   });
 
   const dislikeMutation = useMutation(like.dislikeMovie, {
     onSuccess(data) {
-      setIsDisliked(true);
       setIsLiked(false);
-      setUser((prev) => {
-        if (prev) {
-          return { ...prev, dislikes: [...prev.dislikes, data] };
-        }
-        return null;
-      });
-      setMovie((prev) => {
-        if (prev) {
-          return { ...prev, dislikes: [...prev.dislikes, data] };
-        }
-        return null;
-      });
+      setIsDisliked(true);
+      setDislikes(prev=>prev+1);
+      if (user) {
+        setUser(() => ({ ...user, dislikes: [...user.dislikes, data] }));
+      }
     },
-    onError(e) {
+    onError() {
       alert("Oh! Something is wrong... please try again later.");
     },
   });
@@ -61,108 +54,87 @@ const LikeDislikeButton = () => {
   const deleteLikeMutation = useMutation(like.deleteLike, {
     onSuccess(data) {
       setIsLiked(false);
-      setUser((prev) => {
-        if (prev) {
-          return { ...prev, likes: prev.likes.filter((like)=>like.id!==data.id) };
-        }
-        return null;
-      });
-      setMovie((prev) => {
-        if (prev) {
-          return { ...prev, likes: prev.likes.filter((like)=>like.id!==data.id) };
-        }
-        return null;
-      });
+      setIsDisliked(false);
+      setLikes(prev=>prev-1);
+      if (user) {
+        setUser(() => ({
+          ...user,
+          likes: [...user.likes.filter((like) => like.id !== data.id)],
+        }));
+      }
     },
-    onError(e) {
+    onError() {
       alert("Oh! Something is wrong... please try again later.");
     },
   });
 
   const deleteDislikeMutation = useMutation(like.deleteDislike, {
     onSuccess(data) {
+      setIsLiked(false);
       setIsDisliked(false);
-      setUser((prev) => {
-        if (prev) {
-          return { ...prev, likes: prev.likes.filter((like)=>like.id!==data.id) };
-        }
-        return null;
-      });
-      setMovie((prev) => {
-        if (prev) {
-          return { ...prev, dislikes: prev.dislikes.filter((like)=>like.id!==data.id) };
-        }
-        return null;
-      });
+      setDislikes(prev=>prev-1);
+
+      if (user) {
+        setUser(() => ({
+          ...user,
+          dislikes: [
+            ...user.dislikes.filter((dislike) => dislike.id !== data.id),
+          ],
+        }));
+      }
     },
-    onError(e) {
+    onError() {
       alert("Oh! Something is wrong... please try again later.");
     },
   });
 
   const onLikeClick = useCallback(() => {
-    if (movie) {
+    if (user) {
       if (isLiked) {
-        deleteLikeMutation.mutate(movie.id);
-      } else if (isDisliked) {
-        deleteDislikeMutation.mutate(movie.id);
-        likeMutation.mutate(movie.id);
-      } else {
-        likeMutation.mutate(movie.id);
+        deleteLikeMutation.mutate(id);
+      }  else {
+        likeMutation.mutate(id);
       }
     }
-  }, [isLiked, isDisliked]);
+  }, []);
 
   const onDisikeClick = useCallback(() => {
-    if (movie) {
+    if (user) {
       if (isDisliked) {
-        deleteDislikeMutation.mutate(movie.id);
-      } else if (isLiked) {
-        deleteLikeMutation.mutate(movie.id);
-        dislikeMutation.mutate(movie.id);
-      } else {
-        dislikeMutation.mutate(movie.id);
+        deleteDislikeMutation.mutate(id);
+      }  else {
+        dislikeMutation.mutate(id);
       }
     }
-  }, [isLiked, isDisliked]);
+  }, []);
 
   useEffect(() => {
-    if (movie && user && user.likes) {
-      setIsLiked(
-        movie.likes.some((like) =>
-          user.likes.some((userLike) => userLike.id === like.id)
-        )
-      );
-
-      setIsDisliked(
-        movie.dislikes.some((dislike) =>
-          user.dislikes.some((userDisike) => userDisike.id === dislike.id)
-        )
-      );
+    if (user) {
+      setIsLiked(user.likes.some((like) => like.movieId === id));
+      setIsDisliked(user.dislikes.some((dislike) => dislike.movieId === id));
     }
-  }, [movie, user]);
+  }, [user]);
 
-  if (movie)
-    return (
-      <div className={`text-3xl flex`}>
-        <button
-          onClick={onLikeClick}
-          className={`flex ${isLiked ? "text-green-700" : ""}`}
-        >
-          <div>{movie.likes.length}</div>
-          <AiFillLike />
-        </button>
-        /
-        <button
-          onClick={onDisikeClick}
-          className={`flex ${isDisliked ? "text-red-700" : ""}`}
-        >
-          <div>{movie.dislikes.length}</div>
-          <AiFillDislike />
-        </button>
-      </div>
-    );
-  return null;
+  return (
+    <div className={`text-3xl flex`}>
+      <>{console.log("isLiked: " + isLiked + " isDisliked: " + isDisliked)}</>
+      <button
+        onClick={onLikeClick}
+        className={`flex ${isLiked ? "text-green-700" : ""}`}
+      >
+        <div>{likes}</div>
+        <AiFillLike />
+      </button>
+      /
+      <button
+        onClick={onDisikeClick}
+        className={`flex ${isDisliked ? "text-red-700" : ""}`}
+      >
+        <div>{dislikes}</div>
+        <AiFillDislike />
+      </button>
+    </div>
+  );
 };
 
 export default React.memo(LikeDislikeButton);

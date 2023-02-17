@@ -7,6 +7,6 @@ export interface Movie {
   moviePath: string;
   posterPath: string;
   postedAt: string;
-  likes: Array<Like>;
-  dislikes: Array<Dislike>;
+  likes: number;
+  dislikes: number;
 }

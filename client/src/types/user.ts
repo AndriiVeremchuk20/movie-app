@@ -1,4 +1,5 @@
 import { Like } from "./like";
+import { Movie } from "./movie";
 
 export interface User {
     firstName: String;
@@ -7,4 +8,6 @@ export interface User {
     email: String;
     likes: Array<Like>;
     dislikes: Array<Like>;
+    vieved: Array<Movie>;
+    watchLater: Array<Movie>;
 }

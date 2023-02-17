@@ -56,7 +56,7 @@ route.get("/:id", async (req: Request, res: Response) => {
         }
       });
 
-      res.status(200).send(movie);
+      res.status(200).send({...movie, likes: movie.likes.length, dislikes: movie.dislikes.length});
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });
     }

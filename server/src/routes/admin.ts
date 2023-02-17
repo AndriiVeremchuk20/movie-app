@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Like, Role } from "@prisma/client";
 import { Router, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 import prisma from "../../prisma/index";

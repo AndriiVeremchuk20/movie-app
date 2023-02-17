@@ -33,7 +33,7 @@ model Movie {
   description  String
   postedAt     DateTime  @default(now())
   likes        Like[]
-  dislikes      Dislike[]
+  dislikes     Dislike[]
   Review       Review[]
   watchLater   User?     @relation("watchLater", fields: [watchLaterId], references: [id])
   viewed       User?     @relation("viewed", fields: [viewedId], references: [id])

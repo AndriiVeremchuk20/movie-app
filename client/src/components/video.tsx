@@ -20,7 +20,7 @@ const Video = () => {
         className={`bg-black text-white flex text-xl font-bold justify-around rounded-b-lg pb-4 pt-1`}
       >
         <div>
-          <LikeDislikeButton/>
+          <LikeDislikeButton id={movie.id} numLikes={movie.likes} numDislikes={movie.dislikes}/>
         </div>
         <div>
           <DownloadButton id={movie.id} movieURL={getMediaPath(movie.moviePath)} />

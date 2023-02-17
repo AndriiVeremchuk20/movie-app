@@ -7,7 +7,20 @@ route.post("/like", async (req: Request, res: Response) => {
   try {
     const { movieId } = req.body;
     const userId = req.currentUser.id;
-  
+
+    try {
+      const deleteDislike = await prisma.dislike.delete({
+        where: {
+          userId_movieId: {
+            userId,
+            movieId,
+          },
+        },
+      });
+    } catch (e) {
+      console.log("Dislike not found");
+    }
+
     const newLike = await prisma.like.create({
       data: {
         movieId,
@@ -26,6 +39,19 @@ route.post("/dislike", async (req: Request, res: Response) => {
   try {
     const { movieId } = req.body;
     const userId = req.currentUser.id;
+
+    try {
+      const deleteLike = await prisma.like.delete({
+        where: {
+          userId_movieId: {
+            userId,
+            movieId,
+          },
+        },
+      });
+    } catch (e) {
+      console.log("Like not found");
+    }
 
     const newDislike = await prisma.dislike.create({
       data: {

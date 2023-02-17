@@ -74,6 +74,19 @@ route.post(
           where: {
             email: email,
           },
+          select:{
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            age: true,
+            role: true,
+            likes: true,
+            dislikes: true,
+            viewed: true,
+            watchLater: true,
+            password: true,
+          }
         });
 
         if (await comparePassword(password, loginUser.password)) {
@@ -85,6 +98,10 @@ route.post(
               lastName: loginUser.lastName,
               age: loginUser.age,
               email: loginUser.email,
+              likes: loginUser.likes,
+              dislikes: loginUser.dislikes,
+              viewed: loginUser.viewed,
+              watchLater: loginUser.watchLater,
             },
           });
         }
@@ -109,14 +126,16 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
       const currUser = await prisma.user.findFirstOrThrow({
         where: { id: id },
         select: {
+          id: true,
           firstName: true,
           lastName: true,
+          email: true,
           age: true,
-          id: true,
           role: true,
           likes: true,
           dislikes: true,
-          email: true,
+          viewed: true,
+          watchLater: true,
         },
       });
       const token = generateAccessTocken(currUser.id, currUser.role);
@@ -125,10 +144,12 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
         user: {
           firstName: currUser.firstName,
           lastName: currUser.lastName,
-          age: currUser.age,
           email: currUser.email,
+          age: currUser.age,
           likes: currUser.likes,
           dislikes: currUser.dislikes,
+          viewed: currUser.viewed,
+          watchLater: currUser.watchLater,
         },
       });
     } catch (e) {
