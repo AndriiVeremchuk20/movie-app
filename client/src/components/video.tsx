@@ -3,7 +3,7 @@ import getMediaPath from "@/utils/getMediaPath";
 import { useAtom } from "jotai";
 import React from "react";
 import DownloadButton from "./downloadButton";
-import LikeDislikeButton from "./likeDislikeButton";
+import LikeDislikeButton from "./likeButton";
 import ShareButton from "./shareButton";
 
 const Video = () => {
@@ -20,7 +20,7 @@ const Video = () => {
         className={`bg-black text-white flex text-xl font-bold justify-around rounded-b-lg pb-4 pt-1`}
       >
         <div>
-          <LikeDislikeButton id={movie.id} numLikes={movie.likes} numDislikes={movie.dislikes}/>
+          <LikeDislikeButton id={movie.id} numLikes={movie.likes}/>
         </div>
         <div>
           <DownloadButton id={movie.id} movieURL={getMediaPath(movie.moviePath)} />

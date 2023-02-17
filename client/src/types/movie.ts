@@ -8,5 +8,4 @@ export interface Movie {
   posterPath: string;
   postedAt: string;
   likes: number;
-  dislikes: number;
 }

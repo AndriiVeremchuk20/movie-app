@@ -52,11 +52,10 @@ route.get("/:id", async (req: Request, res: Response) => {
           posterPath: true,
           moviePath: true,
           likes: true,
-          dislikes: true,
         }
       });
 
-      res.status(200).send({...movie, likes: movie.likes.length, dislikes: movie.dislikes.length});
+      res.status(200).send({...movie, likes: movie.likes.length});
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });
     }

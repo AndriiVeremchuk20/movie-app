@@ -7,7 +7,6 @@ export interface User {
     age: Number;
     email: String;
     likes: Array<Like>;
-    dislikes: Array<Like>;
     vieved: Array<Movie>;
     watchLater: Array<Movie>;
 }

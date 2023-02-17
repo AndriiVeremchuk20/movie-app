@@ -11,58 +11,46 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(cuid())
-  role       Role      @default(USER)
+  id         String   @id @default(cuid())
+  role       Role     @default(USER)
   firstName  String
   lastName   String
   age        Int
-  email      String    @unique
+  email      String   @unique
   password   String
   reviews    Review[]
   likes      Like[]
-  dislikes   Dislike[] 
-  watchLater Movie[]   @relation("watchLater")
-  viewed     Movie[]   @relation("viewed")
+  watchLater Movie[]  @relation("watchLater")
+  viewed     Movie[]  @relation("viewed")
 }
 
 model Movie {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   posterPath   String
   moviePath    String
   name         String
   description  String
-  postedAt     DateTime  @default(now())
+  postedAt     DateTime @default(now())
   likes        Like[]
-  dislikes     Dislike[]
   Review       Review[]
-  watchLater   User?     @relation("watchLater", fields: [watchLaterId], references: [id])
-  viewed       User?     @relation("viewed", fields: [viewedId], references: [id])
+  watchLater   User?    @relation("watchLater", fields: [watchLaterId], references: [id])
+  viewed       User?    @relation("viewed", fields: [viewedId], references: [id])
   watchLaterId String?
   viewedId     String?
 }
 
 model Like {
-  id String @id @default(cuid())
+  id      String @id @default(cuid())
   user    User   @relation(fields: [userId], references: [id])
   userId  String
   movie   Movie  @relation(fields: [movieId], references: [id])
   movieId String
 
-  @@unique([userId, movieId])  
-}
-
-model Dislike {
-  id String @id @default(cuid())
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String
-  movie   Movie  @relation(fields: [movieId], references: [id])
-  movieId String
-
-  @@unique([userId, movieId])  
+  @@unique([userId, movieId])
 }
 
 model Review {
-  id String @id @default(cuid())
+  id        String   @id @default(cuid())
   posted_at DateTime @default(now())
   Movie     Movie    @relation(fields: [movieId], references: [id])
   movieId   String
