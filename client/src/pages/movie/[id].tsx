@@ -2,10 +2,9 @@ import movies from "@/api/movies";
 import { Movie } from "@/types/movie";
 import MovieInfo from "@/components/movieInfo";
 import Video from "@/components/video";
-//import getMediaPath from "@/utils/getMediaPath";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAtom } from "jotai";
 import { currentMovieAtom } from "@/atom";
 

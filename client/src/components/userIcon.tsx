@@ -7,6 +7,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
 import { RiMovieFill, RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
+import { useRouter } from "next/router";
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const [showDropMenu, setShowDropMenu] = useState<boolean>(false);
@@ -19,6 +20,7 @@ export const UserIcon = () => {
     setUser(null);
     Token.clear();
   }, [user]);
+
 
   if (user) {
     return (
@@ -39,9 +41,9 @@ export const UserIcon = () => {
             <Link href={"/profile"} className="flex w-full text-xl px-3 py-3 ">
               <AiOutlineUser className="text-2xl mx-3" /> <div>Profile</div>
             </Link>
-            <div className="flex w-full text-xl px-3 py-3">
-              <GrView  className="text-2xl mx-3" /> <div>View later</div>{" "}
-            </div>
+            <Link href={"/watch-later"} className="flex w-full text-xl px-3 py-3">
+              <GrView  className="text-2xl mx-3" /> <div>Watch later</div>
+            </Link>
             <div className="flex w-full text-xl px-3 py-3">
               <RiMovieFill  className="text-2xl mx-3"/> <div>Viewed</div>
             </div>

@@ -16,7 +16,7 @@ const LikeButton = () => {
     onSuccess(data) {
       setIsLiked(true);
       if (user&& movie) {
-        setUser(() => ({ ...user, likes: [...user.likes, data] }));
+        setUser(() => ({ ...user, likes: [...user.likes, data.movieId] }));
         setMovie(()=>({...movie, likes: movie.likes+1}));
       }
     },
@@ -31,7 +31,7 @@ const LikeButton = () => {
       if (user&&movie) {
         setUser(() => ({
           ...user,
-          likes: [...user.likes.filter((like) => like.id !== data.id)],
+          likes: [...user.likes.filter((like) => like !== data.movieId)],
         }));
         setMovie(()=>({...movie, likes: movie.likes-1}));
       }
@@ -59,7 +59,7 @@ const LikeButton = () => {
 
   useEffect(() => {
     if (user&&movie) {
-      setIsLiked(user.likes.some((like) => like.movieId === movie.id));
+      setIsLiked(user.likes.some((like) => like === movie.id));
     }
   }, [user, movie]);
 

@@ -15,7 +15,7 @@ router.post("/", async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).send(newWatchLater);
+    res.status(200).send({ movieId: newWatchLater.movieId });
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });
@@ -27,7 +27,7 @@ router.delete("/:movieId", async (req: Request, res: Response) => {
     const userId = req.currentUser.id;
     const { movieId } = req.params;
 
-    const newWatchLater = await prisma.watchLater.delete({
+    const deletedWatchLater = await prisma.watchLater.delete({
       where: {
         userId_movieId: {
           userId,
@@ -36,7 +36,27 @@ router.delete("/:movieId", async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).send(newWatchLater);
+    res.status(200).send({ movieId: deletedWatchLater.movieId });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ msg: "Server error" });
+  }
+});
+
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.currentUser;
+
+    const movies = await prisma.watchLater.findMany({
+      where: { userId: id },
+      select: {
+        movie: {
+          select: { id: true, name: true, posterPath: true, postedAt: true },
+        },
+      },
+    })
+
+    res.status(200).send(movies.map(movie => movie.movie));
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

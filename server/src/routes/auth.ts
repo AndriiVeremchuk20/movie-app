@@ -74,7 +74,7 @@ route.post(
           where: {
             email: email,
           },
-          select:{
+          select: {
             id: true,
             firstName: true,
             lastName: true,
@@ -85,7 +85,7 @@ route.post(
             //viewed: true,
             watchLater: true,
             password: true,
-          }
+          },
         });
 
         if (await comparePassword(password, loginUser.password)) {
@@ -97,9 +97,9 @@ route.post(
               lastName: loginUser.lastName,
               age: loginUser.age,
               email: loginUser.email,
-              likes: loginUser.likes,
-          //    viewed: loginUser.viewed,
-              watchLater: loginUser.watchLater,
+              likes: loginUser.likes.map((like) => like.movieId),
+              //    viewed: loginUser.viewed,
+              watchLater: loginUser.watchLater.map((item) => item.movieId),
             },
           });
         }
@@ -131,7 +131,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           age: true,
           role: true,
           likes: true,
-        //  viewed: true,
+          //  viewed: true,
           watchLater: true,
         },
       });
@@ -143,9 +143,9 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           lastName: currUser.lastName,
           email: currUser.email,
           age: currUser.age,
-          likes: currUser.likes,
+          likes: currUser.likes.map((like) => like.movieId),
           //viewed: currUser.viewed,
-          watchLater: currUser.watchLater,
+          watchLater: currUser.watchLater.map((item) => item.movieId),
         },
       });
     } catch (e) {

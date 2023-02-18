@@ -11,7 +11,7 @@ interface PropsLikeButton {
 }
 
 const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
-  const [user,setUser] = useAtom(appUserAtom);
+  const [user, setUser] = useAtom(appUserAtom);
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
       console.log(data);
       if(user){
         setIsAdded(true);
-        //setUser(()=>({...user, watchLater: [...user.watchLater]}));
+        setUser(()=>({...user, watchLater: [...user.watchLater, data.movieId]}));
       }
     },
     onError(e){
@@ -33,7 +33,7 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
       console.log(data);
       if(user){
         setIsAdded(false);
-        //setUser(()=>({...user, watchLater: user.watchLater.filter(()=>true)}));
+        setUser(()=>({...user, watchLater: user.watchLater.filter((id)=>id!==data.movieId)}));
       }
     },
     onError(e){
@@ -59,7 +59,7 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
 
   useEffect(()=>{
     if(user){
-      setIsAdded(user.watchLater.some(movie=>movie.id===movieId));
+      setIsAdded(user.watchLater.some(watchLaterMovie=> watchLaterMovie === movieId));
     }
   },[user]);
 

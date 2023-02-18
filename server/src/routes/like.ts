@@ -15,7 +15,7 @@ route.post("/like", async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).send(newLike);
+    res.status(201).send({ movieId: newLike.movieId });
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });
@@ -33,7 +33,7 @@ route.delete("/like/:movieId", async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).send(deletedLike);
+    res.status(201).send({ movieId: deletedLike.movieId });
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

@@ -1,4 +1,4 @@
-import { Movie } from "@/api/types/movie";
+import { Movie } from "../types/movie";
 import React from "react";
 import MoviesCard from "./movieCard";
 

@@ -1,5 +1,5 @@
 import client from "."
-import { Movie } from "../types/movie";
+import { Movie, MovieAllInfo } from "../types/movie";
 
 const paths = {
     getMovies: "/media/",
@@ -12,7 +12,7 @@ const getMovies = async () => {
 }
 
 const getMoviesById = async (id: string) => { 
-    const response = await client.get<Movie>(paths.getMovies+id);
+    const response = await client.get<MovieAllInfo>(paths.getMovies+id);
     return response.data;
 }
 

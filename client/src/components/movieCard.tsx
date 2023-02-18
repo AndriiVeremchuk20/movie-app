@@ -9,7 +9,6 @@ interface PropsMovieCard {
 }
 
 const cutName = (name: string, maxSpaces: number) => {
-  name = name[0].charAt(0).toUpperCase() + name.slice(1); //capitalize first letter
   return name.split(" ").length > maxSpaces
     ? name.split(" ").slice(0, 3).join(" ") + "..."
     : name;
