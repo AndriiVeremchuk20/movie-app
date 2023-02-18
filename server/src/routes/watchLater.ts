@@ -56,7 +56,7 @@ router.get("/", async (req: Request, res: Response) => {
       },
     })
 
-    res.status(200).send(movies.map(movie => movie.movie));
+    res.status(200).send(movies.map(movie => movie.movie).reverse());
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

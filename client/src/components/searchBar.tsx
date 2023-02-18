@@ -1,14 +1,11 @@
 import movies from "@/api/movies";
-import { Movie } from "@/api/types/movie";
+import { Movie } from "@/types/movie";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import AutocompleteMoviesSearch from "./autocompleteMoviesSearch";
-
-//add autocomplete
-//and use debounce hook
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
