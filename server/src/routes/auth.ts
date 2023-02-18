@@ -82,7 +82,7 @@ route.post(
             age: true,
             role: true,
             likes: true,
-            viewed: true,
+            //viewed: true,
             watchLater: true,
             password: true,
           }
@@ -98,7 +98,7 @@ route.post(
               age: loginUser.age,
               email: loginUser.email,
               likes: loginUser.likes,
-              viewed: loginUser.viewed,
+          //    viewed: loginUser.viewed,
               watchLater: loginUser.watchLater,
             },
           });
@@ -131,7 +131,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           age: true,
           role: true,
           likes: true,
-          viewed: true,
+        //  viewed: true,
           watchLater: true,
         },
       });
@@ -144,7 +144,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           email: currUser.email,
           age: currUser.age,
           likes: currUser.likes,
-          viewed: currUser.viewed,
+          //viewed: currUser.viewed,
           watchLater: currUser.watchLater,
         },
       });

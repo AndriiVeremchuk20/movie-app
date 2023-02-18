@@ -1,8 +1,8 @@
-import { Movie } from "@/api/types/movie";
+import { Movie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
-import LikeButton from "./addToFavoriteButton";
+import WatchLaterButton from "./watchLaterButton";
 
 interface PropsMovieCard {
   movie: Movie;
@@ -37,7 +37,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
           <div className={`text-xl`}>{cutName(movie.name, 3)}</div>
           <div className={`text-sm`}>{movie.postedAt.slice(0, 4)}</div>
         </div>
-        <LikeButton isLiked={false} movieId={movie.id} />
+        <WatchLaterButton movieId={movie.id} />
       </div>
     </div>
   );

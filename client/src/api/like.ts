@@ -1,4 +1,4 @@
-import { Dislike, Like } from "@/types/like";
+import { Like } from "@/types/like";
 import Token from "@/utils/token";
 import client from ".";
 
