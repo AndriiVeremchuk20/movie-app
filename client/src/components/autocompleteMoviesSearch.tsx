@@ -12,7 +12,7 @@ const AutocompleteMoviesSearch: React.FC<PropsAutocompleteMovieSearch> = ({
   if (movies.length > 0) {
     return (
       <div
-        className={`flex flex-col w-10/12 ml-3 overflow-y-auto min-h-fit max-h-72 bg-slate-400 rounded-sm divide-y-2`}
+        className={`ml-3 flex max-h-72 min-h-fit w-10/12 flex-col divide-y-2 overflow-y-auto rounded-sm bg-slate-400`}
       >
         {movies.map((movie) => (
           <AutocompleteCard key={movie.id} movie={movie} />

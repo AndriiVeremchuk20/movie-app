@@ -12,7 +12,7 @@ const BackButton = () => {
   return (
     <button
       onClick={onBackClick}
-      className={`mr-4 text-4xl w-13 h-13 rounded-full bg-slate-700 shadow-black shadow-md hover:animate-pulse dark:bg-slate-300 px-4 cursor-pointer`}
+      className={`w-13 h-13 mr-4 cursor-pointer rounded-full bg-slate-700 px-4 text-4xl shadow-md shadow-black hover:animate-pulse dark:bg-slate-300`}
     >
       <BiArrowBack className=" text-lime-500 dark:text-indigo-900" />
     </button>

@@ -1,4 +1,3 @@
-export interface WatchLater{
-    movieId: string;
+export interface WatchLater {
+  movieId: string;
 }
-  

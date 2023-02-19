@@ -5,7 +5,7 @@ export interface RegistrationRequestBody extends User {
 }
 
 export interface ResponseMessage {
-    msg: string;
+  msg: string;
 }
 
 export interface LoginRequestBody {

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 export const Rooms = () => {
-  return (
-    <div>R</div>
-  )
-}
+  return <div>R</div>;
+};
 
 export default Rooms;

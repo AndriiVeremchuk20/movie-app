@@ -25,16 +25,16 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
 
   return (
     <div
-      className={`w-60 h-96 bg-slate-900 shadow-slate-800 shadow-xl hover:shadow-none hover:bg-slate-800 cursor-pointer`}
+      className={`h-96 w-60 cursor-pointer bg-slate-900 shadow-xl shadow-slate-800 hover:bg-slate-800 hover:shadow-none`}
     >
       <NewMark date={movie.postedAt} />
       <img
         onClick={onCardClick}
         src={getMediaPath(movie.posterPath)}
         alt={movie.name}
-        className={`w-full h-80`}
+        className={`h-80 w-full`}
       />
-      <div className="flex justify-between mt-1 mx-2">
+      <div className="mx-2 mt-1 flex justify-between">
         <div onClick={onCardClick} className={`text-white`}>
           <div className={`text-md`}>{getShortName(movie.name, 13)}</div>
           <div className={`text-sm`}>{movie.postedAt.slice(0, 4)}</div>

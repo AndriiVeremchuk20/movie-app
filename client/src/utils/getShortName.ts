@@ -4,7 +4,7 @@ const getShortName = (name: string, maxLen: number): string => {
 
   const result = splitName.reduce((accumulator, currentValue) => {
     if (accumulator.length <= maxLen) {
-      accumulator+=` ${currentValue}`;
+      accumulator += ` ${currentValue}`;
       return accumulator;
     }
     return accumulator;

@@ -29,8 +29,8 @@ export const UpButton = () => {
     return (
       <div
         onClick={onClick}
-        className={`rounded-full outline-none text-2xl p-4 
-      bg-lime-200 dark:bg-indigo-500 fixed bottom-28 right-20 animate-bounce`}
+        className={`fixed bottom-28 right-20 animate-bounce 
+      rounded-full bg-lime-200 p-4 text-2xl outline-none dark:bg-indigo-500`}
       >
         <RiArrowUpFill />
       </div>

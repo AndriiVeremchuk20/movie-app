@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
-import { MdMovie} from "react-icons/md";
+import { MdMovie } from "react-icons/md";
 
 export const Logo = () => {
   const route = useRouter();
@@ -12,10 +12,10 @@ export const Logo = () => {
   return (
     <div
       onClick={onLogoClick}
-      className="flex w-auto h-auto bg-slate-700 shadow-black shadow-md hover:animate-pulse dark:bg-slate-300 px-4 rounded-md  cursor-pointer"
+      className="flex h-auto w-auto cursor-pointer rounded-md bg-slate-700 px-4 shadow-md shadow-black hover:animate-pulse  dark:bg-slate-300"
     >
       <MdMovie className="text-6xl font-bold text-lime-500 dark:text-indigo-900" />
-      <div className="text-4xl font-bold text-lime-500 dark:text-indigo-900 mt-2">
+      <div className="mt-2 text-4xl font-bold text-lime-500 dark:text-indigo-900">
         Get Movie
       </div>
     </div>

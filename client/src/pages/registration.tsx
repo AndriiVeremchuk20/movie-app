@@ -39,7 +39,7 @@ const Registration = () => {
         router.push("/login");
       },
       onError(e) {
-        if(isAxiosError(e)&&e.response){
+        if (isAxiosError(e) && e.response) {
           const resMessage = e.response.data as ResponseError;
           setMessage(resMessage.msg);
         }
@@ -65,18 +65,18 @@ const Registration = () => {
   };
 
   return (
-    <div className="h-screen bg-lime-600 dark:bg-indigo-900 flex">
+    <div className="flex h-screen bg-lime-600 dark:bg-indigo-900">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`bg-slate-200 dark:bg-slate-400 h-auto w-auto m-auto 
-        flex flex-col p-6 border-solid border-2 border-indigo-900 rounded 
-        shadow-2xl`}
+        className={`m-auto flex h-auto w-auto flex-col 
+        rounded border-2 border-solid border-indigo-900 bg-slate-200 p-6 shadow-2xl 
+        dark:bg-slate-400`}
       >
-        <div className="text-3xl font-mono font-bold ">Registration</div>
+        <div className="font-mono text-3xl font-bold ">Registration</div>
         <div className="flex flex-col">
           <input
             type="text"
-            className="outline-none text-xl m-2 rounded p-2 w-80 shadow-lg dark:bg-slate-300 placeholder-slate-700"
+            className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
             placeholder="First name"
             {...register("firstName", {
               required: true,
@@ -91,7 +91,7 @@ const Registration = () => {
         <div className="flex flex-col">
           <input
             type="text"
-            className="outline-none text-xl m-2 rounded p-2 w-80 shadow-lg dark:bg-slate-300 placeholder-slate-700"
+            className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
             placeholder="Last name"
             {...register("lastName", {
               required: true,
@@ -108,7 +108,7 @@ const Registration = () => {
             type="number"
             min="1"
             max="100"
-            className="outline-none text-xl m-2 rounded p-2 w-80 shadow-lg dark:bg-slate-300 placeholder-slate-700"
+            className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
             placeholder="Age"
             {...register("age", {
               required: true,
@@ -121,7 +121,7 @@ const Registration = () => {
         <div className="flex flex-col">
           <input
             type="email"
-            className="outline-none text-xl m-2 rounded p-2 w-80 shadow-lg dark:bg-slate-300 placeholder-slate-700"
+            className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
             placeholder="Email"
             {...register("email", {
               required: true,
@@ -135,7 +135,7 @@ const Registration = () => {
         <div className="flex flex-col">
           <div className="flex">
             <input
-              className="outline-none text-xl m-2 w-72 rounded px-4 py-2 shadow-lg dark:bg-slate-300 placeholder-slate-700"
+              className="m-2 w-72 rounded px-4 py-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               {...register("password", {
@@ -159,7 +159,7 @@ const Registration = () => {
         <div className="flex flex-col">
           <div className="flex">
             <input
-              className="outline-none text-xl m-2 w-72 rounded px-4 py-2 shadow-lg dark:bg-slate-300 placeholder-slate-700"
+              className="m-2 w-72 rounded px-4 py-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
               type={showRepeatPassword ? "text" : "password"}
               placeholder="Repeat password"
               {...register("repeatPassword", {
@@ -182,10 +182,10 @@ const Registration = () => {
         </div>
 
         <button
-          className="w-full h-auto flex justify-center bg-lime-400 my-3 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-700"
+          className="my-3 flex h-auto w-full justify-center bg-lime-400 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-700"
           type="submit"
         >
-          {isLoading ? <Loader/> : "Registration"}
+          {isLoading ? <Loader /> : "Registration"}
         </button>
 
         {isError ? (

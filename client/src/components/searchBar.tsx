@@ -53,7 +53,7 @@ export const SearchBar = () => {
     <div className={``}>
       <form
         onSubmit={onSubmit}
-        className={`w-fit h-12 flex content-center bg-lime-600 dark:bg-indigo-700 rounded-2xl shadow-stone-700 shadow-md`}
+        className={`flex h-12 w-fit content-center rounded-2xl bg-lime-600 shadow-md shadow-stone-700 dark:bg-indigo-700`}
       >
         <input
           type="search"
@@ -61,13 +61,13 @@ export const SearchBar = () => {
           onChange={onInputChange}
           max={50}
           placeholder={"Search..."}
-          className={`w-96 outline-none rounded-l-2xl py-1 px-3 text-xl`}
+          className={`w-96 rounded-l-2xl py-1 px-3 text-xl outline-none`}
         />
         <button
           type="submit"
-          className={`w-16 flex justify-center text-2xl hover:animate-pulse`}
+          className={`flex w-16 justify-center text-2xl hover:animate-pulse`}
         >
-          <FaSearch className="m-auto bg-lime" />
+          <FaSearch className="bg-lime m-auto" />
         </button>
       </form>
       {searchText ? <AutocompleteMoviesSearch movies={foundMovies} /> : null}

@@ -15,37 +15,39 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const router = useRouter();
 
-  const addToWatchLaterMutation = useMutation(watchLater.add,{
-    onSuccess(data){
+  const addToWatchLaterMutation = useMutation(watchLater.add, {
+    onSuccess(data) {
       console.log(data);
-      if(user){
+      if (user) {
         setIsAdded(true);
-        setUser(()=>({...user, watchLater: [...user.watchLater, data.movieId]}));
+        setUser(() => ({
+          ...user,
+          watchLater: [...user.watchLater, data.movieId],
+        }));
       }
     },
-    onError(e){
-    
-    }
+    onError(e) {},
   });
 
-  const removeFromWatchLaterMutation = useMutation(watchLater.remove,{
-    onSuccess(data){
+  const removeFromWatchLaterMutation = useMutation(watchLater.remove, {
+    onSuccess(data) {
       console.log(data);
-      if(user){
+      if (user) {
         setIsAdded(false);
-        setUser(()=>({...user, watchLater: user.watchLater.filter((id)=>id!==data.movieId)}));
+        setUser(() => ({
+          ...user,
+          watchLater: user.watchLater.filter((id) => id !== data.movieId),
+        }));
       }
     },
-    onError(e){
-    
-    }
+    onError(e) {},
   });
 
   const onAddClick = useCallback(() => {
     if (user) {
-      if(isAdded){
+      if (isAdded) {
         removeFromWatchLaterMutation.mutate(movieId);
-      }else{
+      } else {
         addToWatchLaterMutation.mutate(movieId);
       }
       setIsAdded((prev) => !prev);
@@ -57,21 +59,22 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
     }
   }, [user, isAdded]);
 
-  useEffect(()=>{
-    if(user){
-      setIsAdded(user.watchLater.some(watchLaterMovie=> watchLaterMovie === movieId));
-    }
-    else{
+  useEffect(() => {
+    if (user) {
+      setIsAdded(
+        user.watchLater.some((watchLaterMovie) => watchLaterMovie === movieId)
+      );
+    } else {
       setIsAdded(false);
     }
-  },[user]);
+  }, [user]);
 
   return (
     <button
       onClick={onAddClick}
-      className={`text-4xl m-1 flex justify-center text-blue-600 w-8 h-8`}
+      className={`m-1 flex h-8 w-8 justify-center text-4xl text-blue-600`}
     >
-      {isAdded ? <MdDone className=" text-green-600"/> : <MdAdd />}
+      {isAdded ? <MdDone className=" text-green-600" /> : <MdAdd />}
     </button>
   );
 };

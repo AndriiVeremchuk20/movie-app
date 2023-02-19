@@ -5,19 +5,17 @@ import { BsGithub } from "react-icons/bs";
 const Footer = () => {
   return (
     <footer
-      className={`w-full h-24 bg-lime-700 dark:bg-indigo-800 flex p-4 bottom-0 justify-between content-center`}
+      className={`bottom-0 flex h-24 w-full content-center justify-between bg-lime-700 p-4 dark:bg-indigo-800`}
     >
       <Logo />
-      <div
-      className={`text-2xl mt-3`}
-      >© 2023 Copyright: Andrii Veremchuk</div>
+      <div className={`mt-3 text-2xl`}>© 2023 Copyright: Andrii Veremchuk</div>
       <a
         href="https://github.com/AndriiVeremchuk20"
         target={"_blank"}
         rel={"noreferrer"}
-        className={`text-4xl w-fit flex mt-3 mr-4`}
+        className={`mt-3 mr-4 flex w-fit text-4xl`}
       >
-        <BsGithub className="mr-2"/> <div>Git</div>
+        <BsGithub className="mr-2" /> <div>Git</div>
       </a>
     </footer>
   );

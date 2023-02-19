@@ -48,13 +48,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
-        <div className="h-auto md:w-3/4 w-screen mt-36 pb-10 mb-10 bg-emerald-500 dark:bg-sky-800 flex justify-center">
+      <div className="flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900">
+        <div className="mt-36 mb-10 flex h-auto w-screen justify-center bg-emerald-500 pb-10 dark:bg-sky-800 md:w-3/4">
           <div>
-          {
-            query?<div className="text-2xl m-2">{`Results for "${query}" :`}</div>:null
-          }  
-          <MoviesList moviesList={moviesList} />
+            {query ? (
+              <div className="m-2 text-2xl">{`Results for "${query}" :`}</div>
+            ) : null}
+            <MoviesList moviesList={moviesList} />
           </div>
         </div>
       </div>

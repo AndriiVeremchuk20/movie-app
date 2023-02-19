@@ -24,30 +24,29 @@ const MoviePage = () => {
     if (id && !Array.isArray(id)) {
       getMovieByIdMutation.mutate(id);
     }
-    return ()=>{
+    return () => {
       setCurrentMovie(null);
-    }
+    };
   }, [id]);
 
   if (currentMovie)
     return (
       <div
-        className={`min-h-screen max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900`}
+        className={`flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900`}
       >
         <>{console.log(currentMovie.name)}</>
-        <div className={`w-3/4  mt-32 flex flex-col`}>
-          <MovieInfo/>
-          <div className={`w-full h-auto my-10`}>
-            <Video/>
+        <div className={`mt-32  flex w-3/4 flex-col`}>
+          <MovieInfo />
+          <div className={`my-10 h-auto w-full`}>
+            <Video />
           </div>
-
         </div>
       </div>
     );
 
   return (
     <div
-      className={`min-h-screen max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900`}
+      className={`flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900`}
     >
       Movie not found
     </div>

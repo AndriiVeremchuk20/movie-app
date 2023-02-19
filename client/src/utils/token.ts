@@ -1,23 +1,23 @@
 class Storage {
-    private key: string;
+  private key: string;
 
-    constructor(key: string){
-        this.key = key;
-    }
+  constructor(key: string) {
+    this.key = key;
+  }
 
-    set(value: string){
-        localStorage.setItem(this.key, value);
-    }
+  set(value: string) {
+    localStorage.setItem(this.key, value);
+  }
 
-    get(){
-        return localStorage.getItem(this.key);
-    }
+  get() {
+    return localStorage.getItem(this.key);
+  }
 
-    clear(){
-        localStorage.removeItem(this.key);
-    }
+  clear() {
+    localStorage.removeItem(this.key);
+  }
 }
 
-const Token =new Storage("Token"); 
+const Token = new Storage("Token");
 
 export default Token;

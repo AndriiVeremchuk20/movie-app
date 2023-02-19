@@ -3,11 +3,11 @@ import { useAtom } from "jotai";
 import React, { memo, useCallback, useEffect } from "react";
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 
-const ChangeTheme =  () => {
+const ChangeTheme = () => {
   const [isDark, setIsDark] = useAtom(darkModeAtom);
 
   const onButtonClick = useCallback(() => {
-    setIsDark(prev=>!prev);
+    setIsDark((prev) => !prev);
   }, []);
 
   useEffect(() => {
@@ -16,7 +16,10 @@ const ChangeTheme =  () => {
   }, [isDark]);
 
   return (
-    <button onClick={onButtonClick} className="rounded-full outline-none text-2xl p-4 bg-lime-200 dark:bg-indigo-500 fixed top-28 left-20">
+    <button
+      onClick={onButtonClick}
+      className="fixed top-28 left-20 rounded-full bg-lime-200 p-4 text-2xl outline-none dark:bg-indigo-500"
+    >
       {isDark ? <BsFillSunFill /> : <BsFillMoonFill />}
     </button>
   );

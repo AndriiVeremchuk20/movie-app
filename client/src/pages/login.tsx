@@ -35,7 +35,7 @@ const Login = () => {
       route.push("/");
     },
     onError(e) {
-      if(isAxiosError(e)&&e.response){
+      if (isAxiosError(e) && e.response) {
         const error = e.response.data as ResponseError;
         setErrorMessage(error.msg);
       }
@@ -52,17 +52,17 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen bg-lime-600 dark:bg-indigo-900 flex">
+    <div className="flex h-screen bg-lime-600 dark:bg-indigo-900">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`bg-slate-200 dark:bg-slate-400 h-auto w-96 m-auto flex 
-        flex-col p-6 border-solid border-2 border-indigo-900 rounded shadow-2xl`}
+        className={`m-auto flex h-auto w-96 flex-col rounded 
+        border-2 border-solid border-indigo-900 bg-slate-200 p-6 shadow-2xl dark:bg-slate-400`}
       >
-        <div className="text-3xl font-mono font-bold">Login</div>
+        <div className="font-mono text-3xl font-bold">Login</div>
         <div className="flex flex-col">
           <input
             type="email"
-            className="outline-none text-xl m-2 rounded p-2 w-80 shadow-lg dark:bg-slate-300 placeholder-slate-600"
+            className="m-2 w-80 rounded p-2 text-xl placeholder-slate-600 shadow-lg outline-none dark:bg-slate-300"
             placeholder="Email"
             {...register("email", {
               required: true,
@@ -76,7 +76,7 @@ const Login = () => {
         <div className="flex flex-col">
           <div className="flex">
             <input
-              className="outline-none text-xl m-2 w-72 rounded px-4 py-2 shadow-lg dark:bg-slate-300 placeholder-slate-600"
+              className="m-2 w-72 rounded px-4 py-2 text-xl placeholder-slate-600 shadow-lg outline-none dark:bg-slate-300"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               {...register("password", {
@@ -99,10 +99,10 @@ const Login = () => {
         </div>
         <button
           disabled={isLoading}
-          className="w-full bg-lime-400 dark:bg-lime-500 my-3 py-2 hover:bg-lime-500 dark:hover:bg-lime-600"
+          className="my-3 w-full bg-lime-400 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-600"
           type="submit"
         >
-          {isLoading? <Loader/> : "Login"}
+          {isLoading ? <Loader /> : "Login"}
         </button>
 
         <div>
@@ -110,8 +110,8 @@ const Login = () => {
             Registration
           </Link>
         </div>
-        <div className={`w-full h-auto text-xl bg-red-700 text-white`}>
-            {errorMessage}
+        <div className={`h-auto w-full bg-red-700 text-xl text-white`}>
+          {errorMessage}
         </div>
       </form>
     </div>

@@ -15,9 +15,9 @@ const LikeButton = () => {
   const likeMutation = useMutation(like.likeMovie, {
     onSuccess(data) {
       setIsLiked(true);
-      if (user&& movie) {
+      if (user && movie) {
         setUser(() => ({ ...user, likes: [...user.likes, data.movieId] }));
-        setMovie(()=>({...movie, likes: movie.likes+1}));
+        setMovie(() => ({ ...movie, likes: movie.likes + 1 }));
       }
     },
     onError() {
@@ -28,12 +28,12 @@ const LikeButton = () => {
   const deleteLikeMutation = useMutation(like.deleteLike, {
     onSuccess(data) {
       setIsLiked(false);
-      if (user&&movie) {
+      if (user && movie) {
         setUser(() => ({
           ...user,
           likes: [...user.likes.filter((like) => like !== data.movieId)],
         }));
-        setMovie(()=>({...movie, likes: movie.likes-1}));
+        setMovie(() => ({ ...movie, likes: movie.likes - 1 }));
       }
     },
     onError() {
@@ -47,34 +47,33 @@ const LikeButton = () => {
       if (confirm(text)) {
         router.push("/login");
       }
-    }
-    else if (user && movie) {
+    } else if (user && movie) {
       if (isLiked) {
         deleteLikeMutation.mutate(movie.id);
       } else {
         likeMutation.mutate(movie.id);
       }
-    } 
+    }
   }, [user, movie, isLiked]);
 
   useEffect(() => {
-    if (user&&movie) {
+    if (user && movie) {
       setIsLiked(user.likes.some((like) => like === movie.id));
     }
   }, [user, movie]);
 
-  if(movie)
-  return (
-    <div className={`text-3xl flex`}>
-      <button
-        onClick={onLikeClick}
-        className={`flex ${isLiked ? "text-green-600" : ""}`}
-      >
-        <div>{movie.likes}</div>
-        <AiFillLike />
-      </button>
-    </div>
-  );
+  if (movie)
+    return (
+      <div className={`flex text-3xl`}>
+        <button
+          onClick={onLikeClick}
+          className={`flex ${isLiked ? "text-green-600" : ""}`}
+        >
+          <div>{movie.likes}</div>
+          <AiFillLike />
+        </button>
+      </div>
+    );
   return null;
 };
 

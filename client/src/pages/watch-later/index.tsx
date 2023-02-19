@@ -19,8 +19,8 @@ const WatchLaterPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen max-h-fit flex justify-center bg-lime-100 dark:bg-sky-900">
-      <div className="h-auto md:w-3/4 w-screen mt-36 pb-10 mb-10 bg-emerald-500 dark:bg-sky-800 flex justify-center">
+    <div className="flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900">
+      <div className="mt-36 mb-10 flex h-auto w-screen justify-center bg-emerald-500 pb-10 dark:bg-sky-800 md:w-3/4">
         <div>
           {movieList.length > 0 ? (
             <MoviesList moviesList={movieList} />

@@ -13,11 +13,11 @@ const Video = () => {
   if (movie)
     return (
       <div className={`h-auto`}>
-        <video className={`w-full h-auto outline-none rounded-t-lg`} controls>
+        <video className={`h-auto w-full rounded-t-lg outline-none`} controls>
           <source src={getMediaPath(movie.moviePath)} type="video/mp4" />
         </video>
         <div
-          className={`bg-black text-white flex text-xl font-bold justify-around rounded-b-lg py-4`}
+          className={`flex justify-around rounded-b-lg bg-black py-4 text-xl font-bold text-white`}
         >
           <div className="hover:animate-pulse">
             <LikeButton />

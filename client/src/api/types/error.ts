@@ -1,3 +1,3 @@
 export interface ResponseError {
-    msg: string;
+  msg: string;
 }

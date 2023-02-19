@@ -10,7 +10,7 @@ const NewMark: React.FC<PropNewMark> = ({ date }) => {
 
   if (show) {
     return (
-      <div className={`absolute w-14 h-8 text-2xl font-bold bg-orange-500`}>
+      <div className={`absolute h-8 w-14 bg-orange-500 text-2xl font-bold`}>
         New
       </div>
     );

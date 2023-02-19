@@ -12,9 +12,13 @@ const paths = {
 
 const add = async (movieId: string) => {
   const token = Token.get();
-  const resporse = await client.post<WatchLater>(paths.main, {movieId}, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const resporse = await client.post<WatchLater>(
+    paths.main,
+    { movieId },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
 
   return resporse.data;
 };
@@ -30,12 +34,12 @@ const remove = async (movieId: string) => {
 
 const getMovies = async () => {
   const token = Token.get();
-  const resporse = await client.get<Array<Movie>>(paths.main,{
+  const resporse = await client.get<Array<Movie>>(paths.main, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
   return resporse.data;
-}
+};
 
 const watchLater = {
   add,
