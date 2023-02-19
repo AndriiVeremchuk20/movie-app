@@ -37,7 +37,7 @@ export const UserIcon = () => {
           </div>
         </div>
         {showDropMenu ? (
-          <div className="absolute w-44 h-auto text-1xl top-20 right-3 shadow-black shadow-sm bg-slate-300 rounded-md cursor-pointer child-hover:bg-cyan-800">
+          <div className="absolute w-72 h-auto text-1xl top-20 right-3 shadow-black shadow-sm bg-slate-300 rounded-md cursor-pointer child-hover:bg-cyan-800">
             <Link href={"/profile"} className="flex w-full text-xl px-3 py-3 ">
               <AiOutlineUser className="text-2xl mx-3" /> <div>Profile</div>
             </Link>

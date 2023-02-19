@@ -1,4 +1,5 @@
 import admin from "@/api/admin";
+import { Loader } from "@/components/loader";
 import { useMutation } from "@tanstack/react-query";
 import React, { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -114,10 +115,10 @@ const Movies = () => {
         <div className="w-full flex flex-col">
           <button
             type="submit"
-            className={`m-1 p-1 w-full bg-lime-600 text-white hover:bg-lime-800 font-bold`}
+            className={`m-1 p-1 w-full bg-lime-600 flex justify-center text-white hover:bg-lime-800 font-bold`}
           >
             {
-              addMovie.isLoading? "Wait": "Post"
+              addMovie.isLoading? <Loader/>: "Post"
             }
           </button>
           <button

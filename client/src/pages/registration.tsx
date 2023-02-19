@@ -1,4 +1,5 @@
 import { ResponseError } from "@/api/types/error";
+import { Loader } from "@/components/loader";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import Link from "next/link";
@@ -184,7 +185,7 @@ const Registration = () => {
           className="w-full h-auto flex justify-center bg-lime-400 my-3 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-700"
           type="submit"
         >
-          {isLoading ? "Wait..." : "Registration"}
+          {isLoading ? <Loader/> : "Registration"}
         </button>
 
         {isError ? (

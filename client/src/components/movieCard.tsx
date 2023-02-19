@@ -2,6 +2,7 @@ import { Movie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
+import NewMark from "./newMark";
 import WatchLaterButton from "./watchLaterButton";
 
 interface PropsMovieCard {
@@ -25,6 +26,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
     <div
       className={`w-60 h-96 bg-slate-900 shadow-slate-800 shadow-xl hover:shadow-none hover:bg-slate-800 cursor-pointer`}
     >
+      <NewMark date={movie.postedAt} />
       <img
         onClick={onCardClick}
         src={getMediaPath(movie.posterPath)}

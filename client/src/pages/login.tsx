@@ -1,6 +1,7 @@
 import auth from "@/api/auth";
 import { ResponseError } from "@/api/types/error";
 import { appUserAtom } from "@/atom";
+import { Loader } from "@/components/loader";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { useAtom } from "jotai";
@@ -101,7 +102,7 @@ const Login = () => {
           className="w-full bg-lime-400 dark:bg-lime-500 my-3 py-2 hover:bg-lime-500 dark:hover:bg-lime-600"
           type="submit"
         >
-          Login
+          {isLoading? <Loader/> : "Login"}
         </button>
 
         <div>

@@ -2,6 +2,7 @@ import { currentMovieAtom } from "@/atom";
 import getMediaPath from "@/utils/getMediaPath";
 import { useAtom } from "jotai";
 import React from "react";
+import NewMark from "./newMark";
 
 const MovieInfo = () => {
   const [movie] = useAtom(currentMovieAtom);
@@ -9,6 +10,9 @@ const MovieInfo = () => {
   if (movie)
     return (
       <div className="bg-slate-300 text-black dark:text-white dark:bg-slate-900 flex justify-center rounded-lg">
+        <div>
+          <NewMark date={movie.postedAt} />
+        </div>
         <img
           alt={movie.name}
           src={getMediaPath(movie.posterPath)}

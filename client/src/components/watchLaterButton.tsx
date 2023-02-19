@@ -61,6 +61,9 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
     if(user){
       setIsAdded(user.watchLater.some(watchLaterMovie=> watchLaterMovie === movieId));
     }
+    else{
+      setIsAdded(false);
+    }
   },[user]);
 
   return (
