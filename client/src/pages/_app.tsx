@@ -12,6 +12,7 @@ import { appUserAtom } from "@/atom";
 import auth from "@/api/auth";
 import { useEffect } from "react";
 import Footer from "@/components/footer";
+import { UpButton } from "@/components/upButton";
 
 const AppWrapper = (props: any) => {
   return <QueryClientProvider client={new QueryClient()} {...props} />;
@@ -45,6 +46,7 @@ export default function App(props: AppProps) {
         <Footer/>
       </AppWrapper>
       <ChangeThemeButton />
+      <UpButton/>
     </>
   );
 }
