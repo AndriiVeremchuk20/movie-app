@@ -1,5 +1,6 @@
 import { Movie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
+import getShortName from "@/utils/getShortName";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import NewMark from "./newMark";
@@ -35,7 +36,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
       />
       <div className="flex justify-between mt-1 mx-2">
         <div onClick={onCardClick} className={`text-white`}>
-          <div className={`text-xl`}>{cutName(movie.name, 3)}</div>
+          <div className={`text-md`}>{getShortName(movie.name, 13)}</div>
           <div className={`text-sm`}>{movie.postedAt.slice(0, 4)}</div>
         </div>
         <WatchLaterButton movieId={movie.id} />

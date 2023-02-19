@@ -36,11 +36,6 @@ model Movie {
   likes       Like[]
   Review      Review[]
   watchLater  WatchLater[]
-
-  // watchLater   User?    @relation("watchLater", fields: [watchLaterId], references: [id])
-  // viewed       User?    @relation("viewed", fields: [viewedId], references: [id])
-  // watchLaterId String?
-  // viewedId     String?
 }
 
 model WatchLater {
