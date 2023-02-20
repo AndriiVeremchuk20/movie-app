@@ -1,9 +1,10 @@
 export interface User {
-  firstName: String;
-  lastName: String;
+  firstName: string;
+  lastName: string;
   age: Number;
-  email: String;
-  likes: Array<String>;
-  vieved: Array<String>;
-  watchLater: Array<String>;
+  email: string;
+  likes: Array<string>;
+  vieved: Array<string>;
+  watchLater: Array<string>;
+  avatarPath: string|null; 
 }

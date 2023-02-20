@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import prisma from "../../prisma";
 
+
 const route = Router();
 
 route.get("/", async (req: Request, res: Response) => {
@@ -25,6 +26,7 @@ route.get("/search", async (req: Request, res: Response) => {
       where: {
         name: {
           contains: `${search_query ?? ""}`,
+          mode: "insensitive",
         },
       },
       select: { name: true, postedAt: true, posterPath: true, id: true },
@@ -64,5 +66,6 @@ route.get("/:id", async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
+
 
 export default route;

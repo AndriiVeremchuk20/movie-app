@@ -21,6 +21,7 @@ model User {
   reviews    Review[]
   likes      Like[]
   watchLater WatchLater[]
+  avatarPath String?
   
   // watchLater Movie[]  @relation("watchLater")
   // viewed     Movie[]  @relation("viewed")

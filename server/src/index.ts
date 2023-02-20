@@ -4,6 +4,7 @@ import adminRoute from "./routes/admin";
 import mediaRoute from "./routes/media";
 import likeRoute from "./routes/like";
 import watchLaterRoute from "./routes/watchLater";
+import avatarRoute from "./routes/avatar";
 import adminMiddleware from "./middleware/admin";
 import dotenv from "dotenv";
 import fileupload from "express-fileupload";
@@ -45,6 +46,7 @@ app.use("/admin", adminMiddleware, adminRoute);
 app.use("/media", mediaRoute);
 app.use("/likes", authMiddleware, likeRoute);
 app.use("/watchLater", authMiddleware, watchLaterRoute);
+app.use("/avatar", authMiddleware, avatarRoute);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

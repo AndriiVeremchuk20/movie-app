@@ -2,12 +2,11 @@ import { appUserAtom } from "@/atom";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
-import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
 import { RiMovieFill, RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
-import { useRouter } from "next/router";
+import UserAvatar from "./userAvatar";
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const [showDropMenu, setShowDropMenu] = useState<boolean>(false);
@@ -30,7 +29,9 @@ export const UserIcon = () => {
         } cursor-pointer rounded-md px-4  dark:bg-slate-300`}
       >
         <div className="flex">
-          <BiUserCircle className="text-6xl font-bold text-lime-500 dark:text-indigo-900" />
+          <div className=" my-1 w-16 h-auto">
+            <UserAvatar avatarPath={user.avatarPath} />
+          </div>
           <div className="text-1xl mt-2 pl-2 font-bold text-lime-500 dark:text-indigo-900">
             {(user.firstName + " " + user.lastName).slice(0, 18)}
           </div>

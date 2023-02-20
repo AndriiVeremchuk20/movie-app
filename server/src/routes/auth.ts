@@ -85,6 +85,7 @@ route.post(
             //viewed: true,
             watchLater: true,
             password: true,
+            avatarPath: true,
           },
         });
 
@@ -100,6 +101,7 @@ route.post(
               likes: loginUser.likes.map((like) => like.movieId),
               //    viewed: loginUser.viewed,
               watchLater: loginUser.watchLater.map((item) => item.movieId),
+              avatarPath: loginUser.avatarPath
             },
           });
         }
@@ -133,6 +135,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           likes: true,
           //  viewed: true,
           watchLater: true,
+          avatarPath: true,
         },
       });
       const token = generateAccessTocken(currUser.id, currUser.role);
@@ -146,6 +149,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           likes: currUser.likes.map((like) => like.movieId),
           //viewed: currUser.viewed,
           watchLater: currUser.watchLater.map((item) => item.movieId),
+          avatarPath: currUser.avatarPath,
         },
       });
     } catch (e) {
