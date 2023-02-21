@@ -1,6 +1,7 @@
+import { Movie } from "@prisma/client";
+import { raw } from "@prisma/client/runtime";
 import { Router, Request, Response } from "express";
 import prisma from "../../prisma";
-
 
 const route = Router();
 
@@ -54,10 +55,14 @@ route.get("/:id", async (req: Request, res: Response) => {
           posterPath: true,
           moviePath: true,
           likes: true,
-        }
+        },
       });
 
-      res.status(200).send({...movie, likes: movie.likes.length});
+      const recommendations = await prisma.$queryRawUnsafe(
+        `SELECT id, name, "posterPath", "postedAt"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`
+      );
+      
+      res.status(200).send({ ...movie, likes: movie.likes.length, recommendations: recommendations });
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });
     }
@@ -66,6 +71,5 @@ route.get("/:id", async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
-
 
 export default route;

@@ -31,7 +31,7 @@ const remove = async () => {
 
 const avatarApi = {
   edit,
-  remove
+  remove,
 };
 
 export default avatarApi;

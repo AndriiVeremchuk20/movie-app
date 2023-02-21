@@ -1,5 +1,3 @@
-import { Like } from "./like";
-
 export interface Movie {
   id: string;
   name: string;
@@ -11,4 +9,5 @@ export interface MovieAllInfo extends Movie {
   description: string;
   moviePath: string;
   likes: number;
+  recommendations: Array<Movie>;
 }

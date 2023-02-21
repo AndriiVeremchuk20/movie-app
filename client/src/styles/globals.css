@@ -8,3 +8,24 @@ html {
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Set the background color of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Set the color and style of the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Set the color and style of the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

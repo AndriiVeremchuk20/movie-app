@@ -6,5 +6,5 @@ export interface User {
   likes: Array<string>;
   vieved: Array<string>;
   watchLater: Array<string>;
-  avatarPath: string|null; 
+  avatarPath: string | null;
 }

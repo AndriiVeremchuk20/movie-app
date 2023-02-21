@@ -1,3 +1,3 @@
 export interface AvatarResponse {
-    avatarPath: string;
+  avatarPath: string;
 }

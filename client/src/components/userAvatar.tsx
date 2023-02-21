@@ -4,21 +4,21 @@ import React from "react";
 import getMediaPath from "@/utils/getMediaPath";
 
 interface PropsUserAvatar {
-  avatarPath: string|null;
+  avatarPath: string | null;
 }
 
 const UserAvatar: React.FC<PropsUserAvatar> = ({ avatarPath }) => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       {avatarPath ? (
         <img
           src={getMediaPath(avatarPath)}
           alt={avatarPath}
-          className={`w-full h-full rounded-full`}
+          className={`h-full w-full rounded-full`}
         />
       ) : (
         <div>
-          <BiUserCircle className={`w-full h-full rounded-full`} />
+          <BiUserCircle className={`h-full w-full rounded-full`} />
         </div>
       )}
     </div>

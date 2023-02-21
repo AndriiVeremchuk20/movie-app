@@ -29,7 +29,7 @@ export const UserIcon = () => {
         } cursor-pointer rounded-md px-4  dark:bg-slate-300`}
       >
         <div className="flex">
-          <div className=" my-1 w-16 h-auto">
+          <div className=" my-1 h-auto w-16">
             <UserAvatar avatarPath={user.avatarPath} />
           </div>
           <div className="text-1xl mt-2 pl-2 font-bold text-lime-500 dark:text-indigo-900">
