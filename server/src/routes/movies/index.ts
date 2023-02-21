@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import commentsRoute from "./review";
+import { text } from "stream/consumers";
 import prisma from "../../../prisma";
 import authMiddleware from "../../middleware/auth";
 
@@ -55,6 +55,18 @@ route.get("/:id", async (req: Request, res: Response) => {
           posterPath: true,
           moviePath: true,
           likes: true,
+          Review: {
+            select: {
+              User: {
+                select:{
+                firstName: true,
+                lastName: true,
+                avatarPath: true,
+                id: true,
+              }},
+              text: true
+            }
+          },
         },
       });
 
@@ -62,7 +74,7 @@ route.get("/:id", async (req: Request, res: Response) => {
         `SELECT id, name, "posterPath", "postedAt"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`
       );
       
-      res.status(200).send({ ...movie, likes: movie.likes.length, recommendations: recommendations });
+      res.status(200).send({ ...movie, review: movie.Review, likes: movie.likes.length, recommendations: recommendations });
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });
     }
@@ -71,7 +83,5 @@ route.get("/:id", async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
-
-route.use("/comments", authMiddleware, commentsRoute);
 
 export default route;

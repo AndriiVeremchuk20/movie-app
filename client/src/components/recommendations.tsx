@@ -11,7 +11,7 @@ const Recommendations: React.FC<PropsRecommendations> = ({ movies }) => {
     return (
       <div className="w-full mt-2 mb-4">
         <div className="text-2xl mb-1">Recomendations:</div>
-        <div className="flex overflow-x-scroll">{
+        <div className="relative flex overflow-x-scroll">{
           movies.map(movie => <div key={movie.id} className="flex-none w-auto h-auto mx-2"><MovieCard movie={movie}/></div>)
           }</div>
       </div>

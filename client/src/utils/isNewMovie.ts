@@ -8,7 +8,7 @@ const isNewMovie = (date: string) => {
     return (
       today.getFullYear() === moviePostedDate.getFullYear() &&
       today.getMonth() === moviePostedDate.getMonth() &&
-      today.getDay() - moviePostedDate.getDay() >= 0
+      today.getDay() - moviePostedDate.getDay() >= 1
     );
   } catch (e) {
     console.error(e);

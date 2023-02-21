@@ -8,6 +8,7 @@ import { generateAccessTocken } from "../../utils/token";
 import avatarRoute from "./avatar";
 import likeRoute from "./like";
 import watchLaterRoute from "./watchLater";
+import commentsRoute from "./review";
 //import { Role } from "@prisma/client"; // use to set admin
 
 const route = Router();
@@ -97,6 +98,7 @@ route.post(
           return res.status(201).send({
             token,
             user: {
+              id: loginUser.id,
               firstName: loginUser.firstName,
               lastName: loginUser.lastName,
               age: loginUser.age,
@@ -145,6 +147,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
       res.status(201).send({
         token,
         user: {
+          id: currUser.id,
           firstName: currUser.firstName,
           lastName: currUser.lastName,
           email: currUser.email,
@@ -168,5 +171,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
 route.use("/avatar", authMiddleware, avatarRoute);
 route.use("/likes", authMiddleware, likeRoute);
 route.use("/watch-later", authMiddleware, watchLaterRoute);
+route.use("/comments", authMiddleware, commentsRoute);
+
 
 export default route;

@@ -14,6 +14,7 @@ const Movies = () => {
   const [posterFile, setPosterFile] = useState<File | null>(null);
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -30,6 +31,7 @@ const Movies = () => {
   const addMovie = useMutation(admin.addMovie, {
     onSuccess(data) {
       console.log(data);
+      reset();
     },
     onError() {},
   });

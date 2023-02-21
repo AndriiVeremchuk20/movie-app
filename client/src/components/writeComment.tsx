@@ -13,20 +13,21 @@ interface Comment {
 const WriteComment = () => {
   const [movie] = useAtom(currentMovieAtom);
   const {
+    reset,
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<Comment>();
 
-  const commentMutation = useMutation(commentApi.post,{
-    onSuccess(data){
+  const commentMutation = useMutation(commentApi.post, {
+    onSuccess(data) {
       console.log(data);
-    }
-  })
+    },
+  });
 
   const onSubmit: SubmitHandler<Comment> = (data) => {
-    if(movie)
-    commentMutation.mutate({text: data.text, movieId: movie.id});
+    if (movie) commentMutation.mutate({ text: data.text, movieId: movie.id });
+    reset();
   };
 
   return (
@@ -49,7 +50,9 @@ const WriteComment = () => {
         </button>
       </form>
       {errors.text && (
-        <span className="text-sm text-red-500">{errors.text.message}</span>
+        <span className="text-md m-3 rounded-md border-2 border-red-700 bg-red-400 p-2 text-red-700">
+          Invalind comment
+        </span>
       )}
     </div>
   );
