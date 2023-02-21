@@ -1,10 +1,13 @@
 import { Router, Request, Response } from "express";
 import { check, validationResult } from "express-validator";
-import { comparePassword, hashPassword } from "../utils/hashPassword";
-import prisma from "../../prisma";
-import registrationMiddleware from "../middleware/registration";
-import authMiddleware from "../middleware/auth";
-import { generateAccessTocken } from "../utils/token";
+import { comparePassword, hashPassword } from "../../utils/hashPassword";
+import prisma from "../../../prisma";
+import registrationMiddleware from "../../middleware/registration";
+import authMiddleware from "../../middleware/auth";
+import { generateAccessTocken } from "../../utils/token";
+import avatarRoute from "./avatar";
+import likeRoute from "./like";
+import watchLaterRoute from "./watchLater";
 //import { Role } from "@prisma/client"; // use to set admin
 
 const route = Router();
@@ -161,5 +164,9 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
+
+route.use("/avatar", authMiddleware, avatarRoute);
+route.use("/likes", authMiddleware, likeRoute);
+route.use("/watch-later", authMiddleware, watchLaterRoute);
 
 export default route;

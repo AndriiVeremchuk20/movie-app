@@ -1,8 +1,8 @@
 import { Like, Role } from "@prisma/client";
 import { Router, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
-import prisma from "../../prisma/index";
-import checkFilesFormat from "../utils/checkFilesFormat";
+import prisma from "../../../prisma/index";
+import checkFilesFormat from "../../utils/checkFilesFormat";
 import { v4 as uuidv4 } from "uuid";
 
 const route = Router();

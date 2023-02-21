@@ -3,7 +3,7 @@ import client from ".";
 import { AvatarResponse } from "./types/avatar";
 
 const paths = {
-  main: "/avatar",
+  main: "user/avatar",
 };
 
 const edit = async (body: FormData) => {

@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import prisma from "../../prisma";
+import prisma from "../../../prisma";
 
 const route = Router();
 
-route.post("/like", async (req: Request, res: Response) => {
+route.post("/", async (req: Request, res: Response) => {
   try {
     const { movieId } = req.body;
     const userId = req.currentUser.id;
@@ -22,7 +22,7 @@ route.post("/like", async (req: Request, res: Response) => {
   }
 });
 
-route.delete("/like/:movieId", async (req: Request, res: Response) => {
+route.delete("/:movieId", async (req: Request, res: Response) => {
   try {
     const { movieId } = req.params;
     const userId = req.currentUser.id;

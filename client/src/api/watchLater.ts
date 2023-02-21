@@ -5,7 +5,7 @@ import Token from "@/utils/token";
 import client from ".";
 
 const paths = {
-  main: "/watchLater/",
+  main: "user/watch-later/",
 };
 
 //post delete

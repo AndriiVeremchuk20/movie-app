@@ -8,9 +8,9 @@ import client from ".";
 import Token from "@/utils/token";
 
 const paths = {
-  registration: "/auth/registration",
-  login: "/auth/login",
-  auth: "/auth/auth",
+  registration: "/user/registration",
+  login: "/user/login",
+  auth: "/user/auth",
 };
 
 const registration = async (body: RegistrationRequestBody) => {

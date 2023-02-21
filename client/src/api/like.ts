@@ -3,8 +3,7 @@ import Token from "@/utils/token";
 import client from ".";
 
 const paths = {
-  like: "likes/like",
-  dislike: "likes/dislike",
+  like: "/user/likes/",
 };
 
 const likeMovie = async (movieId: string) => {

@@ -1,7 +1,7 @@
-import { Movie } from "@prisma/client";
-import { raw } from "@prisma/client/runtime";
 import { Router, Request, Response } from "express";
-import prisma from "../../prisma";
+import commentsRoute from "./review";
+import prisma from "../../../prisma";
+import authMiddleware from "../../middleware/auth";
 
 const route = Router();
 
@@ -71,5 +71,7 @@ route.get("/:id", async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
+
+route.use("/comments", authMiddleware, commentsRoute);
 
 export default route;

@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import { useAtom } from "jotai";
 import { currentMovieAtom } from "@/atom";
 import Recommendations from "@/components/recommendations";
+import MovieComment from "@/components/movieComment";
 
 const MoviePage = () => {
   const router = useRouter();
@@ -42,6 +43,9 @@ const MoviePage = () => {
           </div>
           <div>
             <Recommendations movies={currentMovie.recommendations}/>
+          </div>
+          <div>
+            <MovieComment/>
           </div>
         </div>
       </div>

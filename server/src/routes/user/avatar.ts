@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import fileUpload from "express-fileupload";
-import prisma from "../../prisma";
+import prisma from "../../../prisma";
 import fs from "fs";
 const route = Router();
 
