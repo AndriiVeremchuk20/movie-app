@@ -1,9 +1,9 @@
-import { Movie } from "@/api/types/movie";
+import { BaseMovie } from "@/types/movie";
 import React from "react";
 import AutocompleteCard from "./autocompleteCard";
 
 interface PropsAutocompleteMovieSearch {
-  movies: Array<Movie>;
+  movies: Array<BaseMovie>;
 }
 
 const AutocompleteMoviesSearch: React.FC<PropsAutocompleteMovieSearch> = ({

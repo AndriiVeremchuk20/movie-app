@@ -22,7 +22,6 @@ const AppInner = ({ Component, pageProps }: AppProps) => {
   const [, setAppUser] = useAtom(appUserAtom);
   const authMutate = useMutation(auth.authentication, {
     onSuccess(data) {
-      console.log(data);
       setAppUser(data.user);
     },
     onError(e) {

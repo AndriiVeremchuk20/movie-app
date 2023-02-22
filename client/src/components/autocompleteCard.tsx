@@ -1,10 +1,10 @@
-import { Movie } from "@/api/types/movie";
+import { BaseMovie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 
 interface PropsAutocompleteCard {
-  movie: Movie;
+  movie: BaseMovie;
 }
 
 const AutocompleteCard: React.FC<PropsAutocompleteCard> = ({ movie }) => {

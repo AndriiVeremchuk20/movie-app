@@ -1,9 +1,9 @@
-import { Movie } from "@/types/movie";
+import { BaseMovie } from "@/types/movie";
 import React from "react";
 import MovieCard from "./movieCard";
 
 interface PropsRecommendations {
-  movies: Array<Movie>;
+  movies: Array<BaseMovie>;
 }
 
 const Recommendations: React.FC<PropsRecommendations> = ({ movies }) => {

@@ -1,4 +1,4 @@
-import { Comment } from "@/types/comment";
+import { BaseComment, } from "@/types/comment";
 import Token from "@/utils/token";
 import client from ".";
 import { CommentReqBody } from "./types/comment";
@@ -9,7 +9,7 @@ const paths = {
 
 const post = async (body: CommentReqBody) => {
   const token = Token.get();
-  const response = await client.post<Comment>(paths.main, body, {
+  const response = await client.post<BaseComment>(paths.main, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

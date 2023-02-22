@@ -29,7 +29,6 @@ const authentication = async () => {
   const response = await client.get<LoginResponseData>(paths.auth, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  console.log(response.data);
   Token.set(response.data.token);
   return response.data;
 };

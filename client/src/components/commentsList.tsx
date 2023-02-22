@@ -1,8 +1,18 @@
 import React from 'react'
+import { Comment } from '@/types/comment'
+import CommentCard from './commentCard'
 
-const CommentsList = () => {
+interface PropCommentsList {
+  comments: Array<Comment>
+}
+
+const CommentsList: React.FC<PropCommentsList> = ({comments}) => {
   return (
-    <div>commentsList</div>
+    <div className='flex flex-col my-6 gap-6'>
+      {
+        comments.map(comment => <CommentCard  key={comment.id} comment={comment}/>)
+      }
+    </div>
   )
 }
 

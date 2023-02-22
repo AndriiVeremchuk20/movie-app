@@ -1,5 +1,5 @@
 import movies from "@/api/movies";
-import { Movie } from "@/types/movie";
+import { BaseMovie } from "@/types/movie";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ import AutocompleteMoviesSearch from "./autocompleteMoviesSearch";
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
-  const [foundMovies, setFoundMovies] = useState<Array<Movie>>([]);
+  const [foundMovies, setFoundMovies] = useState<Array<BaseMovie>>([]);
   const debounce = useDebounce(searchText, 1000);
   const router = useRouter();
 

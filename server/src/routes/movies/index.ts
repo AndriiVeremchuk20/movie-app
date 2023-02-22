@@ -55,17 +55,23 @@ route.get("/:id", async (req: Request, res: Response) => {
           posterPath: true,
           moviePath: true,
           likes: true,
-          Review: {
+          comments: {
+            orderBy:{
+              posted_at: "desc"
+            },
             select: {
+              id: true,
+              text: true,
+              posted_at: true,
               User: {
-                select:{
-                firstName: true,
-                lastName: true,
-                avatarPath: true,
-                id: true,
-              }},
-              text: true
-            }
+                select: {
+                  id: true,
+                  firstName: true,
+                  lastName: true,
+                  avatarPath: true,
+                },
+              },
+            },
           },
         },
       });
@@ -73,8 +79,12 @@ route.get("/:id", async (req: Request, res: Response) => {
       const recommendations = await prisma.$queryRawUnsafe(
         `SELECT id, name, "posterPath", "postedAt"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`
       );
-      
-      res.status(200).send({ ...movie, review: movie.Review, likes: movie.likes.length, recommendations: recommendations });
+
+      res.status(200).send({
+        ...movie,
+        likes: movie.likes.length,
+        recommendations: recommendations,
+      });
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });
     }

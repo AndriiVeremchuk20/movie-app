@@ -8,7 +8,7 @@ import { generateAccessTocken } from "../../utils/token";
 import avatarRoute from "./avatar";
 import likeRoute from "./like";
 import watchLaterRoute from "./watchLater";
-import commentsRoute from "./review";
+import commentsRoute from "./comments";
 //import { Role } from "@prisma/client"; // use to set admin
 
 const route = Router();
@@ -138,7 +138,6 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           age: true,
           role: true,
           likes: true,
-          //  viewed: true,
           watchLater: true,
           avatarPath: true,
         },
@@ -153,7 +152,6 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           email: currUser.email,
           age: currUser.age,
           likes: currUser.likes.map((like) => like.movieId),
-          //viewed: currUser.viewed,
           watchLater: currUser.watchLater.map((item) => item.movieId),
           avatarPath: currUser.avatarPath,
         },

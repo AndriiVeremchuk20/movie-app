@@ -18,11 +18,11 @@ model User {
   age        Int
   email      String       @unique
   password   String
-  reviews    Review[]
+  comments   Comments[]
   likes      Like[]
   watchLater WatchLater[]
   avatarPath String?
-  
+
   // watchLater Movie[]  @relation("watchLater")
   // viewed     Movie[]  @relation("viewed")
 }
@@ -31,11 +31,11 @@ model Movie {
   id          String       @id @default(cuid())
   posterPath  String
   moviePath   String
-  title       String
+  name        String
   description String
   postedAt    DateTime     @default(now())
   likes       Like[]
-  Review      Review[]
+  comments    Comments[]
   watchLater  WatchLater[]
 }
 
@@ -45,7 +45,7 @@ model WatchLater {
   userId  String
   movie   Movie  @relation(fields: [movieId], references: [id])
   movieId String
-  
+
   @@unique([userId, movieId])
 }
 
@@ -67,7 +67,7 @@ model Like {
   @@unique([userId, movieId])
 }
 
-model Review {
+model Comments {
   id        String   @id @default(cuid())
   posted_at DateTime @default(now())
   text      String
@@ -75,6 +75,7 @@ model Review {
   movieId   String
   User      User     @relation(fields: [userId], references: [id])
   userId    String
+  postedAt  DateTime @default(now())
 }
 
 enum Role {

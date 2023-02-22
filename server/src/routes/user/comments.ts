@@ -7,15 +7,13 @@ route.post("/", async(req: Request, res: Response) => {
     const userId = req.currentUser.id;
     const { movieId, text } = req.body;
     
-    const newComment = await prisma.review.create({data:{
+    const newComment = await prisma.comments.create({data:{
       userId,
       movieId,
       text
     }});
 
-    console.log(newComment);
-
-    res.status(201).send(newComment);
+    res.status(201).send({id: newComment.id, text: newComment.text, posted_at: newComment.posted_at});
 
   } catch (e) {
     console.log(e);

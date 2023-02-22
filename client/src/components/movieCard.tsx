@@ -1,4 +1,4 @@
-import { Movie } from "@/types/movie";
+import { BaseMovie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
 import getShortName from "@/utils/getShortName";
 import { useRouter } from "next/router";
@@ -7,7 +7,7 @@ import NewMark from "./newMark";
 import WatchLaterButton from "./watchLaterButton";
 
 interface PropsMovieCard {
-  movie: Movie;
+  movie: BaseMovie
 }
 
 const cutName = (name: string, maxSpaces: number) => {

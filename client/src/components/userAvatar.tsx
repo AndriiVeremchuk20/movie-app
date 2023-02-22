@@ -1,4 +1,3 @@
-import { appUserAtom } from "@/atom";
 import { BiUserCircle } from "react-icons/bi";
 import React from "react";
 import getMediaPath from "@/utils/getMediaPath";
