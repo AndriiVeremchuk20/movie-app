@@ -1,4 +1,4 @@
-import {Comment} from "./comment";
+import { Comment } from "./comment";
 
 export interface BaseMovie {
   id: string;
@@ -12,5 +12,5 @@ export interface Movie extends BaseMovie {
   moviePath: string;
   likes: number;
   recommendations: Array<Movie>;
-  comments: Array<Comment>
+  comments: Array<Comment>;
 }

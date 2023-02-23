@@ -24,11 +24,11 @@ const CommentCard: React.FC<PropCommentCard> = ({ comment }) => {
         <div className="m-auto">{comment.User.firstName.slice(0, 10)}</div>
       </div>
       <div
-        className={`text-xl flex w-full rounded-lg p-4
+        className={`flex w-full rounded-lg p-4 text-xl
       ${
         user
           ? user.id === comment.User.id
-            ? " pr-10 flex-row-reverse bg-slate-400"
+            ? " flex-row-reverse bg-slate-400 pr-10"
             : "bg-slate-200"
           : "bg-slate-200"
       }

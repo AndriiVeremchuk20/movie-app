@@ -7,7 +7,7 @@ import NewMark from "./newMark";
 import WatchLaterButton from "./watchLaterButton";
 
 interface PropsMovieCard {
-  movie: BaseMovie
+  movie: BaseMovie;
 }
 
 const cutName = (name: string, maxSpaces: number) => {

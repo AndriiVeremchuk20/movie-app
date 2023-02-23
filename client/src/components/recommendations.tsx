@@ -9,11 +9,15 @@ interface PropsRecommendations {
 const Recommendations: React.FC<PropsRecommendations> = ({ movies }) => {
   if (movies.length > 0)
     return (
-      <div className="w-full mt-2 mb-4">
-        <div className="text-2xl mb-1">Recomendations:</div>
-        <div className="relative flex overflow-x-scroll">{
-          movies.map(movie => <div key={movie.id} className="flex-none w-auto h-auto mx-2"><MovieCard movie={movie}/></div>)
-          }</div>
+      <div className="mt-2 mb-4 w-full">
+        <div className="mb-1 text-2xl">Recomendations:</div>
+        <div className="relative flex overflow-x-scroll">
+          {movies.map((movie) => (
+            <div key={movie.id} className="mx-2 h-auto w-auto flex-none">
+              <MovieCard movie={movie} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   return null;

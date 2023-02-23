@@ -106,7 +106,7 @@ route.post(
               likes: loginUser.likes.map((like) => like.movieId),
               //    viewed: loginUser.viewed,
               watchLater: loginUser.watchLater.map((item) => item.movieId),
-              avatarPath: loginUser.avatarPath
+              avatarPath: loginUser.avatarPath,
             },
           });
         }
@@ -166,10 +166,25 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
   }
 });
 
+route.delete("/", authMiddleware, async (req: Request, res: Response) => {
+  try {
+    const { id } = req.currentUser;
+
+    await prisma.user.delete({where:{
+      id
+    }});
+
+    res.status(203).send({msg: "Accoutn deleted"});
+
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ msg: "Server error" });
+  }
+});
+
 route.use("/avatar", authMiddleware, avatarRoute);
 route.use("/likes", authMiddleware, likeRoute);
 route.use("/watch-later", authMiddleware, watchLaterRoute);
 route.use("/comments", authMiddleware, commentsRoute);
-
 
 export default route;

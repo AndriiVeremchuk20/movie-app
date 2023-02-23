@@ -11,6 +11,7 @@ const paths = {
   registration: "/user/registration",
   login: "/user/login",
   auth: "/user/auth",
+  delete: "/user/",
 };
 
 const registration = async (body: RegistrationRequestBody) => {
@@ -33,10 +34,20 @@ const authentication = async () => {
   return response.data;
 };
 
+const deleteAccount = async () => {
+  const token = Token.get();
+  const response = await client.delete<ResponseMessage>(paths.delete, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  Token.clear();
+  return response.data;
+};
+
 const auth = {
   registration,
   login,
   authentication,
+  deleteAccount,
 };
 
 export default auth;

@@ -1,4 +1,4 @@
 export interface CommentReqBody {
-    movieId: string;
-    text: string;
+  movieId: string;
+  text: string;
 }

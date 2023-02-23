@@ -42,10 +42,10 @@ const MoviePage = () => {
             <Video />
           </div>
           <div>
-            <Recommendations movies={currentMovie.recommendations}/>
+            <Recommendations movies={currentMovie.recommendations} />
           </div>
           <div>
-            <MovieComment/>
+            <MovieComment />
           </div>
         </div>
       </div>

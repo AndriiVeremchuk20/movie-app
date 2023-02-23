@@ -30,7 +30,7 @@ route.get("/search", async (req: Request, res: Response) => {
           mode: "insensitive",
         },
       },
-      select: { name: true, postedAt: true, posterPath: true, id: true },
+      select: { id: true, name: true, postedAt: true, posterPath: true },
     });
 
     res.status(200).send(results);
@@ -56,8 +56,8 @@ route.get("/:id", async (req: Request, res: Response) => {
           moviePath: true,
           likes: true,
           comments: {
-            orderBy:{
-              posted_at: "desc"
+            orderBy: {
+              posted_at: "desc",
             },
             select: {
               id: true,

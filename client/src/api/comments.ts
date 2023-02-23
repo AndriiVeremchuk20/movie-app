@@ -1,4 +1,4 @@
-import { BaseComment, } from "@/types/comment";
+import { BaseComment } from "@/types/comment";
 import Token from "@/utils/token";
 import client from ".";
 import { CommentReqBody } from "./types/comment";

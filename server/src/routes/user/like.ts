@@ -3,6 +3,34 @@ import prisma from "../../../prisma";
 
 const route = Router();
 
+route.get("/", async (req: Request, res: Response) => {
+  try {
+    const userId = req.currentUser.id;
+
+    const likedMovies = await prisma.like.findMany({
+      where: {
+        userId,
+      },
+      select:{
+        movie: {
+          select: {
+            id: true,
+            name: true,
+            postedAt: true,
+            posterPath: true,
+          }
+        }
+      }
+    }).then(movies => movies.map(movie => movie.movie));
+
+    res.status(200).send(likedMovies);
+
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({msg: "Server error"});
+  }
+});
+
 route.post("/", async (req: Request, res: Response) => {
   try {
     const { movieId } = req.body;

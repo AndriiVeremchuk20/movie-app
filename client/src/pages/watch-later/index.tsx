@@ -1,11 +1,16 @@
 import watchLater from "@/api/watchLater";
+import { appUserAtom } from "@/atom";
 import MoviesList from "@/components/moviesList";
 import { Movie } from "@/types/movie";
 import { useMutation } from "@tanstack/react-query";
+import { useAtom } from "jotai";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const WatchLaterPage = () => {
   const [movieList, setMovieList] = useState<Array<Movie>>([]);
+  const [user] = useAtom(appUserAtom);
+  const router = useRouter();
 
   const getMarkedMoviesMutation = useMutation(watchLater.getMovies, {
     onSuccess(data) {
@@ -17,6 +22,10 @@ const WatchLaterPage = () => {
   useEffect(() => {
     getMarkedMoviesMutation.mutate();
   }, []);
+
+  // useEffect(()=>{if(!user){
+  //   router.replace("/")
+  // }},[user]);
 
   return (
     <div className="flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900">

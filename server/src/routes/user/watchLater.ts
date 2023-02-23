@@ -54,9 +54,9 @@ router.get("/", async (req: Request, res: Response) => {
           select: { id: true, name: true, posterPath: true, postedAt: true },
         },
       },
-    })
+    }).then(movies=> movies.map(movie => movie.movie).reverse());
 
-    res.status(200).send(movies.map(movie => movie.movie).reverse());
+    res.status(200).send(movies);
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

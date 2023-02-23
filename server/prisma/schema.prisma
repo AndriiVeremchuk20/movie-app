@@ -41,9 +41,9 @@ model Movie {
 
 model WatchLater {
   id      String @id @default(cuid())
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
-  movie   Movie  @relation(fields: [movieId], references: [id])
+  movie   Movie  @relation(fields: [movieId], references: [id], onDelete: Cascade)
   movieId String
 
   @@unique([userId, movieId])
@@ -59,9 +59,9 @@ model WatchLater {
 
 model Like {
   id      String @id @default(cuid())
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
-  movie   Movie  @relation(fields: [movieId], references: [id])
+  movie   Movie  @relation(fields: [movieId], references: [id], onDelete: Cascade)
   movieId String
 
   @@unique([userId, movieId])
@@ -71,9 +71,9 @@ model Comments {
   id        String   @id @default(cuid())
   posted_at DateTime @default(now())
   text      String
-  Movie     Movie    @relation(fields: [movieId], references: [id])
+  Movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
   movieId   String
-  User      User     @relation(fields: [userId], references: [id])
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   postedAt  DateTime @default(now())
 }

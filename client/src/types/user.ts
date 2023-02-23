@@ -1,4 +1,4 @@
-export interface BaseUser{ 
+export interface BaseUser {
   id: string;
   firstName: string;
   lastName: string;
@@ -6,7 +6,7 @@ export interface BaseUser{
 }
 
 export interface User extends BaseUser {
-  age: Number;
+  age: number;
   email: string;
   likes: Array<string>;
   vieved: Array<string>;
