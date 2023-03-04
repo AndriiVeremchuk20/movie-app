@@ -9,6 +9,7 @@ import avatarRoute from "./avatar";
 import likeRoute from "./like";
 import watchLaterRoute from "./watchLater";
 import commentsRoute from "./comments";
+import { isPromise } from "util/types";
 //import { Role } from "@prisma/client"; // use to set admin
 
 const route = Router();
@@ -95,7 +96,7 @@ route.post(
         });
 
         if (await comparePassword(password, loginUser.password)) {
-          const token = generateAccessTocken(loginUser.id, loginUser.role);
+          const token = generateAccessTocken(loginUser.id, loginUser.role, loginUser.isPremium);
           return res.status(201).send({
             token,
             user: {
@@ -145,7 +146,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           isPremium: true,
         },
       });
-      const token = generateAccessTocken(currUser.id, currUser.role);
+      const token = generateAccessTocken(currUser.id, currUser.role, currUser.isPremium);
       res.status(201).send({
         token,
         user: {

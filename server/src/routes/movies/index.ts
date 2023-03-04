@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import prisma from "../../../prisma";
+import isPremiumMiddleware from "../../middleware/isPremium";
 
 const route = Router();
 
@@ -38,9 +39,10 @@ route.get("/search", async (req: Request, res: Response) => {
   }
 });
 
-route.get("/:id", async (req: Request, res: Response) => {
+route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    const { isPremium } = req.currentUser;
 
     try {
       const movie = await prisma.movie.findFirstOrThrow({
@@ -75,7 +77,7 @@ route.get("/:id", async (req: Request, res: Response) => {
         },
       });
 
-      if(movie.isForPremium){
+      if(movie.isForPremium&&!isPremium){
         movie.moviePath = "";
       }
 

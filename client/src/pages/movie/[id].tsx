@@ -14,7 +14,7 @@ const MoviePage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [currentMovie, setCurrentMovie] = useAtom(currentMovieAtom);
-  const getMovieByIdMutation = useMutation(movies.getMoviesById, {
+  const getMovieByIdMutation = useMutation(movies.getMovieById, {
     onSuccess(data) {
       setCurrentMovie(data);
       console.log(data);

@@ -3,10 +3,11 @@ const jwt = require("jsonwebtoken");
 
 const secret = process.env.SECRET;
 
-export const generateAccessTocken = (id: string, roles: Role ) => {
+export const generateAccessTocken = (id: string, role: Role, isPremium: boolean ) => {
     const payload = {
         id: id,
-        role: roles,
+        role: role,
+        isPremium: isPremium
     }
     return jwt.sign(payload, secret, { expiresIn: "1h" });
 }

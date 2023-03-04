@@ -1,7 +1,7 @@
-import { currentMovieAtom } from "@/atom";
+import { appUserAtom, currentMovieAtom } from "@/atom";
 import getMediaPath from "@/utils/getMediaPath";
 import { useAtom } from "jotai";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import DownloadButton from "./downloadButton";
 import LikeButton from "./likeButton";
 import ShareButton from "./shareButton";
@@ -9,11 +9,12 @@ import WatchLaterButton from "./watchLaterButton";
 
 const Video = () => {
   const [movie] = useAtom(currentMovieAtom);
+  const [user] = useAtom(appUserAtom);
 
   if (movie)
     return (
       <div className={`h-auto`}>
-        {movie.isForPremium ? (
+        {movie.isForPremium && !user?.isPremium? (
           <div className="flex h-96 w-full rounded-t-lg bg-black">
             <div className="m-auto">
               <div className="flex text-2xl text-white">
