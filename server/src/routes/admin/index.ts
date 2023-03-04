@@ -24,7 +24,7 @@ route.post("/movie", async (req: Request, res: Response) => {
       return res.status(403).send({ msg: "No file uploaded" });
     }
 
-    const { name, description } = req.body;
+    const { name, description, isPremium, postedAt } = req.body;
     const movie = req.files.movie as UploadedFile;
     const poster = req.files.poster as UploadedFile;
 
@@ -53,8 +53,10 @@ route.post("/movie", async (req: Request, res: Response) => {
       data: {
         name,
         description,
+        isForPremium: isPremium === "true",
         posterPath: posterPath.slice(8),
         moviePath: moviePath.slice(8),
+        postedAt: new Date(postedAt),
       },
     });
 

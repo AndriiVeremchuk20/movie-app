@@ -2,6 +2,7 @@ import { BaseMovie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
+import IsPremiumMark from "./isPremiumMark";
 
 interface PropsAutocompleteCard {
   movie: BaseMovie;

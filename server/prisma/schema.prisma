@@ -22,6 +22,7 @@ model User {
   likes      Like[]
   watchLater WatchLater[]
   avatarPath String?
+  isPremium  Boolean @default(false)
 
   // watchLater Movie[]  @relation("watchLater")
   // viewed     Movie[]  @relation("viewed")
@@ -37,6 +38,7 @@ model Movie {
   likes       Like[]
   comments    Comments[]
   watchLater  WatchLater[]
+  isForPremium Boolean @default(false)
 }
 
 model WatchLater {

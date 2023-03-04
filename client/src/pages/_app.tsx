@@ -13,6 +13,7 @@ import auth from "@/api/auth";
 import { useEffect } from "react";
 import Footer from "@/components/footer";
 import { UpButton } from "@/components/upButton";
+import Token from "@/utils/token";
 
 const AppWrapper = (props: any) => {
   return <QueryClientProvider client={new QueryClient()} {...props} />;
@@ -30,7 +31,9 @@ const AppInner = ({ Component, pageProps }: AppProps) => {
   });
 
   useEffect(() => {
-    authMutate.mutate();
+    if (Token.get()) {
+      authMutate.mutate();
+    }
   }, []);
 
   return <Component {...pageProps} />;

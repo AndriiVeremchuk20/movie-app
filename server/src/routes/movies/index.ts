@@ -1,14 +1,12 @@
 import { Router, Request, Response } from "express";
-import { text } from "stream/consumers";
 import prisma from "../../../prisma";
-import authMiddleware from "../../middleware/auth";
 
 const route = Router();
 
 route.get("/", async (req: Request, res: Response) => {
   try {
     const movies = await prisma.movie.findMany({
-      select: { name: true, postedAt: true, posterPath: true, id: true },
+      select: { name: true, postedAt: true, posterPath: true, id: true, isForPremium: true },
       orderBy: [{ postedAt: "desc" }],
     });
     res.status(200).send(movies);
@@ -30,7 +28,7 @@ route.get("/search", async (req: Request, res: Response) => {
           mode: "insensitive",
         },
       },
-      select: { id: true, name: true, postedAt: true, posterPath: true },
+      select: { id: true, name: true, postedAt: true, posterPath: true, isForPremium: true },
     });
 
     res.status(200).send(results);
@@ -55,6 +53,7 @@ route.get("/:id", async (req: Request, res: Response) => {
           posterPath: true,
           moviePath: true,
           likes: true,
+          isForPremium: true,
           comments: {
             orderBy: {
               posted_at: "desc",
@@ -76,8 +75,12 @@ route.get("/:id", async (req: Request, res: Response) => {
         },
       });
 
+      if(movie.isForPremium){
+        movie.moviePath = "";
+      }
+
       const recommendations = await prisma.$queryRawUnsafe(
-        `SELECT id, name, "posterPath", "postedAt"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`
+        `SELECT id, name, "posterPath", "postedAt", "isForPremium"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`
       );
 
       res.status(200).send({

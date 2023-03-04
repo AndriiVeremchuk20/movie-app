@@ -51,7 +51,7 @@ router.get("/", async (req: Request, res: Response) => {
       where: { userId: id },
       select: {
         movie: {
-          select: { id: true, name: true, posterPath: true, postedAt: true },
+          select: { id: true, name: true, posterPath: true, postedAt: true, isForPremium: true },
         },
       },
     }).then(movies=> movies.map(movie => movie.movie).reverse());

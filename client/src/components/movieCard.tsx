@@ -1,8 +1,11 @@
+import { appUserAtom } from "@/atom";
 import { BaseMovie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
 import getShortName from "@/utils/getShortName";
+import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
+import IsPremiumMark from "./isPremiumMark";
 import NewMark from "./newMark";
 import WatchLaterButton from "./watchLaterButton";
 
@@ -18,6 +21,7 @@ const cutName = (name: string, maxSpaces: number) => {
 
 const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
   const router = useRouter();
+  const [user] = useAtom(appUserAtom);
 
   const onCardClick = useCallback(() => {
     router.push(`/movie/${movie.id}`);
@@ -28,6 +32,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
       className={`h-96 w-60 cursor-pointer bg-slate-900 shadow-xl shadow-slate-800 hover:bg-slate-800 hover:shadow-none`}
     >
       <NewMark date={movie.postedAt} />
+      <IsPremiumMark isForPremium={movie.isForPremium}/>
       <img
         onClick={onCardClick}
         src={getMediaPath(movie.posterPath)}

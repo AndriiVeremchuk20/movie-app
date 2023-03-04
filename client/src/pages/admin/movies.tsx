@@ -7,6 +7,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 type Inputs = {
   name: string;
   description: string;
+  isPremium: boolean;
+  postedAt: string;
 };
 
 const Movies = () => {
@@ -42,7 +44,9 @@ const Movies = () => {
       body.append("movie", movieFile);
       body.append("poster", posterFile);
       body.append("name", data.name);
+      body.append("isPremium", data.isPremium+"");
       body.append("description", data.description);
+      body.append("postedAt", data.postedAt);
 
       addMovie.mutate(body);
     }
@@ -52,7 +56,7 @@ const Movies = () => {
     <div className={`flex h-screen w-full bg-sky-600`}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`m-auto  w-auto rounded-md bg-cyan-700 p-2`}
+        className={` mt-24 m-auto  w-auto rounded-md bg-cyan-700 p-2`}
       >
         <div className={`text-3xl font-bold`}>Add Movie</div>
         <div>
@@ -109,6 +113,37 @@ const Movies = () => {
               onChange={onMovieChange}
             />
           </label>
+        </div>
+        <div className="frex mb-2">
+          <label
+            htmlFor="isPremium"
+            className={``}
+          >
+            Is premium:            
+          </label>
+          <input
+              type="checkbox"
+              id="isPremium"
+              className={`w-5 h-5 ml-2`}
+              {
+                ...register("isPremium")
+              }
+            />
+        </div>
+        <div className="frex mb-2">
+          <label
+            htmlFor="postedAt"
+            className={``}
+          >
+            Posted date:            
+          </label>
+          <input
+              type="date"
+              id="postedAt"
+              {
+                ...register("postedAt")
+              }
+            />
         </div>
         <div className="flex w-full flex-col">
           <button

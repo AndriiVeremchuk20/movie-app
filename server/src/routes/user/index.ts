@@ -90,6 +90,7 @@ route.post(
             watchLater: true,
             password: true,
             avatarPath: true,
+            isPremium: true,
           },
         });
 
@@ -107,6 +108,7 @@ route.post(
               //    viewed: loginUser.viewed,
               watchLater: loginUser.watchLater.map((item) => item.movieId),
               avatarPath: loginUser.avatarPath,
+              isPemium: loginUser.isPremium,
             },
           });
         }
@@ -140,6 +142,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           likes: true,
           watchLater: true,
           avatarPath: true,
+          isPremium: true,
         },
       });
       const token = generateAccessTocken(currUser.id, currUser.role);
@@ -154,6 +157,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           likes: currUser.likes.map((like) => like.movieId),
           watchLater: currUser.watchLater.map((item) => item.movieId),
           avatarPath: currUser.avatarPath,
+          isPremium: currUser.isPremium,
         },
       });
     } catch (e) {

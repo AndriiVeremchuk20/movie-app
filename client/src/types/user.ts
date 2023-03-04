@@ -11,4 +11,5 @@ export interface User extends BaseUser {
   likes: Array<string>;
   vieved: Array<string>;
   watchLater: Array<string>;
+  isPremium: boolean;
 }
