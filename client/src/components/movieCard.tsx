@@ -1,3 +1,4 @@
+import appRoutes from "@/appRoutes";
 import { appUserAtom } from "@/atom";
 import { BaseMovie } from "@/types/movie";
 import getMediaPath from "@/utils/getMediaPath";
@@ -24,7 +25,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
   const [user] = useAtom(appUserAtom);
 
   const onCardClick = useCallback(() => {
-    router.push(`/movie/${movie.id}`);
+    router.push(appRoutes.movie(movie.id));
   }, []);
 
   return (

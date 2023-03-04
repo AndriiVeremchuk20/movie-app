@@ -1,3 +1,4 @@
+import appRoutes from "@/appRoutes";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import { MdMovie } from "react-icons/md";
@@ -6,7 +7,7 @@ export const Logo = () => {
   const route = useRouter();
 
   const onLogoClick = useCallback(() => {
-    route.replace("/");
+    route.replace(appRoutes.home);
   }, []);
 
   return (

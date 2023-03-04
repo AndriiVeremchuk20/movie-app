@@ -1,6 +1,6 @@
-import { User } from "@/types/user";
+import { BaseUser, User } from "@/types/user";
 
-export interface RegistrationRequestBody extends User {
+export interface RegistrationRequestBody extends BaseUser {
   password: string;
 }
 

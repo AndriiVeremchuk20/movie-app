@@ -1,4 +1,5 @@
 import { ResponseError } from "@/api/types/error";
+import appRoutes from "@/appRoutes";
 import { Loader } from "@/components/loader";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
@@ -195,7 +196,7 @@ const Registration = () => {
         ) : null}
 
         <div>
-          <Link href={"login"} className="text-indigo-600 underline">
+          <Link href={appRoutes.login} className="text-indigo-600 underline">
             Login
           </Link>
         </div>

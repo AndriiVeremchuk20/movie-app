@@ -7,6 +7,7 @@ import { GrView } from "react-icons/gr";
 import { RiMovieFill, RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
 import UserAvatar from "./userAvatar";
+import appRoutes from "@/appRoutes";
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const [showDropMenu, setShowDropMenu] = useState<boolean>(false);
@@ -38,11 +39,11 @@ export const UserIcon = () => {
         </div>
         {showDropMenu ? (
           <div className="text-1xl absolute top-20 right-3 h-auto w-72 cursor-pointer rounded-md bg-slate-300 shadow-sm shadow-black child-hover:bg-cyan-800">
-            <Link href={"/profile"} className="flex w-full px-3 py-3 text-xl ">
+            <Link href={appRoutes.profile} className="flex w-full px-3 py-3 text-xl ">
               <AiOutlineUser className="mx-3 text-2xl" /> <div>Profile</div>
             </Link>
             <Link
-              href={"/watch-later"}
+              href={appRoutes.watchLater}
               className="flex w-full px-3 py-3 text-xl"
             >
               <GrView className="mx-3 text-2xl" /> <div>Watch later</div>
@@ -64,7 +65,7 @@ export const UserIcon = () => {
 
   return (
     <Link
-      href={"/login"}
+      href={appRoutes.login}
       className=" flex h-auto w-44 cursor-pointer justify-center rounded-xl bg-slate-700 px-4 hover:animate-pulse dark:bg-slate-300"
     >
       <div className="mt-2 text-3xl font-bold text-lime-500 dark:text-indigo-900">

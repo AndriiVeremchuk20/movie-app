@@ -1,5 +1,6 @@
 import auth from "@/api/auth";
 import { ResponseError } from "@/api/types/error";
+import appRoutes from "@/appRoutes";
 import { appUserAtom } from "@/atom";
 import { Loader } from "@/components/loader";
 import { useMutation } from "@tanstack/react-query";
@@ -102,11 +103,11 @@ const Login = () => {
           className="my-3 w-full bg-lime-400 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-600"
           type="submit"
         >
-          {isLoading ? <Loader /> : "Login"}
+          {isLoading ?<div className="m-auto"> <Loader /></div> : "Login"}
         </button>
 
         <div>
-          <Link href={"registration"} className="text-indigo-600 underline">
+          <Link href={appRoutes.registration} className="text-indigo-600 underline">
             Registration
           </Link>
         </div>
