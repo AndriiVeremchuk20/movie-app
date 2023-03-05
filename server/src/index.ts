@@ -1,4 +1,4 @@
-import exprpress, { Request, Response, Express } from "express";
+import express, { Request, Response, Express } from "express";
 import userRoute from "./routes/user";
 import adminRoute from "./routes/admin";
 import mediaRoute from "./routes/movies";
@@ -8,10 +8,9 @@ import fileupload from "express-fileupload";
 
 const cors = require("cors");
 
-
 dotenv.config();
 
-const app: Express = exprpress();
+const app: Express = express();
 const port = process.env.PORT;
 
 app.use(cors());
@@ -23,9 +22,9 @@ app.use(
     createParentPath: true,
   })
 );
-app.use(exprpress.static("public"));
-app.use(exprpress.json());
-app.use(exprpress.urlencoded());
+app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("All goods");
