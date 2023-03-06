@@ -9,7 +9,7 @@ import avatarRoute from "./avatar";
 import likeRoute from "./like";
 import watchLaterRoute from "./watchLater";
 import commentsRoute from "./comments";
-import { isPromise } from "util/types";
+import premiumRoute from "./premium";
 //import { Role } from "@prisma/client"; // use to set admin
 
 const route = Router();
@@ -191,5 +191,6 @@ route.use("/avatar", authMiddleware, avatarRoute);
 route.use("/likes", authMiddleware, likeRoute);
 route.use("/watch-later", authMiddleware, watchLaterRoute);
 route.use("/comments", authMiddleware, commentsRoute);
+route.use("/premium", premiumRoute);
 
 export default route;

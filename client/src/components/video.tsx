@@ -1,6 +1,8 @@
+import appRoutes from "@/appRoutes";
 import { appUserAtom, currentMovieAtom } from "@/atom";
 import getMediaPath from "@/utils/getMediaPath";
 import { useAtom } from "jotai";
+import Link from "next/link";
 import React from "react";
 import DownloadButton from "./downloadButton";
 import LikeButton from "./likeButton";
@@ -19,7 +21,7 @@ const Video = () => {
             <div className="m-auto">
               <div className="flex text-2xl text-white">
                 <div className="px-1"> Only for</div>
-                <div className="font-bold text-yellow-600">Premium</div>
+                <Link href={appRoutes.premium} className="font-bold text-yellow-600">Premium</Link>
               </div>
             </div>
           </div>

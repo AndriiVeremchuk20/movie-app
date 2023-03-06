@@ -8,6 +8,9 @@ import { RiMovieFill, RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
 import UserAvatar from "./userAvatar";
 import appRoutes from "@/appRoutes";
+import {AiFillCrown} from "react-icons/ai";
+
+
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const [showDropMenu, setShowDropMenu] = useState<boolean>(false);
@@ -57,6 +60,9 @@ export const UserIcon = () => {
             >
               <RiLogoutBoxLine className="mx-3 text-2xl" /> <div>Logout</div>
             </div>
+            {
+              user&&!user.isPremium?<Link href={appRoutes.premium} className="flex w-full bg-yellow-600 rounded-b-md px-3 py-3 text-xl"><AiFillCrown/> Premium</Link>:null
+            }
           </div>
         ) : null}
       </div>
