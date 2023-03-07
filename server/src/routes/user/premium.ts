@@ -4,9 +4,10 @@ import authMiddleware from "../../middleware/auth";
 
 const router = Router();
 
-router.post("/", authMiddleware, async (req: Request, res: Response) => {
+router.put("/", authMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.currentUser;
+    console.log(id)
     await prisma.user.update({ where: { id: id }, data: { isPremium: true } });
     res.status(200).send({ msg: "Done" });
   } catch (e) {

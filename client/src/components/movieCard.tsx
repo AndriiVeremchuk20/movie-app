@@ -33,7 +33,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
       className={`h-96 w-60 cursor-pointer bg-slate-900 shadow-xl shadow-slate-800 hover:bg-slate-800 hover:shadow-none`}
     >
       <NewMark date={movie.postedAt} />
-      <IsPremiumMark isForPremium={movie.isForPremium}/>
+      <IsPremiumMark isForPremium={movie.isForPremium} />
       <img
         onClick={onCardClick}
         src={getMediaPath(movie.posterPath)}

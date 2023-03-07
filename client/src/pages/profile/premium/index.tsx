@@ -32,9 +32,9 @@ export const Premium = () => {
     }
   });
 
-  const onBuyPremiumClick = useCallback(()=>{
+  const onBuyPremiumClick = ()=>{
     buyPremium.mutate();
-  },[])
+  }
 
   useEffect(() => {
     if (!isAuthed()) {
@@ -58,7 +58,7 @@ export const Premium = () => {
               ? `Buy premium you get access to movies that are only available for premium user.`
               : `You're alredy premium`}
           </div>
-          <div>
+          <div className="m-3">
             <Recommendations movies={movies}/>
           </div>
           <div>

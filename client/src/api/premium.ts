@@ -3,27 +3,28 @@ import Token from "@/utils/token";
 import client from ".";
 
 const paths = {
-    getPremiumMovies: "/user/premium",
-    buyPremium: "/user/premium",
-}
+  getPremiumMovies: "/user/premium",
+  buyPremium: "/user/premium",
+};
 
+const buyPremium = async () => {
+  const token = Token.get();
+  const response = await client.put<any>(paths.buyPremium, {}, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
 
-const buyPremium = async() => {
-    const token = Token.get();
-    const response = await client.post<any>(paths.buyPremium, {
-      headers: {Authorization: `Bearer: ${token}`}
-    });
-    return response.data;
-}
-
-const getPremiumMovies = async() => {
-    const response = await client.get<Array<BaseMovie>>(paths.getPremiumMovies);
-    return response.data;
-}
+const getPremiumMovies = async () => {
+  const response = await client.get<Array<BaseMovie>>(paths.getPremiumMovies);
+  return response.data;
+};
 
 const premium = {
-    buyPremium,
-    getPremiumMovies,
-}
+  buyPremium,
+  getPremiumMovies,
+};
 
 export default premium;
