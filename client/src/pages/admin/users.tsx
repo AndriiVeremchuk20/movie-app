@@ -7,25 +7,39 @@ import React, { useCallback, useEffect, useState } from "react";
 const Users = () => {
   const [users, setUsers] = useState<Array<User>>([]);
 
-  const getUsersMutation = useMutation(admin.getUsers, {
+  const getUsersMutation = useMutation(admin.users.getUsers, {
     onSuccess(data) {
       setUsers(data);
     },
     onError() {},
   });
 
-  const deleteUserMutation = useMutation(admin.deleteUser, {
+  const deleteUserMutation = useMutation(admin.users.deleteUser, {
     onSuccess(data){
       console.log(data);
       setUsers(prev => prev.filter(user=>user.id!==data.id));
     }
   });
 
-
+  const premiumMutation = useMutation(admin.users.pickPremium, {
+    onSuccess(data){
+      console.log(data);
+      setUsers(prev=>prev.map(item=>{
+        if(item.id === data.id){
+          return {...item, isPremium: false}
+        }
+        return item
+      }))
+    }
+  });
 
   const onDeleteUserClick = useCallback((id: string)=>{
     deleteUserMutation.mutate(id);
-  },[])
+  },[]);
+
+  const onPremiumClick = useCallback((id: string)=>{
+    premiumMutation.mutate(id);
+  },[]);
 
   useEffect(() => {
     getUsersMutation.mutate();
@@ -58,7 +72,10 @@ const Users = () => {
                   <td align="center">{user.age}</td>
                   <td align="center"> {user.email}</td>
                   <td align="center">
+                    
                     <button
+                      disabled={!user.isPremium}
+                      onClick={()=>{onPremiumClick(user.id)}}
                       className={` ${
                         user.isPremium ? "bg-yellow-500" : "bg-gray-300"
                       } w-fit p-2 hover:shadow-sm hover:shadow-yellow-800`}

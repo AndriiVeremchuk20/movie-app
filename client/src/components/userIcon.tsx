@@ -72,9 +72,7 @@ export const UserIcon = () => {
             >
               <GrView className="mx-3 text-2xl" /> <div>Watch later</div>
             </Link>
-            <div className="flex w-full px-3 py-3 text-xl">
-              <RiMovieFill className="mx-3 text-2xl" /> <div>Viewed</div>
-            </div>
+            
             <div
               onClick={onLogoutClick}
               className="flex w-full px-3 py-3 text-xl"

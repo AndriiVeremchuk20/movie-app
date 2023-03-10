@@ -1,4 +1,4 @@
-import { Like, Role } from "@prisma/client";
+import { Role } from "@prisma/client";
 import { Router, Request, Response } from "express";
 import { UploadedFile } from "express-fileupload";
 import prisma from "../../../prisma/index";
@@ -18,30 +18,42 @@ route.get("/users", async (req: Request, res: Response) => {
   }
 });
 
-route.delete("/users/:id", async(req:Request, res:Response)=>{
+route.put("/users/:id", async (req: Request, res: Response) => {
   try {
-    const {id} = req.params;
-    
-    const deletedUser = await prisma.user.delete({where: {
-      id
-    }});
+    const { id } = req.params;
 
-    res.status(203).send({msg: "Deleted success", id: deletedUser.id});
-    
+    const updaeUser = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        isPremium: false,
+      },
+    });
+
+    res.status(203).send({ msg: "Done", id: updaeUser.id });
   } catch (error) {
     console.log(error);
-    res.status(500).send({msg: "Server error"});
+    res.status(500).send({ msg: "Server error" });
   }
 });
 
-route.put("/user/:id",async (req: Request, res:Response) => {
+route.delete("/users/:id", async (req: Request, res: Response) => {
   try {
-    
+    const { id } = req.params;
+
+    const deletedUser = await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+
+    res.status(203).send({ msg: "Deleted success", id: deletedUser.id });
   } catch (error) {
     console.log(error);
-    res.status(500).send({msg: "Server error"});
-  }  
-})
+    res.status(500).send({ msg: "Server error" });
+  }
+});
 
 route.post("/movie", async (req: Request, res: Response) => {
   try {
@@ -91,5 +103,6 @@ route.post("/movie", async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
+
 
 export default route;

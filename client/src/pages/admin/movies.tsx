@@ -30,7 +30,7 @@ const Movies = () => {
     setMovieFile(e.target.files[0]);
   }, []);
 
-  const addMovie = useMutation(admin.addMovie, {
+  const addMovie = useMutation(admin.movies.addMovie, {
     onSuccess(data) {
       console.log(data);
       reset();

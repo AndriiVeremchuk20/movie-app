@@ -5,6 +5,7 @@ import client from ".";
 const paths = {
   getUsers: "/admin/users",
   deleteUser: (id: string) => `/admin/users/${id}`,
+  pickPremium: (id: string) => `/admin/users/${id}`,
   postMovie: "/admin/movie",
 };
 
@@ -24,6 +25,14 @@ const deleteUser = async (id: string) => {
   return response.data;
 }; 
 
+const pickPremium = async (id: string) => {
+  const token = Token.get();
+  const response = await client.put<{msg: string, id: string}>(paths.pickPremium(id), {}, {
+      headers: {Authorization: `Bearer: ${token}`}
+  });
+  return response.data;
+}; 
+
 const addMovie = async (body: FormData) => {
   const token = Token.get();
   const response = await client.post<any>(paths.postMovie, body, {
@@ -37,9 +46,15 @@ const addMovie = async (body: FormData) => {
 };
 
 const admin = {
-  getUsers,
-  addMovie,
-  deleteUser,
+  users: {
+    getUsers,
+    deleteUser,
+    pickPremium,
+  },
+  movies: {
+    addMovie,
+  }
+  
 };
 
 export default admin;
