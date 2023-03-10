@@ -6,6 +6,10 @@ const appRoutes = {
     profile: "/profile",
     watchLater: "/watch-later",
     premium: "/profile/premium", 
+    admin: {
+        movies: "/admin/movies",
+        users: "/admin/users",
+    }
 }
 
 export default appRoutes;

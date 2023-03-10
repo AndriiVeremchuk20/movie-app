@@ -9,7 +9,7 @@ const route = Router();
 
 route.get("/users", async (req: Request, res: Response) => {
   try {
-    const users = await prisma.user.findMany({});
+    const users = await prisma.user.findMany();
     const usersWithoudAdmins = users.filter((user) => user.role !== Role.ADMIN);
     res.status(200).send(usersWithoudAdmins);
   } catch (e) {
@@ -17,6 +17,31 @@ route.get("/users", async (req: Request, res: Response) => {
     res.status(500).send({ msg: "Server error" });
   }
 });
+
+route.delete("/users/:id", async(req:Request, res:Response)=>{
+  try {
+    const {id} = req.params;
+    
+    const deletedUser = await prisma.user.delete({where: {
+      id
+    }});
+
+    res.status(203).send({msg: "Deleted success", id: deletedUser.id});
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({msg: "Server error"});
+  }
+});
+
+route.put("/user/:id",async (req: Request, res:Response) => {
+  try {
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({msg: "Server error"});
+  }  
+})
 
 route.post("/movie", async (req: Request, res: Response) => {
   try {

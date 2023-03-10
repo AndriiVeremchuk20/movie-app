@@ -8,8 +8,9 @@ import { RiMovieFill, RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
 import UserAvatar from "./userAvatar";
 import appRoutes from "@/appRoutes";
-import {AiFillCrown} from "react-icons/ai";
-
+import { AiFillCrown } from "react-icons/ai";
+import { Role } from "@/types/user";
+import {MdOutlineAdminPanelSettings} from "react-icons/md";
 
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
@@ -42,9 +43,27 @@ export const UserIcon = () => {
         </div>
         {showDropMenu ? (
           <div className="text-1xl absolute top-20 right-3 h-auto w-72 cursor-pointer rounded-md bg-slate-300 shadow-sm shadow-black child-hover:bg-cyan-800">
-            
-            
-            <Link href={appRoutes.profile} className="flex w-full px-3 py-3 text-xl ">
+            {user && user.role === Role.admin ? (
+              <>
+                <Link
+                  className="flex w-full px-3 py-3 text-xl bg-red-500 rounded-t-md"
+                  href={appRoutes.admin.movies}
+                >
+                  <MdOutlineAdminPanelSettings className="text-3xl"/> Movies Panel
+                </Link>
+                <Link
+                  className="flex w-full px-3 py-3 text-xl bg-red-500"
+                  href={appRoutes.admin.users}
+                >
+                  <MdOutlineAdminPanelSettings className="text-3xl"/> Users Panel
+                </Link>
+              </>
+            ) : null}
+
+            <Link
+              href={appRoutes.profile}
+              className="flex w-full px-3 py-3 text-xl "
+            >
               <AiOutlineUser className="mx-3 text-2xl" /> <div>Profile</div>
             </Link>
             <Link
@@ -62,9 +81,14 @@ export const UserIcon = () => {
             >
               <RiLogoutBoxLine className="mx-3 text-2xl" /> <div>Logout</div>
             </div>
-            {
-              user&&!user.isPremium?<Link href={appRoutes.premium} className="flex w-full bg-yellow-600 rounded-b-md px-3 py-3 text-xl"><AiFillCrown/> Premium</Link>:null
-            }
+            {user && !user.isPremium ? (
+              <Link
+                href={appRoutes.premium}
+                className="flex w-full rounded-b-md bg-yellow-600 px-3 py-3 text-xl"
+              >
+                <AiFillCrown /> Premium
+              </Link>
+            ) : null}
           </div>
         ) : null}
       </div>

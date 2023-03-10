@@ -1,14 +1,14 @@
 import moviesApi from "@/api/movies";
-import { appUserAtom, moviesAtom } from "@/atom";
+import { appUserAtom } from "@/atom";
 import MoviesList from "@/components/moviesList";
+import { BaseMovie } from "@/types/movie";
 import { useMutation } from "@tanstack/react-query";
-import { useAtom } from "jotai";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [moviesList, setMoviesList] = useAtom(moviesAtom);
+  const [moviesList, setMoviesList] = useState<Array<BaseMovie>>([]);
   const router = useRouter();
   const { query } = router.query;
 
@@ -40,6 +40,7 @@ export default function Home() {
     }
   }, [query]);
 
+  
   return (
     <>
       <Head>

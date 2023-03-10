@@ -110,6 +110,7 @@ route.post(
               watchLater: loginUser.watchLater.map((item) => item.movieId),
               avatarPath: loginUser.avatarPath,
               isPemium: loginUser.isPremium,
+              role: loginUser.role,
             },
           });
         }
@@ -159,6 +160,7 @@ route.get("/auth", authMiddleware, async (req: Request, res: Response) => {
           watchLater: currUser.watchLater.map((item) => item.movieId),
           avatarPath: currUser.avatarPath,
           isPremium: currUser.isPremium,
+          role: currUser.role,
         },
       });
     } catch (e) {
