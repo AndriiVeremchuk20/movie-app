@@ -13,28 +13,23 @@ export const Premium = () => {
   const [movies, setMovies] = useState<Array<BaseMovie>>([]);
   const router = useRouter();
 
-
   const getPremiumMovies = useMutation(premium.getPremiumMovies, {
-    onSuccess(data){
+    onSuccess(data) {
       setMovies(data);
     },
-    onError(){
-
-    }
+    onError() {},
   });
 
   const buyPremium = useMutation(premium.buyPremium, {
-    onSuccess(){
+    onSuccess() {
       router.reload();
     },
-    onError(){
-
-    }
+    onError() {},
   });
 
-  const onBuyPremiumClick = ()=>{
+  const onBuyPremiumClick = () => {
     buyPremium.mutate();
-  }
+  };
 
   useEffect(() => {
     if (!isAuthed()) {
@@ -42,9 +37,9 @@ export const Premium = () => {
     }
   }, [user]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getPremiumMovies.mutate();
-  },[])
+  }, []);
 
   if (user)
     return (
@@ -59,12 +54,19 @@ export const Premium = () => {
               : `You're alredy premium`}
           </div>
           <div className="m-3">
-            <Recommendations movies={movies}/>
+            <Recommendations movies={movies} />
           </div>
-          <div>
-            <button onClick={onBuyPremiumClick} className="w-fit bg-yellow-600 px-2 py-1 text-2xl font-bold text-black hover:bg-yellow-700 hover:shadow-sm hover:shadow-yellow-700">
-              Buy Premium
-            </button>
+          <div className="w-full flex flex-col">
+            <div className="m-auto text-5xl text-white mb-5">
+              18$
+            </div>
+               <button
+                onClick={onBuyPremiumClick}
+                className="w-fit m-auto bg-yellow-600 px-3 py-2 rounded-sm text-3xl font-bold text-black hover:bg-yellow-700 hover:shadow-sm hover:shadow-yellow-700"
+              >
+                Buy Premium
+              </button>
+            
           </div>
         </div>
       </div>
