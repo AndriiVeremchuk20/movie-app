@@ -39,7 +39,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
         src={getMediaPath(movie.posterPath)}
         alt={movie.name}
         className={`h-80 w-full`}
-      />
+      /> 
       <div className="mx-2 mt-1 flex justify-between">
         <div onClick={onCardClick} className={`text-white`}>
           <div className={`text-md`}>{getShortName(movie.name, 13)}</div>

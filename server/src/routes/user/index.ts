@@ -106,7 +106,6 @@ route.post(
               age: loginUser.age,
               email: loginUser.email,
               likes: loginUser.likes.map((like) => like.movieId),
-              //    viewed: loginUser.viewed,
               watchLater: loginUser.watchLater.map((item) => item.movieId),
               avatarPath: loginUser.avatarPath,
               isPemium: loginUser.isPremium,

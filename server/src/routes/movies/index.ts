@@ -41,6 +41,7 @@ route.get("/search", async (req: Request, res: Response) => {
 
 route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
   try {
+    
     const { id } = req.params;
     const { isPremium } = req.currentUser;
 

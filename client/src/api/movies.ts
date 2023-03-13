@@ -14,9 +14,9 @@ const getMovies = async () => {
 };
 
 const getMovieById = async (id: string) => {
-  const token = Token.get();
+  const token = Token.get() ?? "";
   const response = await client.get<Movie>(paths.getMovieById(id), {
-    headers: {Authorization: `Bearer: ${token}`}
+    headers: {Authorization: `${token}`}
   });
   return response.data;
 };

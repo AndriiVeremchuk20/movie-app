@@ -9,7 +9,7 @@ export const generateAccessTocken = (id: string, role: Role, isPremium: boolean 
         role: role,
         isPremium: isPremium
     }
-    return jwt.sign(payload, secret, { expiresIn: "1h" });
+    return jwt.sign(payload, secret, { expiresIn: "10h" });
 }
 
 export const decodeAccessToken = (token: String) => {
