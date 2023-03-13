@@ -7,7 +7,7 @@ const route = Router();
 route.get("/", async (req: Request, res: Response) => {
   try {
     const movies = await prisma.movie.findMany({
-      select: { name: true, postedAt: true, posterPath: true, id: true, isForPremium: true },
+      select: { name: true, postedAt: true, posterPath: true, id: true, isForPremium: true, genre: true },
       orderBy: [{ postedAt: "desc" }],
     });
     res.status(200).send(movies);
@@ -57,6 +57,7 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
           moviePath: true,
           likes: true,
           isForPremium: true,
+          genre: true,
           comments: {
             orderBy: {
               posted_at: "desc",

@@ -3,6 +3,7 @@ import { appUserAtom } from "@/atom";
 import MoviesList from "@/components/moviesList";
 import { BaseMovie } from "@/types/movie";
 import { useMutation } from "@tanstack/react-query";
+import { useAtom } from "jotai";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ export default function Home() {
   const [moviesList, setMoviesList] = useState<Array<BaseMovie>>([]);
   const router = useRouter();
   const { query } = router.query;
+  const [user] = useAtom(appUserAtom);
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
     onSuccess(data) {
@@ -38,7 +40,7 @@ export default function Home() {
     } else {
       getMoviesMutation.mutate();
     }
-  }, [query]);
+  }, [query, user]);
 
   
   return (
@@ -50,7 +52,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900">
-        <div className="mt-36 mb-10 flex h-auto w-screen justify-center bg-emerald-500 pb-10 dark:bg-sky-800 md:w-3/4">
+        <div className="mt-36 mb-10 flex h-auto w-screen justify-center bg-emerald-500 pb-10 dark:bg-sky-700 md:w-3/4">
           <div>
             {query ? (
               <div className="m-2 text-2xl">{`Results for "${query}" :`}</div>

@@ -23,9 +23,6 @@ model User {
   watchLater WatchLater[]
   avatarPath String?
   isPremium  Boolean @default(false)
-
-  // watchLater Movie[]  @relation("watchLater")
-  // viewed     Movie[]  @relation("viewed")
 }
 
 model Movie {
@@ -35,6 +32,7 @@ model Movie {
   name        String
   description String
   postedAt    DateTime     @default(now())
+  genre       MovieGenre   @default(ACTION)
   likes       Like[]
   comments    Comments[]
   watchLater  WatchLater[]
@@ -50,14 +48,6 @@ model WatchLater {
 
   @@unique([userId, movieId])
 }
-
-// model View {
-//   id String @id @default(cuid())
-//   user    User   @relation(fields: [userId], references: [id])
-//   userId  String
-//   movie   Movie  @relation(fields: [movieId], references: [id])
-//   movieId String
-// }
 
 model Like {
   id      String @id @default(cuid())
@@ -83,4 +73,20 @@ model Comments {
 enum Role {
   USER
   ADMIN
+}
+
+enum MovieGenre {
+  ACTION
+  ADVENTURE
+  ANIMATION
+  COMEDY
+  CRIME
+  DRAMA
+  FANTASY
+  HORROR
+  MYSTERY
+  ROMANCE
+  SCIENCE_FICTION
+  THRILLER
+  WESTERN
 }

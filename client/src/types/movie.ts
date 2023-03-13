@@ -6,6 +6,7 @@ export interface BaseMovie {
   posterPath: string;
   postedAt: string;
   isForPremium: boolean;
+  genre: string;
 }
 
 export interface Movie extends BaseMovie {
