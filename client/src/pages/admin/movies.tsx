@@ -44,7 +44,7 @@ const Movies = () => {
       body.append("movie", movieFile);
       body.append("poster", posterFile);
       body.append("name", data.name);
-      body.append("isPremium", data.isPremium+"");
+      body.append("isPremium", data.isPremium + "");
       body.append("description", data.description);
       body.append("postedAt", data.postedAt);
 
@@ -56,7 +56,7 @@ const Movies = () => {
     <div className={`flex h-screen w-full bg-sky-600`}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={` mt-24 m-auto  w-auto rounded-md bg-cyan-700 p-2`}
+        className={` m-auto mt-24  w-auto rounded-md bg-cyan-700 p-2`}
       >
         <div className={`text-3xl font-bold`}>Add Movie</div>
         <div>
@@ -115,35 +115,21 @@ const Movies = () => {
           </label>
         </div>
         <div className="frex mb-2">
-          <label
-            htmlFor="isPremium"
-            className={``}
-          >
-            Is premium:            
+          <label htmlFor="isPremium" className={``}>
+            Is premium:
           </label>
           <input
-              type="checkbox"
-              id="isPremium"
-              className={`w-5 h-5 ml-2`}
-              {
-                ...register("isPremium")
-              }
-            />
+            type="checkbox"
+            id="isPremium"
+            className={`ml-2 h-5 w-5`}
+            {...register("isPremium")}
+          />
         </div>
         <div className="frex mb-2">
-          <label
-            htmlFor="postedAt"
-            className={``}
-          >
-            Posted date:            
+          <label htmlFor="postedAt" className={``}>
+            Posted date:
           </label>
-          <input
-              type="date"
-              id="postedAt"
-              {
-                ...register("postedAt")
-              }
-            />
+          <input type="date" id="postedAt" {...register("postedAt")} />
         </div>
         <div className="flex w-full flex-col">
           <button

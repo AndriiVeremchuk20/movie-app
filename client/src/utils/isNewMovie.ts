@@ -9,7 +9,7 @@ const isNewMovie = (date: string) => {
       today.getFullYear() === moviePostedDate.getFullYear() &&
       today.getMonth() === moviePostedDate.getMonth() &&
       today.getDay() === moviePostedDate.getDay()
-     );
+    );
   } catch (e) {
     console.error(e);
     return false;

@@ -7,7 +7,7 @@ export interface BaseUser {
 
 export interface User extends BaseUser {
   age: number;
-  role: Role,
+  role: Role;
   email: string;
   likes: Array<string>;
   vieved: Array<string>;

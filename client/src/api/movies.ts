@@ -3,16 +3,17 @@ import client from ".";
 import { BaseMovie, Movie } from "../types/movie";
 
 const paths = {
-  getMovies: "/media/",
+  getMovies: (page: number)=>`/media/?page=${page}`,
   getMovieById: (id: string) => `/media/${id}`,
   searchMovies: (text: string) => `/media/search?search_query=${text}`,
 };
 
-const getMovies = async () => {
+const getMovies = async (page: number = 1) => {
   const response = await client.get<{
     movies: Array<BaseMovie>;
     pages: number;
-  }>(paths.getMovies);
+    page: number;
+  }>(paths.getMovies(page));
   return response.data;
 };
 

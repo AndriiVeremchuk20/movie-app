@@ -56,17 +56,14 @@ export const Premium = () => {
           <div className="m-3">
             <Recommendations movies={movies} />
           </div>
-          <div className="w-full flex flex-col">
-            <div className="m-auto text-5xl text-white mb-5">
-              18$
-            </div>
-               <button
-                onClick={onBuyPremiumClick}
-                className="w-fit m-auto bg-yellow-600 px-3 py-2 rounded-sm text-3xl font-bold text-black hover:bg-yellow-700 hover:shadow-sm hover:shadow-yellow-700"
-              >
-                Buy Premium
-              </button>
-            
+          <div className="flex w-full flex-col">
+            <div className="m-auto mb-5 text-5xl text-white">18$</div>
+            <button
+              onClick={onBuyPremiumClick}
+              className="m-auto w-fit rounded-sm bg-yellow-600 px-3 py-2 text-3xl font-bold text-black hover:bg-yellow-700 hover:shadow-sm hover:shadow-yellow-700"
+            >
+              Buy Premium
+            </button>
           </div>
         </div>
       </div>

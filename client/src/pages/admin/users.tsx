@@ -15,31 +15,33 @@ const Users = () => {
   });
 
   const deleteUserMutation = useMutation(admin.users.deleteUser, {
-    onSuccess(data){
+    onSuccess(data) {
       console.log(data);
-      setUsers(prev => prev.filter(user=>user.id!==data.id));
-    }
+      setUsers((prev) => prev.filter((user) => user.id !== data.id));
+    },
   });
 
   const premiumMutation = useMutation(admin.users.pickPremium, {
-    onSuccess(data){
+    onSuccess(data) {
       console.log(data);
-      setUsers(prev=>prev.map(item=>{
-        if(item.id === data.id){
-          return {...item, isPremium: false}
-        }
-        return item
-      }))
-    }
+      setUsers((prev) =>
+        prev.map((item) => {
+          if (item.id === data.id) {
+            return { ...item, isPremium: false };
+          }
+          return item;
+        })
+      );
+    },
   });
 
-  const onDeleteUserClick = useCallback((id: string)=>{
+  const onDeleteUserClick = useCallback((id: string) => {
     deleteUserMutation.mutate(id);
-  },[]);
+  }, []);
 
-  const onPremiumClick = useCallback((id: string)=>{
+  const onPremiumClick = useCallback((id: string) => {
     premiumMutation.mutate(id);
-  },[]);
+  }, []);
 
   useEffect(() => {
     getUsersMutation.mutate();
@@ -72,10 +74,11 @@ const Users = () => {
                   <td align="center">{user.age}</td>
                   <td align="center"> {user.email}</td>
                   <td align="center">
-                    
                     <button
                       disabled={!user.isPremium}
-                      onClick={()=>{onPremiumClick(user.id)}}
+                      onClick={() => {
+                        onPremiumClick(user.id);
+                      }}
                       className={` ${
                         user.isPremium ? "bg-yellow-500" : "bg-gray-300"
                       } w-fit p-2 hover:shadow-sm hover:shadow-yellow-800`}
@@ -84,7 +87,15 @@ const Users = () => {
                     </button>
                   </td>
                   <td align="center">
-                    <button className="bg-red-500 p-2 hover:bg-red-600" onClick={()=>{onDeleteUserClick(user.id)}}> Delete user </button>
+                    <button
+                      className="bg-red-500 p-2 hover:bg-red-600"
+                      onClick={() => {
+                        onDeleteUserClick(user.id);
+                      }}
+                    >
+                      {" "}
+                      Delete user{" "}
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -95,7 +106,5 @@ const Users = () => {
     </div>
   );
 };
-
-
 
 export default Users;

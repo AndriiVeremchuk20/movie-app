@@ -15,7 +15,7 @@ export const Header = () => {
 
   return (
     <header className="fixed z-10 flex w-full flex-col opacity-90">
-      <div className="flex  h-20 w-full content-center justify-between bg-lime-500 p-3 dark:bg-indigo-900">
+      <div className="flex  h-20 w-full content-center justify-between bg-neutral-500 p-3 dark:bg-neutral-900">
         <div className="flex">
           {!isRoot ? <BackButton /> : null}
           <Logo />

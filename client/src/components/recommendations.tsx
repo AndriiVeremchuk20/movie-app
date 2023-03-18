@@ -7,7 +7,6 @@ interface PropsRecommendations {
 }
 
 const Recommendations: React.FC<PropsRecommendations> = ({ movies }) => {
-
   console.log(movies);
 
   if (movies.length > 0)

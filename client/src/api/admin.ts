@@ -12,26 +12,33 @@ const paths = {
 const getUsers = async () => {
   const token = Token.get();
   const response = await client.get<Array<User>>(paths.getUsers, {
-      headers: {Authorization: `Bearer: ${token}`}
+    headers: { Authorization: `Bearer: ${token}` },
   });
   return response.data;
 };
 
 const deleteUser = async (id: string) => {
   const token = Token.get();
-  const response = await client.delete<{msg: string, id: string}>(paths.deleteUser(id), {
-      headers: {Authorization: `Bearer: ${token}`}
-  });
+  const response = await client.delete<{ msg: string; id: string }>(
+    paths.deleteUser(id),
+    {
+      headers: { Authorization: `Bearer: ${token}` },
+    }
+  );
   return response.data;
-}; 
+};
 
 const pickPremium = async (id: string) => {
   const token = Token.get();
-  const response = await client.put<{msg: string, id: string}>(paths.pickPremium(id), {}, {
-      headers: {Authorization: `Bearer: ${token}`}
-  });
+  const response = await client.put<{ msg: string; id: string }>(
+    paths.pickPremium(id),
+    {},
+    {
+      headers: { Authorization: `Bearer: ${token}` },
+    }
+  );
   return response.data;
-}; 
+};
 
 const addMovie = async (body: FormData) => {
   const token = Token.get();
@@ -53,8 +60,7 @@ const admin = {
   },
   movies: {
     addMovie,
-  }
-  
+  },
 };
 
 export default admin;

@@ -4,7 +4,6 @@ import MoviesList from "@/components/moviesList";
 import Pagination from "@/components/pagination";
 import SortFilterPanel from "@/components/sortFilterPanel";
 import { BaseMovie } from "@/types/movie";
-import Token from "@/utils/token";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
@@ -13,6 +12,8 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [moviesList, setMoviesList] = useState<Array<BaseMovie>>([]);
+  const [numPages, setNumPages] = useState<number>(1);
+  
   const router = useRouter();
   const { query } = router.query;
   const [user] = useAtom(appUserAtom);
@@ -21,6 +22,7 @@ export default function Home() {
     onSuccess(data) {
       console.log(data);
       setMoviesList(data.movies);
+      setNumPages(data.pages);
     },
     onError(e) {
       console.log(e);
@@ -42,11 +44,10 @@ export default function Home() {
       searchMutation.mutate(query);
     } else {
       getMoviesMutation.mutate();
-    //router.reload();
+      //router.reload();
     }
   }, [query, user]);
 
-  
   return (
     <>
       <Head>
@@ -56,14 +57,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-lite.jpg')] bg-cover dark:bg-[url('/img/bg-dark.jpg')]">
-        <div className=" mt-24 mb-10 flex h-auto justify-center bg-emerald-500 pb-10 dark:bg-slate-700 dark:bg-opacity-50 bg-opacity-40 p-9">
+        <div className=" mt-24 mb-10 flex h-auto justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
           <div>
             {query ? (
               <div className="m-2 text-2xl">{`Results for "${query}" :`}</div>
             ) : null}
-            <SortFilterPanel/>
+            <SortFilterPanel />
             <MoviesList moviesList={moviesList} />
-            <Pagination pages={10} currentPage={3}/>
+            <Pagination pages={numPages} currentPage={1} />
           </div>
         </div>
       </div>

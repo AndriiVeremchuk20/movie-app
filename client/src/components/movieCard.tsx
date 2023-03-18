@@ -30,7 +30,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
 
   return (
     <div
-      className={`h-fit w-60 pb-2 cursor-pointer bg-slate-900 shadow-xl shadow-slate-800 hover:bg-slate-800 hover:shadow-none`}
+      className={`h-fit w-60 cursor-pointer bg-neutral-900 pb-2 shadow-xl shadow-slate-800 bg-opacity-70 hover:bg-neutral-800 hover:shadow-none`}
     >
       <NewMark date={movie.postedAt} />
       <IsPremiumMark isForPremium={movie.isForPremium} />
@@ -39,7 +39,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
         src={getMediaPath(movie.posterPath)}
         alt={movie.name}
         className={`h-80 w-full`}
-      /> 
+      />
       <div className="mx-2 mt-1 flex justify-between">
         <div onClick={onCardClick} className={`text-white`}>
           <div className={`text-md`}>{getShortName(movie.name, 13)}</div>
@@ -47,7 +47,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
           <div className={`text-sm`}>{movie.postedAt.slice(0, 4)}</div>
         </div>
         <div className="my-auto">
-        <WatchLaterButton movieId={movie.id} />
+          <WatchLaterButton movieId={movie.id} />
         </div>
       </div>
     </div>

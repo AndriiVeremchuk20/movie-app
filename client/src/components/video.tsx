@@ -16,12 +16,17 @@ const Video = () => {
   if (movie)
     return (
       <div className={`h-auto`}>
-        {movie.isForPremium && !user?.isPremium? (
+        {movie.isForPremium && !user?.isPremium ? (
           <div className="flex h-96 w-full rounded-t-lg bg-black">
             <div className="m-auto">
               <div className="flex text-2xl text-white">
                 <div className="px-1"> Only for</div>
-                <Link href={appRoutes.premium} className="font-bold text-yellow-600">Premium</Link>
+                <Link
+                  href={appRoutes.premium}
+                  className="font-bold text-yellow-600"
+                >
+                  Premium
+                </Link>
               </div>
             </div>
           </div>

@@ -14,24 +14,26 @@ const SortFilterPanel = () => {
       </div>
 
       <div>
-        Genre: 
+        Genre:
         <select>
-            <option>All</option>
+          <option>All</option>
           <option>ACTION</option>
           <option>ADVENTURE </option>
-          <option>ANIMATION </option>
-          <option>COMEDY </option>
-          <option>CRIME </option>
-          <option>DRAMA </option>
-          <option> FANTASY </option>
-          <option>HORROR </option>
-          <option> MYSTERY</option>
-          <option>ROMANCE </option>
-          <option> SCIENCE_FICTION </option>
-          <option> THRILLER </option>
-          <option> WESTERN</option>
+          <option>ANIMATION</option>
+          <option>COMEDY</option>
+          <option>CRIME</option>
+          <option>DRAMA</option>
+          <option>FANTASY</option>
+          <option>HORROR</option>
+          <option>MYSTERY</option>
+          <option>ROMANCE</option>
+          <option>SCIENCE_FICTION </option>
+          <option>THRILLER</option>
+          <option>WESTERN</option>
         </select>
       </div>
+      
+      <button>Reset</button>
     </div>
   );
 };

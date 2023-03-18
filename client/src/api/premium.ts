@@ -9,11 +9,15 @@ const paths = {
 
 const buyPremium = async () => {
   const token = Token.get();
-  const response = await client.put<any>(paths.buyPremium, {}, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await client.put<any>(
+    paths.buyPremium,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data;
 };
 

@@ -103,11 +103,21 @@ const Login = () => {
           className="my-3 w-full bg-lime-400 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-600"
           type="submit"
         >
-          {isLoading ?<div className="m-auto"> <Loader /></div> : "Login"}
+          {isLoading ? (
+            <div className="m-auto">
+              {" "}
+              <Loader />
+            </div>
+          ) : (
+            "Login"
+          )}
         </button>
 
         <div>
-          <Link href={appRoutes.registration} className="text-indigo-600 underline">
+          <Link
+            href={appRoutes.registration}
+            className="text-indigo-600 underline"
+          >
             Registration
           </Link>
         </div>

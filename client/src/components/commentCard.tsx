@@ -14,7 +14,7 @@ const CommentCard: React.FC<PropCommentCard> = ({ comment }) => {
   return (
     <div
       className={`m-auto flex h-fit w-11/12 ${
-        user&&user.id === comment.User.id ? "flex-row-reverse" : ""
+        user && user.id === comment.User.id ? "flex-row-reverse" : ""
       } content-center`}
     >
       <div className=" m-2 flex flex-col">
@@ -24,11 +24,11 @@ const CommentCard: React.FC<PropCommentCard> = ({ comment }) => {
         <div className="m-auto">{comment.User.firstName.slice(0, 10)}</div>
       </div>
       <div
-        className={`flex flex-col h-fit w-fit rounded-lg p-4 text-xl
+        className={`flex h-fit w-fit flex-col rounded-lg p-4 text-xl
       ${
-        user&&user.id === comment.User.id
-            ? " flex-row-reverse bg-slate-400 pr-10"
-            : "bg-slate-200"
+        user && user.id === comment.User.id
+          ? " flex-row-reverse bg-slate-400 pr-10"
+          : "bg-slate-200"
       }
       
       justify-between shadow-md hover:shadow-black`}

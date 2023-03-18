@@ -10,7 +10,7 @@ import UserAvatar from "./userAvatar";
 import appRoutes from "@/appRoutes";
 import { AiFillCrown } from "react-icons/ai";
 import { Role } from "@/types/user";
-import {MdOutlineAdminPanelSettings} from "react-icons/md";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
@@ -46,16 +46,18 @@ export const UserIcon = () => {
             {user && user.role === Role.admin ? (
               <>
                 <Link
-                  className="flex w-full px-3 py-3 text-xl bg-red-500 rounded-t-md"
+                  className="flex w-full rounded-t-md bg-red-500 px-3 py-3 text-xl"
                   href={appRoutes.admin.movies}
                 >
-                  <MdOutlineAdminPanelSettings className="text-3xl"/> Movies Panel
+                  <MdOutlineAdminPanelSettings className="text-3xl" /> Movies
+                  Panel
                 </Link>
                 <Link
-                  className="flex w-full px-3 py-3 text-xl bg-red-500"
+                  className="flex w-full bg-red-500 px-3 py-3 text-xl"
                   href={appRoutes.admin.users}
                 >
-                  <MdOutlineAdminPanelSettings className="text-3xl"/> Users Panel
+                  <MdOutlineAdminPanelSettings className="text-3xl" /> Users
+                  Panel
                 </Link>
               </>
             ) : null}
@@ -72,7 +74,7 @@ export const UserIcon = () => {
             >
               <GrView className="mx-3 text-2xl" /> <div>Watch later</div>
             </Link>
-            
+
             <div
               onClick={onLogoutClick}
               className="flex w-full px-3 py-3 text-xl"
