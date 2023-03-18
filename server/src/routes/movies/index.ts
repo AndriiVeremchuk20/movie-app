@@ -3,14 +3,18 @@ import prisma from "../../../prisma";
 import isPremiumMiddleware from "../../middleware/isPremium";
 
 const route = Router();
+const MAX_TAKE = 16
 
 route.get("/", async (req: Request, res: Response) => {
   try {
+    const numOfMovies = await prisma.movie.count();
     const movies = await prisma.movie.findMany({
       select: { name: true, postedAt: true, posterPath: true, id: true, isForPremium: true, genre: true },
       orderBy: [{ postedAt: "desc" }],
+      take: MAX_TAKE
+      //skip 
     });
-    res.status(200).send(movies);
+    res.status(200).send({movies: movies, pages: Math.ceil(numOfMovies/MAX_TAKE)});
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

@@ -4,19 +4,22 @@ import { BaseMovie, Movie } from "../types/movie";
 
 const paths = {
   getMovies: "/media/",
-  getMovieById: (id: string) => `/media/${id}`, 
+  getMovieById: (id: string) => `/media/${id}`,
   searchMovies: (text: string) => `/media/search?search_query=${text}`,
 };
 
 const getMovies = async () => {
-  const response = await client.get<Array<BaseMovie>>(paths.getMovies);
+  const response = await client.get<{
+    movies: Array<BaseMovie>;
+    pages: number;
+  }>(paths.getMovies);
   return response.data;
 };
 
 const getMovieById = async (id: string) => {
   const token = Token.get() ?? "";
   const response = await client.get<Movie>(paths.getMovieById(id), {
-    headers: {Authorization: `${token}`}
+    headers: { Authorization: `${token}` },
   });
   return response.data;
 };
