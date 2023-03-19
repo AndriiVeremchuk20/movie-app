@@ -26,10 +26,10 @@ const getMovieById = async (id: string) => {
 };
 
 const searchMovies = async (keyWord: string) => {
-  const response = await client.get<Array<BaseMovie>>(
-    paths.searchMovies(keyWord)
-  );
-  return response.data;
+    const response = await client.get<Array<BaseMovie>>(
+      paths.searchMovies(keyWord)
+    );
+    return response.data;
 };
 
 const movies = {

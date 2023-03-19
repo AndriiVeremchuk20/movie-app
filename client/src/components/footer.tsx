@@ -5,7 +5,7 @@ import { BsGithub } from "react-icons/bs";
 const Footer = () => {
   return (
     <footer
-      className={`bottom-0 flex h-24 w-full content-center justify-between bg-lime-700 p-4 dark:bg-indigo-800`}
+      className={`bottom-0 flex h-24 w-full content-center justify-between bg-neutral-500 bg-opacity-70 p-4 dark:bg-neutral-800`}
     >
       <Logo />
       <div className={`mt-3 text-2xl`}>© 2023 Copyright: Andrii Veremchuk</div>

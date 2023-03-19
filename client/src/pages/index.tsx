@@ -13,9 +13,11 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [moviesList, setMoviesList] = useState<Array<BaseMovie>>([]);
   const [numPages, setNumPages] = useState<number>(1);
+  const [currPage, setCurrPage] = useState<number>(1);
   
   const router = useRouter();
   const { query } = router.query;
+  const {page} = router.query;
   const [user] = useAtom(appUserAtom);
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
@@ -23,6 +25,7 @@ export default function Home() {
       console.log(data);
       setMoviesList(data.movies);
       setNumPages(data.pages);
+      setCurrPage(data.page)
     },
     onError(e) {
       console.log(e);
@@ -40,13 +43,18 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (query && query.length > 0 && !Array.isArray(query)) {
-      searchMutation.mutate(query);
-    } else {
-      getMoviesMutation.mutate();
-      //router.reload();
+    //if (query && query.length > 0 && !Array.isArray(query)) {
+    //  searchMutation.mutate(query);
+   // } else {
+    if (page && page.length > 0 && !Array.isArray(page)) {
+      getMoviesMutation.mutate(parseInt(page));
     }
-  }, [query, user]);
+    else{
+      getMoviesMutation.mutate(1);
+    }
+    
+   // }
+  }, [page, user]);
 
   return (
     <>
@@ -56,7 +64,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-lite.jpg')] bg-cover dark:bg-[url('/img/bg-dark.jpg')]">
+      <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-lite.jpg')] bg-cover dark:bg-[url('/img/bg-dark2.jpg')] bg-fixed dark:bg-fixed">
+        <>{console.log(query)}</>
         <div className=" mt-24 mb-10 flex h-auto justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
           <div>
             {query ? (
@@ -64,7 +73,7 @@ export default function Home() {
             ) : null}
             <SortFilterPanel />
             <MoviesList moviesList={moviesList} />
-            <Pagination pages={numPages} currentPage={1} />
+            <Pagination pages={numPages} currentPage={currPage} />
           </div>
         </div>
       </div>
