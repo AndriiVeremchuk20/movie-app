@@ -1,40 +1,63 @@
-import React from "react";
+import appRoutes from "@/appRoutes";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface SelectValues {
+  sort?: string;
+  filter?: string;
+}
 
 const SortFilterPanel = () => {
+
+  const router = useRouter();
+  const {register, handleSubmit} = useForm<SelectValues>();
+  const onSubmit: SubmitHandler<SelectValues> = (data) => {
+    router.push({
+      pathname: appRoutes.home,
+      query: {
+        ...router.query,
+        ...data,
+      }
+    })
+  };
+
   return (
-    <div className={`mt-2 flex w-full bg-red-500`}>
-      <div>
-        Sort by:
-        <select>
-          <option>Date down</option>
-          <option>Date up</option>
-          <option>Name</option>
-          <option>Likes</option>
+    <form className={`mt-1 p-2 flex w-full bg-neutral-500 bg-opacity-70 child:ml-4 text-md`}>
+      <div className="flex">
+        <div className="mr-1">Sort by:</div>
+        <select defaultValue={"DATE_DOWN"} {...register("sort")}>
+          <option value={"DATE_DOWN"}>Date down</option>
+          <option value={"DATE_UP"}>Date up</option>
+          <option value={"NAME"}>Name</option>
+          <option value={"LIKES"}>Likes</option>
         </select>
       </div>
 
-      <div>
-        Genre:
-        <select>
-          <option>All</option>
-          <option>ACTION</option>
-          <option>ADVENTURE </option>
-          <option>ANIMATION</option>
-          <option>COMEDY</option>
-          <option>CRIME</option>
-          <option>DRAMA</option>
-          <option>FANTASY</option>
-          <option>HORROR</option>
-          <option>MYSTERY</option>
-          <option>ROMANCE</option>
-          <option>SCIENCE_FICTION </option>
-          <option>THRILLER</option>
-          <option>WESTERN</option>
+      <div className="flex">
+        <div className="mr-1">Genre:</div>
+        <select defaultValue={"ALL"} {...register("filter")}>
+          <option value={"All"}>All</option>
+          <option value={"ACTION"}>Action</option>
+          <option value={"ADVENTURE"}>Adventure</option>
+          <option value={"ANIMATION"}>Animation</option>
+          <option value={"COMEDY"}>Comedy</option>
+          <option value={"CRIME"}>Crime</option>
+          <option value={"DRAMA"}>Drama</option>
+          <option value={"FANTASY"}>Fantasy</option>
+          <option value={"HORROR"}>Horror</option>
+          <option value={"MYSTERY"}>Mystery</option>
+          <option value={"ROMANCE"}>Romance</option>
+          <option value={"SCIENCE_FICTION"}>Science fiction</option>
+          <option value={"THRILLER"}>Thriller</option>
+          <option value={"WESTERN"}>Western</option>
         </select>
       </div>
 
-      <button>Reset</button>
-    </div>
+      <button type="reset">Reset</button>
+      <button type="submit">Submit</button>
+      
+    </form>
   );
 };
 

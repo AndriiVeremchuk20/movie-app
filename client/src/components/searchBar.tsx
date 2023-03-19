@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import AutocompleteMoviesSearch from "./autocompleteMoviesSearch";
+import appRoutes from "@/appRoutes";
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -38,8 +39,16 @@ export const SearchBar = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (searchText !== "") {
+        //setSearchText("");
+        //router.push(`/?search=${searchText}`);
+        router.push({
+          pathname: appRoutes.home,
+          query:{
+            ...router.query,
+            search: searchText,
+          }
+        });
         setSearchText("");
-        router.push(`/?query=${searchText}`);
       }
     },
     [searchText]

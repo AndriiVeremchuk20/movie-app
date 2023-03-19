@@ -1,14 +1,15 @@
+import { QueryParams } from "@/types/queryParams";
 import Token from "@/utils/token";
 import client from ".";
 import { BaseMovie, Movie } from "../types/movie";
 
 const paths = {
-  getMovies: (page: number) => `/media/?page=${page}`,
+  getMovies: (params: any) => `/media/?${new URLSearchParams(params).toString()}`,
   getMovieById: (id: string) => `/media/${id}`,
   searchMovies: (text: string) => `/media/search?search_query=${text}`,
 };
 
-const getMovies = async (page: number = 1) => {
+const getMovies = async (page: QueryParams) => {
   const response = await client.get<{
     movies: Array<BaseMovie>;
     pages: number;

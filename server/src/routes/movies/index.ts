@@ -1,3 +1,4 @@
+import { MovieGenre } from "@prisma/client";
 import { Router, Request, Response } from "express";
 import prisma from "../../../prisma";
 import isPremiumMiddleware from "../../middleware/isPremium";
@@ -9,9 +10,25 @@ route.get("/", async (req: Request, res: Response) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const skip = (page-1)*LIMIT;
+    const search = req.query.search || "";
+    const filter = req.query.filter;
 
-    const numOfMovies = await prisma.movie.count();
+    const numOfMovies = await prisma.movie.count({
+      where: {
+        name: {
+          contains: `${search}`,
+          mode: "insensitive",
+        },
+       // genre:filter
+      },
+    });
     const movies = await prisma.movie.findMany({
+      where: {
+        name: {
+          contains: `${search}`,
+          mode: "insensitive",
+        },
+      },
       select: { name: true, postedAt: true, posterPath: true, id: true, isForPremium: true, genre: true },
       orderBy: [{ postedAt: "desc" }],
       take: LIMIT,

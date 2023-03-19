@@ -16,7 +16,7 @@ const Pagination: React.FC<PropPagination> = ({ pages, currentPage }) => {
       if (page !== currentPage) {
         router.push({
           pathname: appRoutes.home,
-          query: { page: page },
+          query: { ...router.query, page: page },
         });
       }
     },

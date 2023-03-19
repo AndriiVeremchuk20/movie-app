@@ -4,6 +4,7 @@ import MoviesList from "@/components/moviesList";
 import Pagination from "@/components/pagination";
 import SortFilterPanel from "@/components/sortFilterPanel";
 import { BaseMovie } from "@/types/movie";
+import { QueryParams } from "@/types/queryParams";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
@@ -16,8 +17,8 @@ export default function Home() {
   const [currPage, setCurrPage] = useState<number>(1);
 
   const router = useRouter();
-  const { query } = router.query;
-  const { page } = router.query;
+  const {query} = router;
+  //const { page } = router.query;
   const [user] = useAtom(appUserAtom);
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
@@ -43,17 +44,28 @@ export default function Home() {
   });
 
   useEffect(() => {
+    const queryParams: QueryParams = {}
+
+    if (query.search) queryParams.search = query.search as string;
+    if (query.page) queryParams.page = Number(query.page);
+    if (query.sort) queryParams.sort = query.sort as string;
+    if (query.filter) queryParams.filter = query.filter as string;
+    
+    getMoviesMutation.mutate(queryParams);
+
+    
     //if (query && query.length > 0 && !Array.isArray(query)) {
     //  searchMutation.mutate(query);
     // } else {
-    if (page && page.length > 0 && !Array.isArray(page)) {
-      getMoviesMutation.mutate(parseInt(page));
-    } else {
-      getMoviesMutation.mutate(1);
-    }
+    // if (page && page.length > 0 && !Array.isArray(page)){
+    //   getMoviesMutation.mutate(parseInt(page));
+    // } else {
+    //   getMoviesMutation.mutate(1);
+    // }
+
 
     // }
-  }, [page, user]);
+  }, [query, user]);
 
   return (
     <>
