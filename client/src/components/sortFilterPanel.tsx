@@ -32,7 +32,7 @@ const SortFilterPanel = () => {
           <option>WESTERN</option>
         </select>
       </div>
-      
+
       <button>Reset</button>
     </div>
   );

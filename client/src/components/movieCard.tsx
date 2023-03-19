@@ -30,7 +30,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
 
   return (
     <div
-      className={`h-fit w-60 cursor-pointer bg-neutral-900 pb-2 shadow-xl shadow-slate-800 bg-opacity-70 hover:bg-neutral-800 hover:shadow-none`}
+      className={`h-fit w-60 cursor-pointer bg-neutral-900 bg-opacity-70 pb-2 shadow-xl shadow-slate-800 hover:bg-neutral-800 hover:shadow-none`}
     >
       <NewMark date={movie.postedAt} />
       <IsPremiumMark isForPremium={movie.isForPremium} />

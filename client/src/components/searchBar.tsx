@@ -53,7 +53,7 @@ export const SearchBar = () => {
     <div className={``}>
       <form
         onSubmit={onSubmit}
-        className={`flex h-12 w-fit content-center rounded-2xl bg-lime-600 shadow-md shadow-stone-700 dark:bg-indigo-700`}
+        className={`flex h-12 w-fit content-center  bg-neutral-600 dark:bg-neutral-700`}
       >
         <input
           type="search"
@@ -61,7 +61,7 @@ export const SearchBar = () => {
           onChange={onInputChange}
           max={50}
           placeholder={"Search..."}
-          className={`w-96 rounded-l-2xl py-1 px-3 text-xl outline-none`}
+          className={`w-96  py-1 px-3 text-xl outline-none`}
         />
         <button
           type="submit"

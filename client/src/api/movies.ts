@@ -3,7 +3,7 @@ import client from ".";
 import { BaseMovie, Movie } from "../types/movie";
 
 const paths = {
-  getMovies: (page: number)=>`/media/?page=${page}`,
+  getMovies: (page: number) => `/media/?page=${page}`,
   getMovieById: (id: string) => `/media/${id}`,
   searchMovies: (text: string) => `/media/search?search_query=${text}`,
 };
@@ -26,10 +26,10 @@ const getMovieById = async (id: string) => {
 };
 
 const searchMovies = async (keyWord: string) => {
-    const response = await client.get<Array<BaseMovie>>(
-      paths.searchMovies(keyWord)
-    );
-    return response.data;
+  const response = await client.get<Array<BaseMovie>>(
+    paths.searchMovies(keyWord)
+  );
+  return response.data;
 };
 
 const movies = {

@@ -2,9 +2,8 @@ import { appUserAtom } from "@/atom";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { GrView } from "react-icons/gr";
-import { RiMovieFill, RiLogoutBoxLine } from "react-icons/ri";
+import { AiOutlineUser, AiOutlineEye } from "react-icons/ai";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
 import UserAvatar from "./userAvatar";
 import appRoutes from "@/appRoutes";
@@ -31,18 +30,18 @@ export const UserIcon = () => {
         onClick={onIconClick}
         className={`flex h-auto w-44 bg-slate-700 shadow-md shadow-black ${
           showDropMenu ? "" : "hover:animate-pulse"
-        } cursor-pointer rounded-md px-4  dark:bg-slate-300`}
+        } cursor-pointer px-4  dark:bg-neutral-400`}
       >
         <div className="flex">
           <div className=" my-1 h-auto w-16">
             <UserAvatar avatarPath={user.avatarPath} />
           </div>
-          <div className="text-1xl mt-2 pl-2 font-bold text-lime-500 dark:text-indigo-900">
+          <div className="text-1xl mt-2 pl-2 font-bold text-opacity-90">
             {(user.firstName + " " + user.lastName).slice(0, 18)}
           </div>
         </div>
         {showDropMenu ? (
-          <div className="text-1xl absolute top-20 right-3 h-auto w-72 cursor-pointer rounded-md bg-slate-300 shadow-sm shadow-black child-hover:bg-cyan-800">
+          <div className="text-1xl absolute top-24 right-3 h-auto w-72 cursor-pointer rounded-md bg-neutral-500 text-white shadow-sm shadow-black child-hover:bg-neutral-800">
             {user && user.role === Role.admin ? (
               <>
                 <Link
@@ -70,9 +69,10 @@ export const UserIcon = () => {
             </Link>
             <Link
               href={appRoutes.watchLater}
-              className="flex w-full px-3 py-3 text-xl"
+              className="flex w-full px-3 py-3 text-xl text-white"
             >
-              <GrView className="mx-3 text-2xl" /> <div>Watch later</div>
+              <AiOutlineEye className="mx-3 text-2xl text-white" />{" "}
+              <div>Watch later</div>
             </Link>
 
             <div
