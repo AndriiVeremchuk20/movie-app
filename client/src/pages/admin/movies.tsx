@@ -9,6 +9,7 @@ type Inputs = {
   description: string;
   isPremium: boolean;
   postedAt: string;
+  genre: string;
 };
 
 const Movies = () => {
@@ -114,6 +115,27 @@ const Movies = () => {
             />
           </label>
         </div>
+
+        <div className="flex">
+          <div className="mr-1">Genre:</div>
+          <select {...register("genre", {required: "Genre requiured"})}>
+            <option hidden>Genre</option>
+            <option value={"ACTION"}>Action</option>
+            <option value={"ADVENTURE"}>Adventure</option>
+            <option value={"ANIMATION"}>Animation</option>
+            <option value={"COMEDY"}>Comedy</option>
+            <option value={"CRIME"}>Crime</option>
+            <option value={"DRAMA"}>Drama</option>
+            <option value={"FANTASY"}>Fantasy</option>
+            <option value={"HORROR"}>Horror</option>
+            <option value={"MYSTERY"}>Mystery</option>
+            <option value={"ROMANCE"}>Romance</option>
+            <option value={"SCIENCE_FICTION"}>Science fiction</option>
+            <option value={"THRILLER"}>Thriller</option>
+            <option value={"WESTERN"}>Western</option>
+          </select>
+        </div>
+
         <div className="frex mb-2">
           <label htmlFor="isPremium" className={``}>
             Is premium:

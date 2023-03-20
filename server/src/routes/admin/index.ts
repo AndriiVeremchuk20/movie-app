@@ -4,6 +4,7 @@ import { UploadedFile } from "express-fileupload";
 import prisma from "../../../prisma/index";
 import checkFilesFormat from "../../utils/checkFilesFormat";
 import { v4 as uuidv4 } from "uuid";
+import { getMovieGenreByName } from "../../utils/getMovieGenreByName";
 
 const route = Router();
 
@@ -61,7 +62,7 @@ route.post("/movie", async (req: Request, res: Response) => {
       return res.status(403).send({ msg: "No file uploaded" });
     }
 
-    const { name, description, isPremium, postedAt } = req.body;
+    const { name, description, isPremium, postedAt, genre } = req.body;
     const movie = req.files.movie as UploadedFile;
     const poster = req.files.poster as UploadedFile;
 
@@ -94,6 +95,7 @@ route.post("/movie", async (req: Request, res: Response) => {
         posterPath: posterPath.slice(8),
         moviePath: moviePath.slice(8),
         postedAt: new Date(postedAt),
+        genre: getMovieGenreByName(genre),
       },
     });
 

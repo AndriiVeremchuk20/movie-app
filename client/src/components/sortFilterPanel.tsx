@@ -9,36 +9,38 @@ interface SelectValues {
 }
 
 const SortFilterPanel = () => {
-
   const router = useRouter();
-  const {register, handleSubmit} = useForm<SelectValues>();
-  
+  const { register, handleSubmit } = useForm<SelectValues>();
+
   const onSubmit: SubmitHandler<SelectValues> = (data) => {
     router.push({
       pathname: appRoutes.home,
       query: {
         ...router.query,
         ...data,
-      }
-    })
+      },
+    });
   };
 
-  const onResetClick = useCallback(()=>{
+  const onResetClick = useCallback(() => {
     router.push({
       pathname: appRoutes.home,
-    })
-  },[])
-
-
+    });
+  }, []);
 
   return (
-    <form className={`mt-1 p-2 flex w-full bg-neutral-500 bg-opacity-70 child:ml-4 text-md`} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={`text-md mt-1 flex w-full bg-neutral-500 bg-opacity-70 p-2 child:ml-4`}
+      onReset={onResetClick}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="flex">
         <div className="mr-1">Sort by:</div>
         <select defaultValue={"DATE_DOWN"} {...register("sort")}>
           <option value={"DATE_DOWN"}>Date down</option>
           <option value={"DATE_UP"}>Date up</option>
-          <option value={"NAME"}>Name</option>
+          <option value={"NAME_UP"}>Name up</option>
+          <option value={"NAME_DOWN"}>Name down</option>
           <option value={"LIKES"}>Likes</option>
         </select>
       </div>
@@ -64,8 +66,9 @@ const SortFilterPanel = () => {
       </div>
 
       <button type="reset">Reset</button>
-      <button type="submit" onClick={onResetClick}>Submit</button>
-      
+      <button type="submit" onClick={onResetClick}>
+        Submit
+      </button>
     </form>
   );
 };
