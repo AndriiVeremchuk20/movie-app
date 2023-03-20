@@ -53,18 +53,6 @@ export default function Home() {
     
     getMoviesMutation.mutate(queryParams);
 
-    
-    //if (query && query.length > 0 && !Array.isArray(query)) {
-    //  searchMutation.mutate(query);
-    // } else {
-    // if (page && page.length > 0 && !Array.isArray(page)){
-    //   getMoviesMutation.mutate(parseInt(page));
-    // } else {
-    //   getMoviesMutation.mutate(1);
-    // }
-
-
-    // }
   }, [query, user]);
 
   return (
@@ -75,12 +63,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-lite.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-dark2.jpg')] dark:bg-fixed">
+      <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-light1.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-dark2.jpg')] dark:bg-fixed">
         <>{console.log(query)}</>
         <div className=" mt-24 mb-10 flex h-auto justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
           <div>
-            {query ? (
-              <div className="m-2 text-2xl">{`Results for "${query}" :`}</div>
+            {query.search ? (
+              <div className="m-2 text-2xl">{`Results for "${query.search}" :`}</div>
             ) : null}
             <SortFilterPanel />
             <MoviesList moviesList={moviesList} />

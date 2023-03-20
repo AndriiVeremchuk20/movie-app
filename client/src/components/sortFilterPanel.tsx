@@ -1,6 +1,6 @@
 import appRoutes from "@/appRoutes";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface SelectValues {
@@ -12,6 +12,7 @@ const SortFilterPanel = () => {
 
   const router = useRouter();
   const {register, handleSubmit} = useForm<SelectValues>();
+  
   const onSubmit: SubmitHandler<SelectValues> = (data) => {
     router.push({
       pathname: appRoutes.home,
@@ -22,8 +23,16 @@ const SortFilterPanel = () => {
     })
   };
 
+  const onResetClick = useCallback(()=>{
+    router.push({
+      pathname: appRoutes.home,
+    })
+  },[])
+
+
+
   return (
-    <form className={`mt-1 p-2 flex w-full bg-neutral-500 bg-opacity-70 child:ml-4 text-md`}>
+    <form className={`mt-1 p-2 flex w-full bg-neutral-500 bg-opacity-70 child:ml-4 text-md`} onSubmit={handleSubmit(onSubmit)}>
       <div className="flex">
         <div className="mr-1">Sort by:</div>
         <select defaultValue={"DATE_DOWN"} {...register("sort")}>
@@ -55,7 +64,7 @@ const SortFilterPanel = () => {
       </div>
 
       <button type="reset">Reset</button>
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={onResetClick}>Submit</button>
       
     </form>
   );

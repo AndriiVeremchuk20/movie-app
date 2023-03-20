@@ -20,7 +20,7 @@ const Pagination: React.FC<PropPagination> = ({ pages, currentPage }) => {
         });
       }
     },
-    [currentPage]
+    [currentPage, router.query]
   );
 
   return (

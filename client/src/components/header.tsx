@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import BackButton from "./backButton";
 import { Logo } from "./logo";
 import { SearchBar } from "./searchBar";
 import { UserIcon } from "./userIcon";
@@ -17,7 +16,6 @@ export const Header = () => {
     <header className="fixed z-10 flex w-full flex-col bg-neutral-500 bg-opacity-90 dark:bg-neutral-900 dark:bg-opacity-90">
       <div className="flex  h-20 w-full content-center justify-between p-3">
         <div className="flex">
-          {!isRoot ? <BackButton /> : null}
           <Logo />
         </div>
         <SearchBar />
