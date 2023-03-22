@@ -66,14 +66,11 @@ const Registration = () => {
   };
 
   return (
-    <div className="flex h-screen bg-lime-600 dark:bg-indigo-900">
+    <div className="flex h-screen bg-[url('/img/bg-login-light.jpg')] dark:bg-cover dark:bg-[url('/img/bg-login-dark.jpg')]">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`m-auto flex h-auto w-auto flex-col 
-        rounded border-2 border-solid border-indigo-900 bg-slate-200 p-6 shadow-2xl 
-        dark:bg-slate-400`}
-      >
-        <div className="font-mono text-3xl font-bold ">Registration</div>
+        className={`m-auto flex h-auto w-auto flex-col rounded-xl bg-neutral-900 bg-opacity-60 dark:bg-neutral-800 dark:bg-opacity-60  p-6 shadow-2xl`} >
+        <div className="font-mono text-3xl font-bold text-white">Registration</div>
         <div className="flex flex-col">
           <input
             type="text"
@@ -148,7 +145,7 @@ const Registration = () => {
             <button
               type="button"
               onClick={onShowPasswordClick}
-              className="text-3xl shadow-sm"
+              className="text-3xl shadow-sm text-white"
             >
               {showPassword ? <BiShow /> : <BiHide />}
             </button>
@@ -172,7 +169,7 @@ const Registration = () => {
             <button
               type="button"
               onClick={onShowRepeatPasswordClick}
-              className="text-3xl shadow-sm"
+              className="text-3xl shadow-sm text-white"
             >
               {showRepeatPassword ? <BiShow /> : <BiHide />}
             </button>
@@ -183,7 +180,7 @@ const Registration = () => {
         </div>
 
         <button
-          className="my-3 flex h-auto w-full justify-center bg-lime-400 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-700"
+          className="my-3 flex h-auto w-full justify-center bg-blue-600 py-2 hover:bg-blue-400"
           type="submit"
         >
           {isLoading ? <Loader /> : "Registration"}
@@ -195,8 +192,8 @@ const Registration = () => {
           <div>{message}</div>
         ) : null}
 
-        <div>
-          <Link href={appRoutes.login} className="text-indigo-600 underline">
+        <div className="w-fill mx-auto">
+          <Link href={appRoutes.login} className="text-blue-300 text-xl underline">
             Login
           </Link>
         </div>

@@ -4,6 +4,7 @@ import MoviesList from "@/components/moviesList";
 import { Movie } from "@/types/movie";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -28,8 +29,13 @@ const WatchLaterPage = () => {
   // }},[user]);
 
   return (
-    <div className="flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900">
-      <div className="mt-36 mb-10 flex h-auto w-screen justify-center bg-emerald-500 pb-10 dark:bg-sky-800 md:w-3/4">
+    <>
+    <Head>
+      <title>Watch Later</title>
+    </Head>
+    <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-w-l-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-w-l-dark.jpg')]">
+    
+      <div className="mt-36 mb-10 flex h-auto w-fit px-10 justify-center bg-opacity-30 bg-neutral-500 pb-10">
         <div>
           {movieList.length > 0 ? (
             <MoviesList moviesList={movieList} />
@@ -39,6 +45,7 @@ const WatchLaterPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

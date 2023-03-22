@@ -53,13 +53,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen bg-lime-600 dark:bg-indigo-900">
+    <div className="flex h-screen bg-[url('/img/bg-login-light.jpg')] dark:bg-[url('/img/bg-login-dark-1.jpg')]">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`m-auto flex h-auto w-96 flex-col rounded 
-        border-2 border-solid border-indigo-900 bg-slate-200 p-6 shadow-2xl dark:bg-slate-400`}
+        className={`m-auto flex h-auto w-96 flex-col rounded-xl bg-opacity-60 p-6 shadow-2xl bg-neutral-900`}
       >
-        <div className="font-mono text-3xl font-bold">Login</div>
+        <div className="font-mono text-3xl font-bold text-white">Login</div>
         <div className="flex flex-col">
           <input
             type="email"
@@ -89,7 +88,7 @@ const Login = () => {
             <button
               type="button"
               onClick={onShowPasswordClick}
-              className="text-3xl shadow-sm"
+              className="text-3xl shadow-sm text-white"
             >
               {showPassword ? <BiShow /> : <BiHide />}
             </button>
@@ -100,7 +99,7 @@ const Login = () => {
         </div>
         <button
           disabled={isLoading}
-          className="my-3 w-full bg-lime-400 py-2 hover:bg-lime-500 dark:bg-lime-500 dark:hover:bg-lime-600"
+          className="my-3 w-full bg-blue-600 py-2 hover:bg-blue-300"
           type="submit"
         >
           {isLoading ? (
@@ -113,10 +112,10 @@ const Login = () => {
           )}
         </button>
 
-        <div>
+        <div className="w-full flex justify-center">
           <Link
             href={appRoutes.registration}
-            className="text-indigo-600 underline"
+            className="text-blue-300 text-xl underline"
           >
             Registration
           </Link>

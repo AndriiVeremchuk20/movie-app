@@ -13,7 +13,7 @@ export const Header = () => {
   }, [router.asPath]);
 
   return (
-    <header className="fixed z-10 flex w-full flex-col bg-neutral-500 bg-opacity-90 dark:bg-neutral-900 dark:bg-opacity-90">
+    <header className="fixed z-10 flex w-full flex-col bg-neutral-300 bg-opacity-90 dark:bg-neutral-900 dark:bg-opacity-90">
       <div className="flex  h-20 w-full content-center justify-between p-3">
         <div className="flex">
           <Logo />
