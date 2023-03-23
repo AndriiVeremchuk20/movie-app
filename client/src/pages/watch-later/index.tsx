@@ -1,7 +1,9 @@
 import watchLater from "@/api/watchLater";
+import appRoutes from "@/appRoutes";
 import { appUserAtom } from "@/atom";
 import MoviesList from "@/components/moviesList";
 import { Movie } from "@/types/movie";
+import { isAuthed } from "@/utils/isAuthed";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
@@ -24,10 +26,12 @@ const WatchLaterPage = () => {
     getMarkedMoviesMutation.mutate();
   }, []);
 
-  // useEffect(()=>{if(!user){
-  //   router.replace("/")
-  // }},[user]);
-
+  useEffect(() => {
+    if (!isAuthed()) {
+      router.replace(appRoutes.login);
+    }
+  }, [user]);
+  
   return (
     <>
     <Head>

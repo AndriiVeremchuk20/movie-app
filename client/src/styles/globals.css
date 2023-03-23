@@ -10,8 +10,8 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 1px;
-  height: 3px;
+  width: 3px;
+  height: 10px;
 }
 
 /* Set the background color of the scrollbar */

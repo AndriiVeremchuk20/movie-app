@@ -12,15 +12,12 @@ const isPremiumMiddleware = async (
   try {
     const token = req.headers.authorization;
 
-    console.log(token)
-
     if (!token) {
       req.currentUser = {...req.currentUser, isPremium: false};
       return next();
     }
    
     const tokenData = decodeAccessToken(token.split(" ")[0]);
-    console.log(tokenData);
     req.currentUser = tokenData;
     next();
   

@@ -1,12 +1,15 @@
+import { Movie } from "@/types/movie";
 import { User } from "@/types/user";
 import Token from "@/utils/token";
 import client from ".";
+import { EditMovieBody } from "./types/movie";
 
 const paths = {
   getUsers: "/admin/users",
   deleteUser: (id: string) => `/admin/users/${id}`,
   pickPremium: (id: string) => `/admin/users/${id}`,
   postMovie: "/admin/movie",
+  editMovie: (id: string) => `/admin/movie/${id}`
 };
 
 const getUsers = async () => {
@@ -52,6 +55,18 @@ const addMovie = async (body: FormData) => {
   return response.data;
 };
 
+
+const editMovie = async ({id, body}: {id: string, body: EditMovieBody}) => {
+  const token = Token.get();
+  const response = await client.put<Movie>(paths.editMovie(id), body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+}
+
 const admin = {
   users: {
     getUsers,
@@ -60,6 +75,7 @@ const admin = {
   },
   movies: {
     addMovie,
+    editMovie,
   },
 };
 

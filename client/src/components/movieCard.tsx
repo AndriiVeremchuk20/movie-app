@@ -30,7 +30,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
 
   return (
     <div
-      className={`h-fit w-60 cursor-pointer bg-neutral-900 bg-opacity-70 pb-2 shadow-xl shadow-slate-800 hover:bg-neutral-800 hover:shadow-none`}
+      className={`h-fit w-60 cursor-pointer bg-neutral-900 bg-opacity-70 pb-2 shadow-sm shadow-blue-800 hover:bg-neutral-800 hover:shadow-none`}
     >
       <NewMark date={movie.postedAt} />
       <IsPremiumMark isForPremium={movie.isForPremium} />
@@ -38,7 +38,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
         onClick={onCardClick}
         src={getMediaPath(movie.posterPath)}
         alt={movie.name}
-        className={`h-80 w-full`}
+        className={`h-72 w-full`}
       />
       <div className="mx-2 mt-1 flex justify-between">
         <div onClick={onCardClick} className={`text-white`}>

@@ -1,12 +1,15 @@
 import admin from "@/api/admin";
+import appRoutes from "@/appRoutes";
 import UserAvatar from "@/components/userAvatar";
 import { User } from "@/types/user";
+import { isAuthed } from "@/utils/isAuthed";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 
 const Users = () => {
   const [users, setUsers] = useState<Array<User>>([]);
-
+  const router = useRouter();
   const getUsersMutation = useMutation(admin.users.getUsers, {
     onSuccess(data) {
       setUsers(data);
@@ -44,6 +47,9 @@ const Users = () => {
   }, []);
 
   useEffect(() => {
+    if (!isAuthed()) {
+      router.replace(appRoutes.login);
+    }
     getUsersMutation.mutate();
   }, []);
 

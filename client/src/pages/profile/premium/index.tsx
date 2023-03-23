@@ -1,4 +1,5 @@
 import premium from "@/api/premium";
+import appRoutes from "@/appRoutes";
 import { appUserAtom } from "@/atom";
 import Recommendations from "@/components/recommendations";
 import { BaseMovie } from "@/types/movie";
@@ -6,7 +7,7 @@ import { isAuthed } from "@/utils/isAuthed";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const Premium = () => {
   const [user] = useAtom(appUserAtom);
@@ -33,7 +34,7 @@ export const Premium = () => {
 
   useEffect(() => {
     if (!isAuthed()) {
-      router.replace("/");
+      router.replace(appRoutes.login);
     }
   }, [user]);
 

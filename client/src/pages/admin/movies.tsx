@@ -1,7 +1,10 @@
 import admin from "@/api/admin";
+import appRoutes from "@/appRoutes";
 import { Loader } from "@/components/loader";
+import { isAuthed } from "@/utils/isAuthed";
 import { useMutation } from "@tanstack/react-query";
-import React, { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Inputs = {
@@ -15,6 +18,7 @@ type Inputs = {
 const Movies = () => {
   const [movieFile, setMovieFile] = useState<File | null>(null);
   const [posterFile, setPosterFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const {
     reset,
@@ -53,6 +57,12 @@ const Movies = () => {
     }
   };
 
+  useEffect(() => {
+    if (!isAuthed()) {
+      router.replace(appRoutes.login);
+    }
+  }, []);
+  
   return (
     <div className={`flex h-screen w-full bg-sky-600`}>
       <form

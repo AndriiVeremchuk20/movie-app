@@ -1,17 +1,13 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { appUserAtom } from "@/atom";
+import { useAtom } from "jotai";
+import React from "react";
 import { Logo } from "./logo";
 import ScrollBar from "./scrollBar";
 import { SearchBar } from "./searchBar";
 import { UserIcon } from "./userIcon";
 
 export const Header = () => {
-  const [isRoot, setIsRoot] = useState<boolean>(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    setIsRoot(router.asPath === "/");
-  }, [router.asPath]);
+  const [user] = useAtom(appUserAtom);
 
   return (
     <header className="fixed z-10 flex w-full flex-col bg-neutral-300 bg-opacity-90 dark:bg-neutral-900 dark:bg-opacity-90">
@@ -22,7 +18,8 @@ export const Header = () => {
         <SearchBar />
         <UserIcon />
       </div>
-      <ScrollBar/>
+      <ScrollBar />
+      {user && user.role === "ADMIN" ? <div className="bg-red-500 text-xl text-center font-bold">Admin Mode</div> : null}
     </header>
   );
 };

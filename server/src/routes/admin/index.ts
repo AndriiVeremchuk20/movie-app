@@ -23,7 +23,7 @@ route.put("/users/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const updaeUser = await prisma.user.update({
+    const updateUser = await prisma.user.update({
       where: {
         id,
       },
@@ -32,7 +32,7 @@ route.put("/users/:id", async (req: Request, res: Response) => {
       },
     });
 
-    res.status(203).send({ msg: "Done", id: updaeUser.id });
+    res.status(201).send({ msg: "Done", id: updateUser.id });
   } catch (error) {
     console.log(error);
     res.status(500).send({ msg: "Server error" });
@@ -106,5 +106,36 @@ route.post("/movie", async (req: Request, res: Response) => {
   }
 });
 
+// route.delete("/movie/:id",async (req: Request, res: Response) => {
+
+// });
+
+route.put("/movie/:id", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id as string
+    console.log(id)
+    const {name, description, isForPremium, postedAt, genre } = req.body;
+
+    console.log(name, description, isForPremium, postedAt, genre )
+
+    const updateMovie = await prisma.movie.update({
+      where: {
+        id,
+      },
+      data: {
+        name: name,
+        description: description,
+        isForPremium: isForPremium,
+        postedAt: new Date(postedAt),
+        genre: getMovieGenreByName(genre),
+      },
+    });
+
+    res.status(201).send({ updateMovie });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ msg: "Server error" });
+  }
+});
 
 export default route;

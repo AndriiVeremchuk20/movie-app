@@ -9,6 +9,8 @@ import Head from "next/head";
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
+import { isAuthed } from "@/utils/isAuthed";
+import appRoutes from "@/appRoutes";
 
 const Profile = () => {
   const [user, setUser] = useAtom(appUserAtom);
@@ -37,6 +39,13 @@ const Profile = () => {
   useEffect(() => {
     getLikedMoviesMutation.mutate();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthed()) {
+      router.replace(appRoutes.login);
+    }
+  }, [user]);
+
 
   if (user)
     return (
