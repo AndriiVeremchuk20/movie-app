@@ -1,11 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from "react";
 
 export const ScrollBar = () => {
-
-  const [value, setValue] = useState<number>(
-    document.documentElement.scrollTop / document.documentElement.scrollHeight -
-      document.documentElement.clientHeight
-  );
+  const [value, setValue] = useState<number>(0);
 
   const handleScroll = useCallback(() => {
     const winScroll =
@@ -16,14 +12,23 @@ export const ScrollBar = () => {
     setValue((winScroll / height) * 100);
   }, []);
 
-  window.addEventListener("scroll", handleScroll);  
+  useEffect(() => {
+    setValue(
+      document.documentElement.scrollTop /
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight
+    );
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className='w-full h-1'>
-     <div className={`bg-blue-600 h-full`} style={{width: `${value}%`}}>
-    </div>   
+    <div className="h-1 w-full">
+      <div
+        className={`h-full bg-blue-600`}
+        style={{ width: `${value}%` }}
+      ></div>
     </div>
-  )
-}
+  );
+};
 
 export default React.memo(ScrollBar);
