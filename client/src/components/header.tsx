@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Logo } from "./logo";
+import ScrollBar from "./scrollBar";
 import { SearchBar } from "./searchBar";
 import { UserIcon } from "./userIcon";
 
@@ -21,6 +22,7 @@ export const Header = () => {
         <SearchBar />
         <UserIcon />
       </div>
+      <ScrollBar/>
     </header>
   );
 };
