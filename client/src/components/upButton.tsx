@@ -28,6 +28,7 @@ export const UpButton = () => {
   if (show) {
     return (
       <div
+        title="Up"
         onClick={onClick}
         className={`fixed bottom-28 right-20 animate-bounce 
       rounded-full bg-neutral-600 p-4 text-2xl text-opacity-90 outline-none dark:bg-neutral-200`}

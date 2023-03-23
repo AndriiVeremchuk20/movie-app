@@ -66,6 +66,7 @@ const LikeButton = () => {
     return (
       <div className={`flex text-3xl`}>
         <button
+          title={`${isLiked?"Hide like":"Like it"}`}
           onClick={onLikeClick}
           className={`flex ${isLiked ? "text-green-600" : ""}`}
         >

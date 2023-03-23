@@ -48,7 +48,11 @@ export const SearchBar = () => {
             search: searchText,
           }
         });
-        setSearchText("");
+      }
+      else{
+        if(router.asPath!== appRoutes.home){
+          router.push(appRoutes.home);
+        }
       }
     },
     [searchText]

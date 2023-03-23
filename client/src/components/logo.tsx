@@ -13,10 +13,10 @@ export const Logo = () => {
   return (
     <div
       onClick={onLogoClick}
-      className="flex h-auto w-auto cursor-pointer bg-slate-700 px-4 shadow-md shadow-black hover:animate-pulse  dark:bg-slate-300"
+      className="flex h-auto w-auto cursor-pointer px-4 text-black dark:text-white"
     >
-      <MdMovie className="text-6xl font-bold text-opacity-90" />
-      <div className="mt-2 text-4xl font-bold text-opacity-90">Get Movie</div>
+      <MdMovie className="text-6xl font-bold" />
+      <div className="mt-2 text-4xl font-bold">Get Movie</div>
     </div>
   );
 };

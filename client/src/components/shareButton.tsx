@@ -11,7 +11,7 @@ const ShareButton = () => {
   }, []);
 
   return (
-    <button className={`text-3xl focus:text-green-600`} onClick={onShareClick}>
+    <button title="Share to" className={`text-3xl focus:text-green-600`} onClick={onShareClick}>
       <AiOutlineShareAlt />
     </button>
   );

@@ -64,11 +64,20 @@ const SortFilterPanel = () => {
           <option value={"WESTERN"}>Western</option>
         </select>
       </div>
-
-      <button type="reset">Reset</button>
-      <button type="submit" onClick={onResetClick}>
-        Submit
-      </button>
+      <div className="flex child:mx-3">
+        <button
+          type="submit"
+          className="text-blue-900 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-900"
+        >
+          Submit
+        </button>
+        <button
+          type="reset"
+          className="text-blue-900 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-900"
+        >
+          Reset
+        </button>
+      </div>
     </form>
   );
 };

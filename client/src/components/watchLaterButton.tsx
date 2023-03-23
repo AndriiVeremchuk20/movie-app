@@ -71,6 +71,7 @@ const AddButton: React.FC<PropsLikeButton> = ({ movieId }) => {
 
   return (
     <button
+      title={`${isAdded?"Remove from watch later":"Add to watch later"}`}
       onClick={onAddClick}
       className={`m-1 flex h-8 w-8 justify-center text-4xl text-blue-600`}
     >

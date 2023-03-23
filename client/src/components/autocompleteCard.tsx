@@ -17,7 +17,7 @@ const AutocompleteCard: React.FC<PropsAutocompleteCard> = ({ movie }) => {
   return (
     <div
       key={movie.id}
-      className={`flex cursor-pointer p-1 hover:bg-teal-600`}
+      className={`flex cursor-pointer p-1 hover:bg-neutral-600`}
       onClick={onCardClick}
     >
       <img src={getMediaPath(movie.posterPath)} className={` h-24 w-16`} />

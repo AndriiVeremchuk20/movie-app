@@ -47,7 +47,6 @@ const Video = () => {
           </div>
           <div className="hover:animate-pulse">
             <DownloadButton
-              id={movie.id}
               movieURL={getMediaPath(movie.moviePath)}
             />
           </div>

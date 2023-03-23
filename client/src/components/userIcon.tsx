@@ -28,15 +28,15 @@ export const UserIcon = () => {
     return (
       <div
         onClick={onIconClick}
-        className={`flex h-auto w-44 bg-slate-700 shadow-md shadow-black ${
+        className={`flex h-auto w-44 ${
           showDropMenu ? "" : "hover:animate-pulse"
-        } cursor-pointer px-4  dark:bg-neutral-400`}
+        } cursor-pointer px-4  dark:text-white`}
       >
         <div className="flex">
           <div className=" my-1 h-auto w-16">
             <UserAvatar avatarPath={user.avatarPath} />
           </div>
-          <div className="text-1xl mt-2 pl-2 font-bold text-opacity-90">
+          <div className="text-1xl mt-1 pl-2">
             {(user.firstName + " " + user.lastName).slice(0, 18)}
           </div>
         </div>
@@ -96,13 +96,20 @@ export const UserIcon = () => {
   }
 
   return (
-    <Link
-      href={appRoutes.login}
-      className=" flex h-auto w-44 cursor-pointer justify-center rounded-xl bg-slate-700 px-4 hover:animate-pulse dark:bg-slate-300"
-    >
-      <div className="mt-2 text-3xl font-bold text-lime-500 dark:text-indigo-900">
-        Login
-      </div>
-    </Link>
+    <div className="flex my-auto text-xl">
+      <Link
+        href={appRoutes.login}
+        className="underline text-blue-600 dark:text-blue-300" 
+      >
+          Login
+      </Link>
+      /
+      <Link
+      className="underline text-blue-600 dark:text-blue-300"
+      href={appRoutes.registration}
+      >
+        Registration
+      </Link>
+    </div>
   );
 };
