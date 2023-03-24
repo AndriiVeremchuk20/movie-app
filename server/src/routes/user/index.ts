@@ -81,37 +81,15 @@ route.post(
           },
           select: {
             id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-            age: true,
             role: true,
-            likes: true,
-            //viewed: true,
-            watchLater: true,
             password: true,
-            avatarPath: true,
             isPremium: true,
           },
         });
 
         if (await comparePassword(password, loginUser.password)) {
           const token = generateAccessTocken(loginUser.id, loginUser.role, loginUser.isPremium);
-          return res.status(201).send({
-            token,
-            user: {
-              id: loginUser.id,
-              firstName: loginUser.firstName,
-              lastName: loginUser.lastName,
-              age: loginUser.age,
-              email: loginUser.email,
-              likes: loginUser.likes.map((like) => like.movieId),
-              watchLater: loginUser.watchLater.map((item) => item.movieId),
-              avatarPath: loginUser.avatarPath,
-              isPemium: loginUser.isPremium,
-              role: loginUser.role,
-            },
-          });
+          return res.status(201).send({ token });
         }
 
         res.status(401).send({ msg: "Invalid password" });

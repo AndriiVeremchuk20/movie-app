@@ -3,7 +3,6 @@ import getMediaPath from "@/utils/getMediaPath";
 import { useAtom } from "jotai";
 import React from "react";
 import IsPremiumMark from "./isPremiumMark";
-import NewMark from "./newMark";
 
 const MovieInfo = () => {
   const [movie] = useAtom(currentMovieAtom);
@@ -12,7 +11,6 @@ const MovieInfo = () => {
     return (
       <div className="flex justify-center rounded-lg bg-slate-300 text-black dark:bg-slate-900 dark:text-white">
         <div>
-          <NewMark date={movie.postedAt} />
           <IsPremiumMark isForPremium={movie.isForPremium} />
         </div>
         <img

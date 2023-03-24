@@ -5,6 +5,7 @@ import Pagination from "@/components/pagination";
 import SortFilterPanel from "@/components/sortFilterPanel";
 import { BaseMovie } from "@/types/movie";
 import { QueryParams } from "@/types/queryParams";
+import Token from "@/utils/token";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
@@ -15,11 +16,9 @@ export default function Home() {
   const [moviesList, setMoviesList] = useState<Array<BaseMovie>>([]);
   const [numPages, setNumPages] = useState<number>(1);
   const [currPage, setCurrPage] = useState<number>(1);
-
+  const [user] = useAtom(appUserAtom);
   const router = useRouter();
   const {query} = router;
-  //const { page } = router.query;
-  const [user] = useAtom(appUserAtom);
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
     onSuccess(data) {
@@ -27,16 +26,6 @@ export default function Home() {
       setMoviesList(data.movies);
       setNumPages(data.pages);
       setCurrPage(data.page);
-    },
-    onError(e) {
-      console.log(e);
-    },
-  });
-
-  const searchMutation = useMutation(moviesApi.searchMovies, {
-    onSuccess(data) {
-      console.log(data);
-      setMoviesList(data);
     },
     onError(e) {
       console.log(e);

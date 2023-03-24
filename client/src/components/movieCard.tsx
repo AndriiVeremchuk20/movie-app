@@ -7,7 +7,6 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import IsPremiumMark from "./isPremiumMark";
-import NewMark from "./newMark";
 import WatchLaterButton from "./watchLaterButton";
 
 interface PropsMovieCard {
@@ -32,7 +31,6 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
     <div
       className={`h-fit w-60 cursor-pointer bg-neutral-900 bg-opacity-70 pb-2 shadow-sm shadow-blue-800 hover:bg-neutral-800 hover:shadow-none`}
     >
-      <NewMark date={movie.postedAt} />
       <IsPremiumMark isForPremium={movie.isForPremium} />
       <img
         onClick={onCardClick}

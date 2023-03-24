@@ -1,4 +1,5 @@
 import {
+  AuthResponseData,
   LoginRequestBody,
   LoginResponseData,
   RegistrationRequestBody,
@@ -27,7 +28,7 @@ const login = async (body: LoginRequestBody) => {
 
 const authentication = async () => {
   const token = Token.get();
-  const response = await client.get<LoginResponseData>(paths.auth, {
+  const response = await client.get<AuthResponseData>(paths.auth, {
     headers: { Authorization: `Bearer ${token}` },
   });
   Token.set(response.data.token);

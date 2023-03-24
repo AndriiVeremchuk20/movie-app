@@ -8,7 +8,7 @@ import { isAxiosError } from "axios";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BiShow, BiHide } from "react-icons/bi";
 
@@ -29,11 +29,10 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { mutate, isLoading } = useMutation(auth.login, {
-    onSuccess(data) {
-      console.log(data);
-      setAppUser(data.user);
-      route.push("/");
+  const loginMutation = useMutation(auth.login, {
+    onSuccess() {
+      authMutation.mutate();
+      route.push(appRoutes.home);
     },
     onError(e) {
       if (isAxiosError(e) && e.response) {
@@ -44,19 +43,25 @@ const Login = () => {
     },
   });
 
+  const authMutation = useMutation(auth.authentication, {
+    onSuccess(data){
+      setAppUser(data.user);
+    }
+  })
+
   const onShowPasswordClick = useCallback(() => {
     setStowPassword((prev) => !prev);
   }, []);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    mutate(data);
+    loginMutation.mutate(data);
   };
 
   return (
     <div className="flex h-screen bg-[url('/img/bg-login-light.jpg')] dark:bg-[url('/img/bg-login-dark-1.jpg')]">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`m-auto flex h-auto w-96 flex-col rounded-xl bg-opacity-60 p-6 shadow-2xl bg-neutral-900`}
+        className={`m-auto flex h-auto w-96 flex-col rounded-xl bg-neutral-900 bg-opacity-60 p-6 shadow-2xl`}
       >
         <div className="font-mono text-3xl font-bold text-white">Login</div>
         <div className="flex flex-col">
@@ -88,7 +93,7 @@ const Login = () => {
             <button
               type="button"
               onClick={onShowPasswordClick}
-              className="text-3xl shadow-sm text-white"
+              className="text-3xl text-white shadow-sm"
             >
               {showPassword ? <BiShow /> : <BiHide />}
             </button>
@@ -98,11 +103,11 @@ const Login = () => {
           )}
         </div>
         <button
-          disabled={isLoading}
+          disabled={loginMutation.isLoading}
           className="my-3 w-full bg-blue-600 py-2 hover:bg-blue-300"
           type="submit"
         >
-          {isLoading ? (
+          {loginMutation.isLoading ? (
             <div className="m-auto">
               {" "}
               <Loader />
@@ -111,11 +116,10 @@ const Login = () => {
             "Login"
           )}
         </button>
-
-        <div className="w-full flex justify-center">
+        <div className="flex w-full justify-center">
           <Link
             href={appRoutes.registration}
-            className="text-blue-300 text-xl underline"
+            className="text-xl text-blue-300 underline"
           >
             Registration
           </Link>

@@ -17,5 +17,9 @@ export interface LoginRequestBody {
 
 export interface LoginResponseData {
   token: string;
+}
+
+export interface AuthResponseData {
   user: User;
+  token: string;
 }
