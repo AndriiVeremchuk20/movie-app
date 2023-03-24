@@ -12,16 +12,21 @@ const isPremiumMiddleware = async (
   try {
     const token = req.headers.authorization;
 
-    if (!token) {
-      req.currentUser = {...req.currentUser, isPremium: false};
-      return next();
+    if (token) {
+      try {
+        const tokenData = decodeAccessToken(token.split(" ")[1]);
+        req.currentUser = tokenData;
+        req.isPremiumUser = req.currentUser.isPremium;
+        return next();
+      } catch (e) {
+        req.isPremiumUser = false;
+        return next();
+      }
     }
-   
-    const tokenData = decodeAccessToken(token.split(" ")[0]);
-    req.currentUser = tokenData;
+
+    req.isPremiumUser = false;
     next();
-  
-} catch (e) {
+  } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });
   }

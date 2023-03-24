@@ -4,6 +4,7 @@ import { currentMovieAtom } from "@/atom";
 import { Movie } from "@/types/movie";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
+import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -16,6 +17,7 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
   movie,
   hideCallback,
 }) => {
+  const router = useRouter();
   const [, setCurrMovie] = useAtom(currentMovieAtom);
   const {
     reset,
@@ -28,6 +30,7 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
     onSuccess(data){
       setCurrMovie(data);
       hideCallback();
+      router.reload();
     },
     onError(){
 
@@ -113,7 +116,7 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
           <label htmlFor="postedAt" className={``}>
             Posted date:
           </label>
-          <input type="date" id="postedAt" {...register("postedAt",{value: movie.postedAt})} />
+          <input type="date" id="postedAt" {...register("postedAt",{value: new Date(movie.postedAt).toDateString()})} />
         </div>
         <div className="flex w-full flex-col">
           <button

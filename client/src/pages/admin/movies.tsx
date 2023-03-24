@@ -67,7 +67,7 @@ const Movies = () => {
     <div className={`flex h-screen w-full bg-sky-600`}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={` m-auto mt-24  w-auto rounded-md bg-cyan-700 p-2`}
+        className={` m-auto mt-36 w-auto rounded-md bg-cyan-700 p-2`}
       >
         <div className={`text-3xl font-bold`}>Add Movie</div>
         <div>
@@ -128,7 +128,7 @@ const Movies = () => {
 
         <div className="flex">
           <div className="mr-1">Genre:</div>
-          <select {...register("genre", {required: "Genre requiured"})}>
+          <select defaultValue={"ACTION"} {...register("genre", {required: "Genre requiured"})}>
             <option hidden>Genre</option>
             <option value={"ACTION"}>Action</option>
             <option value={"ADVENTURE"}>Adventure</option>

@@ -1,6 +1,7 @@
 import { MovieGenre, Prisma } from "@prisma/client";
 import { Router, Request, Response } from "express";
 import prisma from "../../../prisma";
+import authMiddleware from "../../middleware/auth";
 import isPremiumMiddleware from "../../middleware/isPremium";
 import { getMovieGenreByName } from "../../utils/getMovieGenreByName";
 
@@ -103,7 +104,7 @@ route.get("/search", async (req: Request, res: Response) => {
 route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { isPremium } = req.currentUser;
+    const {isPremiumUser} = req;
 
     try {
       const movie = await prisma.movie.findFirstOrThrow({
@@ -139,9 +140,9 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
         },
       });
 
-      if (movie.isForPremium && !isPremium) {
-        movie.moviePath = "";
-      }
+       if (movie.isForPremium && !isPremiumUser) {
+         movie.moviePath = "";
+       }
 
       const recommendations = await prisma.$queryRawUnsafe(
         `SELECT id, name, "posterPath", "postedAt", "isForPremium"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`

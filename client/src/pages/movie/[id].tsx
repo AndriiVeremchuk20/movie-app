@@ -29,12 +29,10 @@ const MoviePage = () => {
 
   const onEditClick = useCallback(()=>{
     setShowEditForm(true);
-    console.log(11)
   },[]);
 
   const hideForm = useCallback(()=>{
     setShowEditForm(false);
-    console.log(11)
   },[]);
 
   useEffect(() => {
