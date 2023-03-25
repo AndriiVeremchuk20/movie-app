@@ -1,12 +1,13 @@
-import { MovieGenre, Prisma } from "@prisma/client";
 import { Router, Request, Response } from "express";
 import prisma from "../../../prisma";
-import authMiddleware from "../../middleware/auth";
 import isPremiumMiddleware from "../../middleware/isPremium";
 import { getMovieGenreByName } from "../../utils/getMovieGenreByName";
+import watchedRoute from "./watched";
 
 const route = Router();
 const LIMIT = 12;
+
+route.use("/watched", watchedRoute);
 
 route.get("/", async (req: Request, res: Response) => {
   try {
@@ -105,7 +106,7 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const {isPremiumUser} = req;
-
+    
     try {
       const movie = await prisma.movie.findFirstOrThrow({
         where: { id: id },

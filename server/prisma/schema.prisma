@@ -22,21 +22,23 @@ model User {
   likes      Like[]
   watchLater WatchLater[]
   avatarPath String?
-  isPremium  Boolean @default(false)
+  isPremium  Boolean      @default(false)
+  Watched    Watched[]
 }
 
 model Movie {
-  id          String       @id @default(cuid())
-  posterPath  String
-  moviePath   String
-  name        String
-  description String
-  postedAt    DateTime     @default(now())
-  genre       MovieGenre   @default(ACTION)
-  likes       Like[]
-  comments    Comments[]
-  watchLater  WatchLater[]
-  isForPremium Boolean @default(false)
+  id           String       @id @default(cuid())
+  posterPath   String
+  moviePath    String
+  name         String
+  description  String
+  postedAt     DateTime     @default(now())
+  genre        MovieGenre   @default(ACTION)
+  likes        Like[]
+  comments     Comments[]
+  watchLater   WatchLater[]
+  watched      Watched[]
+  isForPremium Boolean      @default(false)
 }
 
 model WatchLater {
@@ -68,6 +70,19 @@ model Comments {
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   postedAt  DateTime @default(now())
+}
+
+model Watched {
+  id        String   @id @default(cuid())
+  watchedAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String? 
+  ip        String?  
+  movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId   String
+
+  @@unique([userId, movieId])
+  @@index([userId])
 }
 
 enum Role {

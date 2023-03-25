@@ -1,17 +1,48 @@
+import watched from "@/api/watched";
 import appRoutes from "@/appRoutes";
 import { appUserAtom, currentMovieAtom } from "@/atom";
 import getMediaPath from "@/utils/getMediaPath";
+import getUserIP from "@/utils/getUserIP";
+import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import DownloadButton from "./downloadButton";
 import LikeButton from "./likeButton";
 import ShareButton from "./shareButton";
 import WatchLaterButton from "./watchLaterButton";
 
+// for correct counting of views it is
+// better to use onEnded event in video tag
+
 const Video = () => {
   const [movie] = useAtom(currentMovieAtom);
   const [user] = useAtom(appUserAtom);
+  const [isWatch, setIsWatch] = useState<boolean>(false);
+
+  const onVideoPlay = useCallback(
+    (e: any) => {
+      console.log("video has been played");
+
+      if (!isWatch&&movie) {
+        console.log("play");
+        watchedMovieMutation.mutate(movie.id);
+      }
+
+      setIsWatch(true);
+    },
+    [isWatch, movie]
+  );
+
+  const watchedMovieMutation = useMutation(watched.add, {
+    onSuccess(data){
+      console.log(data);
+      console.log("Okke")
+    },
+    onError(){
+      console.log("ne Okke")
+    }
+  })
 
   if (movie)
     return (
@@ -31,7 +62,12 @@ const Video = () => {
             </div>
           </div>
         ) : (
-          <video className={`h-auto w-full rounded-t-lg outline-none`} controls>
+          <video
+            onPlay={onVideoPlay}
+            className={`h-auto w-full rounded-t-lg outline-none`}
+            controls
+            disablePictureInPicture
+          >
             <source src={getMediaPath(movie.moviePath)} type="video/mp4" />
             <source src={getMediaPath(movie.moviePath)} type="video/mkv" />
           </video>
