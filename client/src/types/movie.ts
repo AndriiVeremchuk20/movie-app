@@ -13,6 +13,7 @@ export interface Movie extends BaseMovie {
   description: string;
   moviePath: string;
   likes: number;
+  watched: number;
   recommendations: Array<Movie>;
   comments: Array<Comment>;
 }

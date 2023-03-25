@@ -5,7 +5,6 @@ import Pagination from "@/components/pagination";
 import SortFilterPanel from "@/components/sortFilterPanel";
 import { BaseMovie } from "@/types/movie";
 import { QueryParams } from "@/types/queryParams";
-import Token from "@/utils/token";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
@@ -22,7 +21,7 @@ export default function Home() {
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
     onSuccess(data) {
-      console.log(data);
+      //console.log(data);
       setMoviesList(data.movies);
       setNumPages(data.pages);
       setCurrPage(data.page);
@@ -52,7 +51,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-index-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-index-dark.jpg')] dark:bg-fixed">
-        <>{console.log(query)}</>
         <div className=" mt-24 mb-10 flex h-auto justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
           <div>
             {query.search ? (

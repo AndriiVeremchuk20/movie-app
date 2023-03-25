@@ -120,6 +120,7 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
           likes: true,
           isForPremium: true,
           genre: true,
+          watched: true,
           comments: {
             orderBy: {
               posted_at: "desc",
@@ -151,8 +152,9 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
 
       res.status(200).send({
         ...movie,
+        watched: movie.watched.length,
         likes: movie.likes.length,
-        recommendations: recommendations,
+        recommendations: recommendations,        
       });
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });

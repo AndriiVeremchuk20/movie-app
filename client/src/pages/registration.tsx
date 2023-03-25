@@ -35,7 +35,7 @@ const Registration = () => {
     auth.registration,
     {
       onSuccess(data) {
-        console.log(data.msg);
+       // console.log(data.msg);
         setMessage(data.msg);
         router.push("/login");
       },

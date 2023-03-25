@@ -2,7 +2,6 @@ import watched from "@/api/watched";
 import appRoutes from "@/appRoutes";
 import { appUserAtom, currentMovieAtom } from "@/atom";
 import getMediaPath from "@/utils/getMediaPath";
-import getUserIP from "@/utils/getUserIP";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Link from "next/link";
@@ -11,38 +10,30 @@ import DownloadButton from "./downloadButton";
 import LikeButton from "./likeButton";
 import ShareButton from "./shareButton";
 import WatchLaterButton from "./watchLaterButton";
+import { AiFillEye } from "react-icons/ai";
 
 // for correct counting of views it is
 // better to use onEnded event in video tag
 
 const Video = () => {
-  const [movie] = useAtom(currentMovieAtom);
+  const [movie, setMovie] = useAtom(currentMovieAtom);
   const [user] = useAtom(appUserAtom);
   const [isWatch, setIsWatch] = useState<boolean>(false);
 
-  const onVideoPlay = useCallback(
-    (e: any) => {
-      console.log("video has been played");
-
-      if (!isWatch&&movie) {
-        console.log("play");
-        watchedMovieMutation.mutate(movie.id);
-      }
-
-      setIsWatch(true);
-    },
-    [isWatch, movie]
-  );
+  const onVideoPlay = useCallback(() => {
+    if (!isWatch && movie) {
+      watchedMovieMutation.mutate(movie.id);
+    }
+    setIsWatch(true);
+  }, [isWatch, movie]);
 
   const watchedMovieMutation = useMutation(watched.add, {
-    onSuccess(data){
-      console.log(data);
-      console.log("Okke")
+    onSuccess(data) {
+      if (movie) {
+        setMovie({ ...movie, watched: (movie.watched += 1) });
+      }
     },
-    onError(){
-      console.log("ne Okke")
-    }
-  })
+  });
 
   if (movie)
     return (
@@ -75,6 +66,14 @@ const Video = () => {
         <div
           className={`flex justify-around rounded-b-lg bg-black py-4 text-xl font-bold text-white`}
         >
+          <div className="flex">
+            <AiFillEye className="text-3xl" />
+            <div>
+              {movie.watched % 1000 < 0
+                ? (movie.watched % 1000) + "k"
+                : movie.watched}
+            </div>
+          </div>
           <div className="hover:animate-pulse">
             <LikeButton />
           </div>

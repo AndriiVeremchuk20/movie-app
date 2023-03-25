@@ -24,7 +24,7 @@ const AppInner = ({ Component, pageProps }: AppProps) => {
   const authMutate = useMutation(auth.authentication, {
     onSuccess(data) {
       setAppUser(data.user);
-      console.log(data.user);
+      //console.log(data.user);
     },
     onError(e) {
       console.log(e);
