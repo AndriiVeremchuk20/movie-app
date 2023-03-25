@@ -18,7 +18,7 @@ export default function Home() {
   const [currPage, setCurrPage] = useState<number>(1);
   const [user] = useAtom(appUserAtom);
   const router = useRouter();
-  const {query} = router;
+  const { query } = router;
 
   const getMoviesMutation = useMutation(moviesApi.getMovies, {
     onSuccess(data) {
@@ -33,15 +33,14 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const queryParams: QueryParams = {}
+    const queryParams: QueryParams = {};
 
     if (query.search) queryParams.search = query.search as string;
     if (query.page) queryParams.page = Number(query.page);
     if (query.sort) queryParams.sort = query.sort as string;
     if (query.filter) queryParams.filter = query.filter as string;
-    
-    getMoviesMutation.mutate(queryParams);
 
+    getMoviesMutation.mutate(queryParams);
   }, [query, user]);
 
   return (

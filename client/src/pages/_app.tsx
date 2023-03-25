@@ -44,7 +44,7 @@ export default function App(props: AppProps) {
   return (
     <>
       <AppWrapper>
-        <Header/>
+        <Header />
         <AppInner {...props} />
         <Footer />
       </AppWrapper>

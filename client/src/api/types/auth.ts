@@ -1,6 +1,6 @@
 import { BaseUser, User } from "@/types/user";
 
-export interface RegistrationRequestBody{
+export interface RegistrationRequestBody {
   firstName: string;
   lastName: string;
   password: string;

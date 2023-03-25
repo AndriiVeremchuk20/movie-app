@@ -46,9 +46,7 @@ const Video = () => {
             <WatchLaterButton movieId={movie.id} />
           </div>
           <div className="hover:animate-pulse">
-            <DownloadButton
-              movieURL={getMediaPath(movie.moviePath)}
-            />
+            <DownloadButton movieURL={getMediaPath(movie.moviePath)} />
           </div>
           <div className="hover:animate-pulse">
             <ShareButton />

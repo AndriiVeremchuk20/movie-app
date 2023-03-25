@@ -27,27 +27,25 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
   } = useForm<EditMovieBody>();
 
   const editMovieMutation = useMutation(admin.movies.editMovie, {
-    onSuccess(data){
+    onSuccess(data) {
       setCurrMovie(data);
       hideCallback();
       router.reload();
     },
-    onError(){
-
-    }
-  })
+    onError() {},
+  });
 
   const onSubmit: SubmitHandler<EditMovieBody> = (data) => {
     console.log(data);
-    editMovieMutation.mutate({id: movie.id, body: data });
-   };
+    editMovieMutation.mutate({ id: movie.id, body: data });
+  };
 
-  const onReset = useCallback(()=>{
+  const onReset = useCallback(() => {
     reset();
-  },[])
+  }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-screen h-full z-10 flex bg-gray-500 bg-opacity-50">
+    <div className="fixed top-0 left-0 z-10 flex h-full w-screen bg-gray-500 bg-opacity-50">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={` m-auto mt-24 w-fit rounded-md bg-cyan-700 p-2`}
@@ -63,7 +61,10 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
               id="name"
               type="text"
               className={`mx-2 my-1 rounded-md px-2 py-1 text-xl text-black outline-none`}
-              {...register("name", { required: "name Required", value: movie.name })}
+              {...register("name", {
+                required: "name Required",
+                value: movie.name,
+              })}
             />
           </label>
         </div>
@@ -76,14 +77,22 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
             <textarea
               id="desc"
               className={`m-3 h-72 w-11/12 resize-none rounded-md p-2 text-sm text-black outline-none`}
-              {...register("description", { required: "name description", value: movie.description})}
+              {...register("description", {
+                required: "name description",
+                value: movie.description,
+              })}
             />
           </label>
         </div>
 
         <div className="flex">
           <div className="mr-1">Genre:</div>
-          <select {...register("genre", { required: "Genre requiured", value: movie.genre})}>
+          <select
+            {...register("genre", {
+              required: "Genre requiured",
+              value: movie.genre,
+            })}
+          >
             <option hidden>Genre</option>
             <option value={"ACTION"}>Action</option>
             <option value={"ADVENTURE"}>Adventure</option>
@@ -109,14 +118,20 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
             type="checkbox"
             id="isPremium"
             className={`ml-2 h-5 w-5`}
-            {...register("isForPremium",{value: movie.isForPremium})}
+            {...register("isForPremium", { value: movie.isForPremium })}
           />
         </div>
         <div className="frex mb-2">
           <label htmlFor="postedAt" className={``}>
             Posted date:
           </label>
-          <input type="date" id="postedAt" {...register("postedAt",{value: new Date(movie.postedAt).toDateString()})} />
+          <input
+            type="date"
+            id="postedAt"
+            {...register("postedAt", {
+              value: new Date(movie.postedAt).toDateString(),
+            })}
+          />
         </div>
         <div className="flex w-full flex-col">
           <button

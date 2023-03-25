@@ -19,7 +19,11 @@ export const Header = () => {
         <UserIcon />
       </div>
       <ScrollBar />
-      {user && user.role === "ADMIN" ? <div className="bg-red-500 text-xl text-center font-bold">Admin Mode</div> : null}
+      {user && user.role === "ADMIN" ? (
+        <div className="bg-red-500 text-center text-xl font-bold">
+          Admin Mode
+        </div>
+      ) : null}
     </header>
   );
 };

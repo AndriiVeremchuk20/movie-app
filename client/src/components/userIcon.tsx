@@ -95,17 +95,17 @@ export const UserIcon = () => {
   }
 
   return (
-    <div className="flex my-auto text-xl">
+    <div className="my-auto flex text-xl">
       <Link
         href={appRoutes.login}
-        className="underline text-blue-600 dark:text-blue-300" 
+        className="text-blue-600 underline dark:text-blue-300"
       >
-          Login
+        Login
       </Link>
       /
       <Link
-      className="underline text-blue-600 dark:text-blue-300"
-      href={appRoutes.registration}
+        className="text-blue-600 underline dark:text-blue-300"
+        href={appRoutes.registration}
       >
         Registration
       </Link>

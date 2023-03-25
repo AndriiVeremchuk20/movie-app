@@ -31,24 +31,23 @@ const WatchLaterPage = () => {
       router.replace(appRoutes.login);
     }
   }, [user]);
-  
+
   return (
     <>
-    <Head>
-      <title>Watch Later</title>
-    </Head>
-    <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-w-l-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-w-l-dark.jpg')]">
-    
-      <div className="mt-36 mb-10 flex h-auto w-fit px-10 justify-center bg-opacity-30 bg-neutral-500 pb-10">
-        <div>
-          {movieList.length > 0 ? (
-            <MoviesList moviesList={movieList} />
-          ) : (
-            <div>Not found no one saved movie...</div>
-          )}
+      <Head>
+        <title>Watch Later</title>
+      </Head>
+      <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-w-l-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-w-l-dark.jpg')]">
+        <div className="mt-36 mb-10 flex h-auto w-fit justify-center bg-neutral-500 bg-opacity-30 px-10 pb-10">
+          <div>
+            {movieList.length > 0 ? (
+              <MoviesList moviesList={movieList} />
+            ) : (
+              <div>Not found no one saved movie...</div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

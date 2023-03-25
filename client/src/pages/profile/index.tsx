@@ -46,17 +46,16 @@ const Profile = () => {
     }
   }, [user]);
 
-
   if (user)
     return (
       <>
         <Head>
           <title>{user.firstName}</title>
         </Head>
-        <div className="flex max-h-fit min-h-screen w-screen justify-center bg-lime-100 dark:bg-sky-900">
-          <div className=" mt-28 mb-10 flex h-auto flex-col justify-center bg-emerald-500 pb-10 dark:bg-sky-800 md:w-3/4">
+        <div className="flex max-h-fit min-h-screen w-screen justify-center bg-[url('/img/bg-profile-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-profile-dark.jpg')] dark:bg-fixed">
+          <div className=" mt-28 mb-10 flex h-auto flex-col justify-center bg-neutral-900 bg-opacity-60 pb-10 dark:bg-neutral-900 dark:bg-opacity-60 md:w-3/4">
             <div className="m-auto">
-              <div className="mt-6 flex rounded-md bg-indigo-900 p-5 shadow-md shadow-indigo-800">
+              <div className="mt-6 flex bg-sky-600 bg-opacity-30 p-5 shadow-md shadow-sky-900">
                 <UploadAvatarForm />
                 <div className="my-5 mx-3 text-2xl text-white">
                   <div>
@@ -75,7 +74,9 @@ const Profile = () => {
                 </button>
               </div>
               <div className="my-3">
-                <div className="text-2xl">Liked movies</div>
+                <div className="text-2xl font-bold text-white">
+                  Liked movies:
+                </div>
                 <MoviesList moviesList={likedMovies} />
               </div>
             </div>

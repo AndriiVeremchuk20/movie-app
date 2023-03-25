@@ -43,14 +43,13 @@ export const SearchBar = () => {
         //router.push(`/?search=${searchText}`);
         router.push({
           pathname: appRoutes.home,
-          query:{
+          query: {
             ...router.query,
             search: searchText,
-          }
+          },
         });
-      }
-      else{
-        if(router.asPath!== appRoutes.home){
+      } else {
+        if (router.asPath !== appRoutes.home) {
           router.push(appRoutes.home);
         }
       }

@@ -66,11 +66,14 @@ const Registration = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[url('/img/bg-login-light.jpg')] dark:bg-cover dark:bg-[url('/img/bg-login-dark.jpg')]">
+    <div className="flex h-screen bg-[url('/img/bg-login-light.jpg')] dark:bg-[url('/img/bg-login-dark.jpg')] dark:bg-cover">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`m-auto flex h-auto w-auto flex-col rounded-xl bg-neutral-900 bg-opacity-60 dark:bg-neutral-800 dark:bg-opacity-60  p-6 shadow-2xl`} >
-        <div className="font-mono text-3xl font-bold text-white">Registration</div>
+        className={`m-auto flex h-auto w-auto flex-col rounded-xl bg-neutral-900 bg-opacity-60 p-6 shadow-2xl  dark:bg-neutral-800 dark:bg-opacity-60`}
+      >
+        <div className="font-mono text-3xl font-bold text-white">
+          Registration
+        </div>
         <div className="flex flex-col">
           <input
             type="text"
@@ -145,7 +148,7 @@ const Registration = () => {
             <button
               type="button"
               onClick={onShowPasswordClick}
-              className="text-3xl shadow-sm text-white"
+              className="text-3xl text-white shadow-sm"
             >
               {showPassword ? <BiShow /> : <BiHide />}
             </button>
@@ -169,7 +172,7 @@ const Registration = () => {
             <button
               type="button"
               onClick={onShowRepeatPasswordClick}
-              className="text-3xl shadow-sm text-white"
+              className="text-3xl text-white shadow-sm"
             >
               {showRepeatPassword ? <BiShow /> : <BiHide />}
             </button>
@@ -193,7 +196,10 @@ const Registration = () => {
         ) : null}
 
         <div className="w-fill mx-auto">
-          <Link href={appRoutes.login} className="text-blue-300 text-xl underline">
+          <Link
+            href={appRoutes.login}
+            className="text-xl text-blue-300 underline"
+          >
             Login
           </Link>
         </div>

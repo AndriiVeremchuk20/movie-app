@@ -4,7 +4,8 @@ import client from ".";
 import { BaseMovie, Movie } from "../types/movie";
 
 const paths = {
-  getMovies: (params: any) => `/media/?${new URLSearchParams(params).toString()}`,
+  getMovies: (params: any) =>
+    `/media/?${new URLSearchParams(params).toString()}`,
   getMovieById: (id: string) => `/media/${id}`,
   searchMovies: (text: string) => `/media/search?search_query=${text}`,
 };

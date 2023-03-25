@@ -62,7 +62,7 @@ const Movies = () => {
       router.replace(appRoutes.login);
     }
   }, []);
-  
+
   return (
     <div className={`flex h-screen w-full bg-sky-600`}>
       <form
@@ -128,7 +128,10 @@ const Movies = () => {
 
         <div className="flex">
           <div className="mr-1">Genre:</div>
-          <select defaultValue={"ACTION"} {...register("genre", {required: "Genre requiured"})}>
+          <select
+            defaultValue={"ACTION"}
+            {...register("genre", { required: "Genre requiured" })}
+          >
             <option hidden>Genre</option>
             <option value={"ACTION"}>Action</option>
             <option value={"ADVENTURE"}>Adventure</option>

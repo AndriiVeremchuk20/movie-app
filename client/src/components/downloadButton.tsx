@@ -7,7 +7,12 @@ interface PropDownloadButton {
 
 const DownloadButton: React.FC<PropDownloadButton> = ({ movieURL }) => {
   return (
-    <a title="Download" className={`text-3xl focus:text-green-600`} href={movieURL} download>
+    <a
+      title="Download"
+      className={`text-3xl focus:text-green-600`}
+      href={movieURL}
+      download
+    >
       <RiDownloadFill />
     </a>
   );

@@ -17,7 +17,6 @@ const MoviePage = () => {
   const { id } = router.query;
   const [user] = useAtom(appUserAtom);
   const [currentMovie, setCurrentMovie] = useAtom(currentMovieAtom);
-  
 
   const getMovieByIdMutation = useMutation(movies.getMovieById, {
     onSuccess(data) {
@@ -27,13 +26,13 @@ const MoviePage = () => {
     onError(e) {},
   });
 
-  const onEditClick = useCallback(()=>{
+  const onEditClick = useCallback(() => {
     setShowEditForm(true);
-  },[]);
+  }, []);
 
-  const hideForm = useCallback(()=>{
+  const hideForm = useCallback(() => {
     setShowEditForm(false);
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (id && !Array.isArray(id)) {
@@ -58,7 +57,7 @@ const MoviePage = () => {
             <MovieInfo />
             {user && user.role === "ADMIN" ? (
               <div className="mt-10 h-24 w-full border-[4px] border-red-500 bg-neutral-300">
-                <div className="flex child:mx-2 my-1">
+                <div className="my-1 flex child:mx-2">
                   <button
                     onClick={onEditClick}
                     className={`bg-orange-500 py-1 px-3 font-bold text-white`}
@@ -71,9 +70,9 @@ const MoviePage = () => {
                     Delete
                   </button>
                 </div>
-                {
-                  showEditForm?<EditMovieForm movie={currentMovie} hideCallback={hideForm}/>:null
-                }
+                {showEditForm ? (
+                  <EditMovieForm movie={currentMovie} hideCallback={hideForm} />
+                ) : null}
               </div>
             ) : null}
             <div className={`my-10 h-auto w-full`}>

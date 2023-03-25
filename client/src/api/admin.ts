@@ -9,7 +9,7 @@ const paths = {
   deleteUser: (id: string) => `/admin/users/${id}`,
   pickPremium: (id: string) => `/admin/users/${id}`,
   postMovie: "/admin/movie",
-  editMovie: (id: string) => `/admin/movie/${id}`
+  editMovie: (id: string) => `/admin/movie/${id}`,
 };
 
 const getUsers = async () => {
@@ -55,8 +55,7 @@ const addMovie = async (body: FormData) => {
   return response.data;
 };
 
-
-const editMovie = async ({id, body}: {id: string, body: EditMovieBody}) => {
+const editMovie = async ({ id, body }: { id: string; body: EditMovieBody }) => {
   const token = Token.get();
   const response = await client.put<Movie>(paths.editMovie(id), body, {
     headers: {
@@ -65,7 +64,7 @@ const editMovie = async ({id, body}: {id: string, body: EditMovieBody}) => {
   });
 
   return response.data;
-}
+};
 
 const admin = {
   users: {

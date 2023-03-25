@@ -44,10 +44,10 @@ const Login = () => {
   });
 
   const authMutation = useMutation(auth.authentication, {
-    onSuccess(data){
+    onSuccess(data) {
       setAppUser(data.user);
-    }
-  })
+    },
+  });
 
   const onShowPasswordClick = useCallback(() => {
     setStowPassword((prev) => !prev);
