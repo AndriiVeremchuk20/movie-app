@@ -24,6 +24,7 @@ model User {
   avatarPath String?
   isPremium  Boolean      @default(false)
   Watched    Watched[]
+  registredAt DateTime @default(now())
 }
 
 model Movie {

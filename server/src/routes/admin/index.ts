@@ -112,11 +112,11 @@ route.post("/movie", async (req: Request, res: Response) => {
 
 route.put("/movie/:id", async (req: Request, res: Response) => {
   try {
-    const id = req.params.id as string
-    console.log(id)
-    const {name, description, isForPremium, postedAt, genre } = req.body;
+    const id = req.params.id as string;
+    console.log(id);
+    const { name, description, isForPremium, postedAt, genre } = req.body;
 
-    console.log(name, description, isForPremium, postedAt, genre )
+    console.log(name, description, isForPremium, postedAt, genre);
 
     const updateMovie = await prisma.movie.update({
       where: {
@@ -132,6 +132,69 @@ route.put("/movie/:id", async (req: Request, res: Response) => {
     });
 
     res.status(201).send({ updateMovie });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ msg: "Server error" });
+  }
+});
+
+route.get("/stats", async (req: Request, res: Response) => {
+  try {
+    const watched = await prisma.watched.findMany({
+      where: {
+        watchedAt: {
+          gte: new Date("2023-01-01T00:00:00.000Z"),
+          lt: new Date("2024-01-01T00:00:00.000Z"),
+        },
+      },
+      select: {
+        watchedAt: true,
+      },
+    });
+
+    const watchedStatsMap = new Map<string, number>();
+
+    watched.forEach((date) => {
+      const month = date.watchedAt.toLocaleString("default", { month: "long" });
+      const count = watchedStatsMap.get(month);
+      if (count) {
+        watchedStatsMap.set(month, count + 1);
+      } else {
+        watchedStatsMap.set(month, 1);
+      }
+    });
+
+    const watchedStats = Array.from(watchedStatsMap.entries());
+
+    const regUsers = await prisma.user.findMany({
+      where: {
+        registredAt: {
+          gte: new Date("2023-01-01T00:00:00.000Z"),
+          lt: new Date("2024-01-01T00:00:00.000Z"),
+        },
+      },
+      select: {
+        registredAt: true,
+      },
+    });
+
+    const regStatsMap = new Map<string, number>();
+
+    regUsers.forEach((user) => {
+      const month = user.registredAt.toLocaleString("default", {
+        month: "long",
+      });
+      const count = regStatsMap.get(month);
+      if (count) {
+        regStatsMap.set(month, count + 1);
+      } else {
+        regStatsMap.set(month, 1);
+      }
+    });
+
+    const regStats = Array.from(regStatsMap.entries());
+
+    res.status(200).send({ watched: watchedStats, registrations: regStats });
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });

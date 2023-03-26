@@ -10,6 +10,7 @@ const paths = {
   pickPremium: (id: string) => `/admin/users/${id}`,
   postMovie: "/admin/movie",
   editMovie: (id: string) => `/admin/movie/${id}`,
+  stats: "admin/stats",
 };
 
 const getUsers = async () => {
@@ -66,6 +67,18 @@ const editMovie = async ({ id, body }: { id: string; body: EditMovieBody }) => {
   return response.data;
 };
 
+const getStats = async () => {
+  const token = Token.get();
+  const response = await client.get<any>(paths.stats, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
+
 const admin = {
   users: {
     getUsers,
@@ -76,6 +89,7 @@ const admin = {
     addMovie,
     editMovie,
   },
+  getStats,
 };
 
 export default admin;
