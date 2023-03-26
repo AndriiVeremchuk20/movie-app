@@ -69,7 +69,10 @@ const editMovie = async ({ id, body }: { id: string; body: EditMovieBody }) => {
 
 const getStats = async () => {
   const token = Token.get();
-  const response = await client.get<any>(paths.stats, {
+  const response = await client.get<{
+    registrations: Array<[string, number]>;
+    watched: Array<[string, number]>;
+  }>(paths.stats, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -77,7 +80,6 @@ const getStats = async () => {
 
   return response.data;
 };
-
 
 const admin = {
   users: {

@@ -1,20 +1,96 @@
-import admin from '@/api/admin';
-import { useMutation } from '@tanstack/react-query';
-import Head from 'next/head';
-import React, { useEffect } from 'react'
+import admin from "@/api/admin";
+import { useMutation } from "@tanstack/react-query";
+import Head from "next/head";
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const AdminPanel = () => {
-  
+  const [statData, setStatData] = useState<{
+    registrations: Array<[string, number]>;
+    watched: Array<[string, number]>;
+  }|null>(null);
+
   const getStatsMutation = useMutation(admin.getStats, {
-    onSuccess(data){
+    onSuccess(data) {
+      setStatData(data);
       console.log(data);
-    }
+    },
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     getStatsMutation.mutate();
-  },[])
-  
+  }, []);
+
+  const optionsWatched = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Watched activity",
+      },
+    },
+  };
+
+  const optionsRegistrations = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Registrations activity",
+      },
+    },
+  };
+
+  const watchedData = {
+    labels: statData?.watched.map(_ => _[0]).reverse(),
+    datasets: [
+      {
+        label: "Watched",
+        data: statData?.watched.map(_=>_[1]).reverse(),
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
+  const registrationData = {
+    labels: statData?.registrations.map(_ => _[0]).reverse(),
+    datasets: [
+      {
+        label: "Registrations",
+        data: statData?.registrations.map(_=>_[1]).reverse(),
+        borderColor: "rgb(139, 23, 132)",
+        backgroundColor: "rgba(150, 23, 140, 0.5)",
+      },
+    ],
+  };
+
   return (
     <>
       <Head>
@@ -25,14 +101,18 @@ const AdminPanel = () => {
       </Head>
       <div className="flex max-h-fit min-h-screen justify-center bg-gradient-to-r from-violet-800 to-fuchsia-800 dark:bg-gradient-to-r dark:from-sky-900 dark:to-neutral-900 ">
         <div className="mt-24 mb-10 flex h-auto justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
-          <div>
-         
+          <div className=" w-[900px]">
+            {statData ? (
+              <>
+                <Line options={optionsWatched} data={watchedData} />
+                <Line options={optionsRegistrations} data={registrationData} />
+              </>
+            ) : null}
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default React.memo(AdminPanel);
-

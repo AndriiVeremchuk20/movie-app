@@ -147,6 +147,9 @@ route.get("/stats", async (req: Request, res: Response) => {
           lt: new Date("2024-01-01T00:00:00.000Z"),
         },
       },
+      orderBy:{
+        watchedAt: "desc"
+      },
       select: {
         watchedAt: true,
       },
@@ -172,6 +175,9 @@ route.get("/stats", async (req: Request, res: Response) => {
           gte: new Date("2023-01-01T00:00:00.000Z"),
           lt: new Date("2024-01-01T00:00:00.000Z"),
         },
+      },
+      orderBy:{
+        registredAt: "desc"
       },
       select: {
         registredAt: true,
