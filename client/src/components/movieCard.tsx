@@ -21,7 +21,6 @@ const cutName = (name: string, maxSpaces: number) => {
 
 const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
   const router = useRouter();
-  const [user] = useAtom(appUserAtom);
 
   const onCardClick = useCallback(() => {
     router.push(appRoutes.movie(movie.id));

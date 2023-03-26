@@ -27,7 +27,7 @@ const Video = () => {
     setIsWatch(true);
   }, [isWatch, movie]);
 
-  const watchedMovieMutation = useMutation(watched.add, {
+  const watchedMovieMutation = useMutation(watched.addWatch, {
     onSuccess(data) {
       if (movie) {
         setMovie({ ...movie, watched: (movie.watched += 1) });

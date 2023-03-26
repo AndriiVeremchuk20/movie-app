@@ -40,24 +40,24 @@ const UploadAvatarForm = () => {
   if (user)
     return (
       <div className="flex w-fit flex-col">
-        <div className="h-96 w-96">
+        <div className=" h-64 w-fit">
           <UserAvatar avatarPath={user.avatarPath} />
         </div>
-        <div className="mt-4 flex flex-row-reverse">
-          <div className="relative w-fit">
+        <div className="mt-4 flex flex-col-reverse">
+          <div className="relative w-fit m-1">
             <input
               type="file"
               className="absolute inset-0 z-50 opacity-0"
               onChange={onFileChange}
             />
-            <button className="ml-16 rounded bg-blue-500 py-2 px-4 text-white">
+            <button className="ml-16 rounded bg-blue-500 py-2 px-9 text-white">
               Change avatar
             </button>
           </div>
 
           <button
             onClick={onRemoveAvatarClick}
-            className="ml-16 rounded bg-red-500 py-2 px-4 text-white hover:bg-red-700"
+            className="ml-16 rounded bg-red-500 py-2 m-1 px-4 text-white hover:bg-red-700"
           >
             Remove avatar
           </button>

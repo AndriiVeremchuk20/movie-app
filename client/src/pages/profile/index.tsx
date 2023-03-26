@@ -1,5 +1,4 @@
 import auth from "@/api/auth";
-import like from "@/api/like";
 import { appUserAtom } from "@/atom";
 import MoviesList from "@/components/moviesList";
 import UploadAvatarForm from "@/components/uploadAvatarForm";
@@ -11,23 +10,24 @@ import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { isAuthed } from "@/utils/isAuthed";
 import appRoutes from "@/appRoutes";
+import watched from "@/api/watched";
 
 const Profile = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const router = useRouter();
-  const [likedMovies, setLikedMovies] = useState<Array<BaseMovie>>([]);
+  const [watchedMovies, setWatchedMovies] = useState<Array<BaseMovie>>([]);
 
   const deleteAccountMutation = useMutation(auth.deleteAccount, {
     onSuccess(data) {
       alert(data.msg);
       setUser(null);
-      router.replace("/");
+      router.replace(appRoutes.home);
     },
   });
 
-  const getLikedMoviesMutation = useMutation(like.getLikedMovies, {
+  const getWatchedMoviesMutation = useMutation(watched.getWatched, {
     onSuccess(data) {
-      setLikedMovies(data);
+      setWatchedMovies(data);
       console.log(data);
     },
   });
@@ -37,7 +37,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    getLikedMoviesMutation.mutate();
+    getWatchedMoviesMutation.mutate();
   }, []);
 
   useEffect(() => {
@@ -63,8 +63,9 @@ const Profile = () => {
                   </div>
                   <div>Age: {user.age} y.o.</div>
                   <a href={`mailto:${user.email}`}>Email: {user.email}</a>
-                  <div>All liked movies: {user.likes.length}</div>
-                  <div>All added to watch later: {user.watchLater.length}</div>
+                  <div>Liked movies: {user.likes.length}</div>
+                  <div>Added to watch later: {user.watchLater.length}</div>
+                  <div>Watched: {user.watched}</div>
                 </div>
                 <button
                   onClick={onDeleteAccountClick}
@@ -75,9 +76,9 @@ const Profile = () => {
               </div>
               <div className="my-3">
                 <div className="text-2xl font-bold text-white">
-                  Liked movies:
+                  Watched movies:
                 </div>
-                <MoviesList moviesList={likedMovies} />
+                <MoviesList moviesList={watchedMovies} />
               </div>
             </div>
           </div>

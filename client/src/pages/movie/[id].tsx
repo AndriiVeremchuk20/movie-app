@@ -21,7 +21,6 @@ const MoviePage = () => {
   const getMovieByIdMutation = useMutation(movies.getMovieById, {
     onSuccess(data) {
       setCurrentMovie(data);
-      //console.log(data);
     },
     onError(e) {},
   });

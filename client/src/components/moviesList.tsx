@@ -8,7 +8,7 @@ interface PropsMoviesList {
 
 const MoviesList: React.FC<PropsMoviesList> = ({ moviesList }) => {
   if (!moviesList.length) {
-    return <div className="mt-3 text-4xl">Not found no one movie 🙍‍♀️</div>;
+    return <div className="mt-3 text-4xl text-white">Not found no one movie 🙍‍♀️</div>;
   }
 
   return (

@@ -10,7 +10,8 @@ export interface User extends BaseUser {
   role: Role;
   email: string;
   likes: Array<string>;
-  vieved: Array<string>;
+  //vieved: Array<string>;
+  watched: number;
   watchLater: Array<string>;
   isPremium: boolean;
 }
