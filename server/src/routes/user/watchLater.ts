@@ -47,14 +47,23 @@ router.get("/", async (req: Request, res: Response) => {
   try {
     const { id } = req.currentUser;
 
-    const movies = await prisma.watchLater.findMany({
-      where: { userId: id },
-      select: {
-        movie: {
-          select: { id: true, name: true, posterPath: true, postedAt: true, isForPremium: true },
+    const movies = await prisma.watchLater
+      .findMany({
+        where: { userId: id },
+        select: {
+          movie: {
+            select: {
+              id: true,
+              name: true,
+              posterPath: true,
+              postedAt: true,
+              isForPremium: true,
+              genre: true,
+            },
+          },
         },
-      },
-    }).then(movies=> movies.map(movie => movie.movie).reverse());
+      })
+      .then((movies) => movies.map((movie) => movie.movie).reverse());
 
     res.status(200).send(movies);
   } catch (e) {

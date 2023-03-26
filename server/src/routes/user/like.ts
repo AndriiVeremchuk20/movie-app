@@ -18,6 +18,8 @@ route.get("/", async (req: Request, res: Response) => {
             name: true,
             postedAt: true,
             posterPath: true,
+            genre: true,
+            isForPremium: true,
           }
         }
       }

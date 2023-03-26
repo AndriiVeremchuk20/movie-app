@@ -21,8 +21,7 @@ route.post(
             movieId,
           },
         });
-        console.log(addedWatching);
-
+        
         res.status(201).send(addedWatching);
       } catch (e) {
         console.log(e);

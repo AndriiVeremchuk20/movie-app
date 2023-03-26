@@ -3,8 +3,11 @@ const appRoutes = {
   login: "/login",
   registration: "/registration",
   movie: (id: string) => `/movie/${id}`,
-  profile: "/profile",
-  watchLater: "/watch-later",
+  profile: {
+    index: "/profile",
+    watchLater: "/profile/watch-later",
+    liked: "/profile/liked",
+  },
   premium: "/profile/premium",
   admin: {
     movies: "/admin/movies",

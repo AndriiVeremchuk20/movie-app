@@ -2,7 +2,7 @@ import { appUserAtom } from "@/atom";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
-import { AiOutlineUser, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import Token from "@/utils/token";
 import UserAvatar from "./userAvatar";
@@ -61,19 +61,26 @@ export const UserIcon = () => {
             ) : null}
 
             <Link
-              href={appRoutes.profile}
+              href={appRoutes.profile.index}
               className="flex w-full px-3 py-3 text-xl "
             >
               <AiOutlineUser className="mx-3 text-2xl" /> <div>Profile</div>
             </Link>
             <Link
-              href={appRoutes.watchLater}
+              href={appRoutes.profile.watchLater}
               className="flex w-full px-3 py-3 text-xl text-white"
             >
               <AiOutlineEye className="mx-3 text-2xl text-white" />{" "}
               <div>Watch later</div>
             </Link>
-
+            <Link
+              href={appRoutes.profile.liked}
+              className="flex w-full px-3 py-3 text-xl text-white"
+            >
+              <AiFillHeart className="mx-3 text-2xl text-white" />{" "}
+              <div>Liked Movies</div>
+            </Link>
+            
             <div
               onClick={onLogoutClick}
               className="flex w-full px-3 py-3 text-xl"
