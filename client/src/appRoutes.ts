@@ -12,6 +12,7 @@ const appRoutes = {
   admin: {
     movies: "/admin/movies",
     users: "/admin/users",
+    admin: "/admin/"
   },
 };
 

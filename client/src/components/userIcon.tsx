@@ -46,6 +46,12 @@ export const UserIcon = () => {
               <>
                 <Link
                   className="flex w-full rounded-t-md bg-red-500 px-3 py-3 text-xl"
+                  href={appRoutes.admin.admin}
+                >
+                  <MdOutlineAdminPanelSettings className="text-3xl" /> Stats Panel
+                </Link>
+                <Link
+                  className="flex w-full rounded-t-md bg-red-500 px-3 py-3 text-xl"
                   href={appRoutes.admin.movies}
                 >
                   <MdOutlineAdminPanelSettings className="text-3xl" /> Add Movie

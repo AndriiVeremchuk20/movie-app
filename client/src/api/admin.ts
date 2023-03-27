@@ -2,6 +2,7 @@ import { Movie } from "@/types/movie";
 import { User } from "@/types/user";
 import Token from "@/utils/token";
 import client from ".";
+import { responseStatsData } from "./types/admin";
 import { EditMovieBody } from "./types/movie";
 
 const paths = {
@@ -69,10 +70,7 @@ const editMovie = async ({ id, body }: { id: string; body: EditMovieBody }) => {
 
 const getStats = async () => {
   const token = Token.get();
-  const response = await client.get<{
-    registrations: Array<[string, number]>;
-    watched: Array<[string, number]>;
-  }>(paths.stats, {
+  const response = await client.get<responseStatsData>(paths.stats, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
