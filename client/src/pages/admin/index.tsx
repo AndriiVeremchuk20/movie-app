@@ -15,6 +15,11 @@ import {
   ArcElement,
 } from "chart.js";
 import { responseStatsData } from "@/api/types/admin";
+import { isAuthed } from "@/utils/isAuthed";
+import appRoutes from "@/appRoutes";
+import { useRouter } from "next/router";
+import { useAtom } from "jotai";
+import { appUserAtom } from "@/atom";
 
 ChartJS.register(
   ArcElement,
@@ -116,6 +121,8 @@ const getLineChartData = (labels: Array<String>, data: Array<number>) => {
 
 const AdminPanel = () => {
   const [statData, setStatData] = useState<responseStatsData | null>(null);
+  const router = useRouter();
+  const [user] = useAtom(appUserAtom);
 
   const getStatsMutation = useMutation(admin.getStats, {
     onSuccess(data) {
@@ -124,6 +131,9 @@ const AdminPanel = () => {
   });
 
   useEffect(() => {
+    if (!isAuthed()) {
+      router.replace(appRoutes.login);
+    }
     getStatsMutation.mutate();
   }, []);
 

@@ -21,7 +21,7 @@ const CommentCard: React.FC<PropCommentCard> = ({ comment }) => {
         <div className=" h-20 w-20">
           <UserAvatar avatarPath={comment.User.avatarPath} />
         </div>
-        <div className="m-auto">{comment.User.firstName.slice(0, 10)}</div>
+        <div className="m-auto text-white">{comment.User.firstName.slice(0, 10)}</div>
       </div>
       <div
         className={`flex h-fit w-fit flex-col rounded-lg p-4 text-xl

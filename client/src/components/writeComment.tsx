@@ -59,15 +59,15 @@ const WriteComment = () => {
           className="h-20 w-full resize-none p-2 outline-none"
           {...register("text", {
             required: true,
-            minLength: 10,
+            minLength: 2,
             maxLength: 1000,
           })}
         />
         <button
           type="submit"
-          className="flex h-auto w-16 bg-blue-600 text-white hover:bg-blue-400"
+          className="flex h-auto w-16 bg-blue-600 text-white hover:bg-blue-700"
         >
-          <MdSend className="m-auto" />
+          <MdSend className="m-auto text-2xl" />
         </button>
       </form>
       {errors.text && (

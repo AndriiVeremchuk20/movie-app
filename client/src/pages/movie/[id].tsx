@@ -72,7 +72,7 @@ const MoviePage = () => {
         </Head>
 
         <div
-          className={`flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900`}
+          className={`flex max-h-fit min-h-screen justify-center bg-[url('/img/movie-page-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/movie-page-dark.jpg')] dark:bg-fixed`}
         >
           <div className={`mt-32  flex w-3/4 flex-col`}>
             <MovieInfo />
