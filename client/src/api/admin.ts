@@ -11,6 +11,7 @@ const paths = {
   pickPremium: (id: string) => `/admin/users/${id}`,
   postMovie: "/admin/movie",
   editMovie: (id: string) => `/admin/movie/${id}`,
+  deleteMovie:  (id: string) => `/admin/movie/${id}`,
   stats: "admin/stats",
 };
 
@@ -68,6 +69,17 @@ const editMovie = async ({ id, body }: { id: string; body: EditMovieBody }) => {
   return response.data;
 };
 
+const deleteMovie = async(id: string)=>{
+  const token = Token.get();
+  const response = await client.delete<Movie>(paths.deleteMovie(id), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+}
+
 const getStats = async () => {
   const token = Token.get();
   const response = await client.get<responseStatsData>(paths.stats, {
@@ -88,6 +100,7 @@ const admin = {
   movies: {
     addMovie,
     editMovie,
+    deleteMovie,
   },
   getStats,
 };

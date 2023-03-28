@@ -10,6 +10,8 @@ import Recommendations from "@/components/recommendations";
 import MovieComment from "@/components/movieComment";
 import Head from "next/head";
 import EditMovieForm from "@/components/editMovieForm";
+import admin from "../../api/admin";
+import appRoutes from "@/appRoutes";
 
 const MoviePage = () => {
   const [showEditForm, setShowEditForm] = useState<boolean>(false);
@@ -24,6 +26,26 @@ const MoviePage = () => {
     },
     onError(e) {},
   });
+
+  const deleteMutation = useMutation(admin.movies.deleteMovie, {
+    onSuccess(data){
+      console.log(data);
+      alert("Delete succes");
+      setCurrentMovie(null);
+      router.replace(appRoutes.home);
+    },
+    onError(e){
+      console.log(e);
+    }
+  });
+
+  const onDeleteClick = useCallback(()=>{
+    if(currentMovie){
+      if(confirm("Do you want to delete this movie?")){
+        deleteMutation.mutate(currentMovie.id);
+      }
+    }
+  },[currentMovie])
 
   const onEditClick = useCallback(() => {
     setShowEditForm(true);
@@ -55,8 +77,8 @@ const MoviePage = () => {
           <div className={`mt-32  flex w-3/4 flex-col`}>
             <MovieInfo />
             {user && user.role === "ADMIN" ? (
-              <div className="mt-10 h-24 w-full border-[4px] border-red-500 bg-neutral-300">
-                <div className="my-1 flex child:mx-2">
+              <div className="mt-10 h-16 w-fit border-[4px] border-red-500">
+                <div className="mt-3 flex child:mx-2">
                   <button
                     onClick={onEditClick}
                     className={`bg-orange-500 py-1 px-3 font-bold text-white`}
@@ -65,6 +87,7 @@ const MoviePage = () => {
                   </button>
                   <button
                     className={`bg-red-600 py-1 px-3 font-bold text-white `}
+                    onClick={onDeleteClick}
                   >
                     Delete
                   </button>

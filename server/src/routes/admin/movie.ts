@@ -4,6 +4,7 @@ import prisma from "../../../prisma/index";
 import checkFilesFormat from "../../utils/checkFilesFormat";
 import { v4 as uuidv4 } from "uuid";
 import { getMovieGenreByName } from "../../utils/getMovieGenreByName";
+import { rmdir } from "fs";
 const route = Router();
 
 route.post("/", async (req: Request, res: Response) => {
@@ -56,9 +57,30 @@ route.post("/", async (req: Request, res: Response) => {
   }
 });
 
-// route.delete("/movie/:id",async (req: Request, res: Response) => {
+route.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const deletedMovie = await prisma.movie.delete({
+      where: {
+        id,
+      },
+    });
 
-// });
+    const path = deletedMovie.moviePath.split("/");
+
+    const mediaFolder = `./public/${path[1]}/${path[2]}`;
+
+    rmdir(mediaFolder, { recursive: true }, (err) => {
+      if (err) throw err;
+      console.log("Movie directory deleted");
+    });
+
+    res.status(203).send(deletedMovie);
+  } catch (e) {
+    console.log(e);
+    res.status(203).send("Server error");
+  }
+});
 
 route.put("/:id", async (req: Request, res: Response) => {
   try {
