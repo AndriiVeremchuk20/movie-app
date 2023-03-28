@@ -1,6 +1,6 @@
 import appRoutes from "@/appRoutes";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface SelectValues {
@@ -42,6 +42,7 @@ const SortFilterPanel = () => {
           <option value={"NAME_UP"}>Name up</option>
           <option value={"NAME_DOWN"}>Name down</option>
           <option value={"LIKES"}>Likes</option>
+          <option value={"WATCHED"}>Watched</option>
         </select>
       </div>
 

@@ -26,6 +26,7 @@ route.get("/", async (req: Request, res: Response) => {
         genre: getMovieGenreByName(filter),
       },
     });
+
     let movies = await prisma.movie.findMany({
       where: {
         name: {
@@ -41,30 +42,28 @@ route.get("/", async (req: Request, res: Response) => {
         id: true,
         isForPremium: true,
         genre: true,
-        likes: true,  
+        likes: true,
+        watched: true,
       },
       orderBy: [
         { postedAt: `${sort === "DATE_UP" ? "asc" : "desc"}` },
-        ],
+      ],
       take: LIMIT,
       skip: skip,
     });
 
-
-    //let Movies = movies.map((movie)=>({...movie, likes: movie.likes.length}))
-    
     if (sort === "NAME_DOWN") {
       movies.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sort === "NAME_UP") {
       movies.sort((a, b) => b.name.localeCompare(a.name));
     } else if (sort === "LIKES") {
-      movies.sort((a,b)=>b.likes.length - a.likes.length);
+      movies.sort((a, b) => b.likes.length - a.likes.length);
+    } else if (sort === "WATCHED"){
+      movies.sort((a, b) => b.watched.length - a.watched.length);
     }
 
-
-
     res.status(200).send({
-      movies: movies.map((movie)=>({...movie, likes: movie.likes.length})),
+      movies: movies.map((movie) => ({ ...movie, likes: movie.likes.length, watched: movie.watched.length })),
       pages: Math.ceil(numOfMovies / LIMIT),
       page: page,
     });
@@ -105,8 +104,8 @@ route.get("/search", async (req: Request, res: Response) => {
 route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const {isPremiumUser} = req;
-    
+    const { isPremiumUser } = req;
+
     try {
       const movie = await prisma.movie.findFirstOrThrow({
         where: { id: id },
@@ -142,9 +141,9 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
         },
       });
 
-       if (movie.isForPremium && !isPremiumUser) {
-         movie.moviePath = "";
-       }
+      if (movie.isForPremium && !isPremiumUser) {
+        movie.moviePath = "";
+      }
 
       const recommendations = await prisma.$queryRawUnsafe(
         `SELECT id, name, "posterPath", "postedAt", "isForPremium"  FROM "Movie" WHERE id != '${id}' ORDER BY RANDOM() LIMIT 7;`
@@ -154,7 +153,7 @@ route.get("/:id", isPremiumMiddleware, async (req: Request, res: Response) => {
         ...movie,
         watched: movie.watched.length,
         likes: movie.likes.length,
-        recommendations: recommendations,        
+        recommendations: recommendations,
       });
     } catch (e) {
       res.status(404).send({ msg: `Movie not found` });
