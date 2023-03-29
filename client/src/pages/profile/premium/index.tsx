@@ -39,8 +39,8 @@ export const Premium = () => {
         <Head>
           <title>Premium</title>
         </Head>
-        <div className="flex max-h-fit min-h-screen justify-center bg-lime-100 dark:bg-sky-900">
-          <div className="mt-36 mb-10 flex h-auto w-screen flex-col  bg-neutral-500 pb-10 dark:bg-neutral-800 bg-opacity-40 dark:bg-opacity-50 md:w-3/4">
+        <div className="flex h-screen justify-center  bg-[url('/img/bg-login-light.jpg')] bg-cover dark:bg-[url('/img/bg-login-dark.jpg')] dark:bg-cover">
+          <div className="mt-36 mb-10 flex h-fit w-screen flex-col  bg-neutral-500 bg-opacity-40 pb-10 dark:bg-neutral-800 dark:bg-opacity-50 md:w-3/4">
             <div className="flex h-fit w-full bg-yellow-600 py-2 text-6xl font-bold text-white">
               Premium
             </div>
@@ -52,12 +52,14 @@ export const Premium = () => {
             <div className="m-3">
               <Recommendations movies={movies} />
             </div>
-            <div className="flex w-full flex-col">
-            <div className="m-auto my-5 text-5xl text-white">18$</div>
-              <div className="w-full flex justify-center">
-                <PaymentForm />
-              </div>           
-            </div>
+            {!user.isPremium ? (
+              <div className="flex w-full flex-col">
+                <div className="m-auto my-5 text-5xl text-white">18$</div>
+                <div className="flex w-full justify-center">
+                  <PaymentForm />
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </>

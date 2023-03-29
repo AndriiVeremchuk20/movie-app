@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import premium from "@/api/premium";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
+
+interface CreditCard {
+  num: string;
+  data: string;
+  ccv: string;
+}
 
 const PaymentForm: React.FC = () => {
+  const [card, setCard] = useState<CreditCard>({ num: "", data: "", ccv: "" });
+  const [isDisabledDutton, setIsDisabledButton] = useState<boolean>(true);
+
   const router = useRouter();
 
   const buyPremium = useMutation(premium.buyPremium, {
@@ -14,20 +22,38 @@ const PaymentForm: React.FC = () => {
     onError() {},
   });
 
+  const onCardChange = useCallback((e: any) => {
+    setCard(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }, []);
+
   const onBuyPremiumClick = () => {
     buyPremium.mutate();
   };
 
+  useEffect(()=>{
+    if (
+      /^\d{16}$/.test(card.num) &&
+      /^\d{4}$/.test(card.data) &&
+      /^\d{3}$/.test(card.ccv)
+    ) {
+      setIsDisabledButton(false);
+    } else {
+      setIsDisabledButton(true);
+    }
+  },[card]);
+
   return (
     <div className="h-auto w-[550px] rounded-3xl border-[4px] border-inherit border-black bg-[url('/img/bg-credit-card.jpg')] bg-cover">
-      <form className="flex w-full flex-wrap gap-2 p-3">
+      <div className="flex w-full flex-wrap gap-2 p-3">
         <label className="relative flex w-full flex-col">
           <span className="mb-3 text-xl font-bold text-white">Card number</span>
           <input
             className="peer rounded-md border-2 border-gray-200 py-2 pl-12 pr-2 placeholder-gray-300"
             type="text"
+            name="num"
             placeholder="0000 0000 0000 0000"
             maxLength={16}
+            onChange={onCardChange}
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +80,9 @@ const PaymentForm: React.FC = () => {
               className="peer rounded-md border-2 border-gray-200 py-2 pl-12 pr-2 placeholder-gray-300"
               type="text"
               placeholder="MM/YY"
+              name="data"
               maxLength={4}
+              onChange={onCardChange}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,6 +129,8 @@ const PaymentForm: React.FC = () => {
               type="text"
               placeholder="&bull;&bull;&bull;"
               maxLength={3}
+              name="ccv"
+              onChange={onCardChange}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -119,16 +149,16 @@ const PaymentForm: React.FC = () => {
           </label>
         </div>
         <div className="h-10 w-full">
-        <button
-          type="submit"
-          disabled
-          onClick={onBuyPremiumClick}
-          className="h-full w-full rounded-b-2xl bg-orange-400 text-xl font-bold text-white hover:bg-orange-600 disabled:bg-gray-500"
-        >
-          Buy
-        </button>
+          <button
+            type="submit"
+            disabled={isDisabledDutton}
+            onClick={onBuyPremiumClick}
+            className="h-full w-full rounded-b-2xl bg-orange-400 text-xl font-bold text-white hover:bg-orange-600 disabled:bg-gray-500"
+          >
+            Buy
+          </button>
+        </div>
       </div>
-      </form>
     </div>
   );
 };
