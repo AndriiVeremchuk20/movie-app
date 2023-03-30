@@ -1,21 +1,18 @@
 import { Router, Request, Response } from "express";
 import prisma from "../../../prisma";
 import authMiddleware from "../../middleware/auth";
-import SendMail from "../../utils/sendEmail";
 
 const router = Router();
 
 router.put("/", authMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.currentUser;
-    const user =  await prisma.user.update({ where: { id: id }, data: { isPremium: true } });
- 
-    await SendMail({
-      mailto: user.email,
-      subject: "Thank you for purchese Premium",
-      text: "test",
+    await prisma.user.update({
+      where: { id: id },
+      data: { isPremium: true },
     });
 
+    
     res.status(200).send({ msg: "Done" });
   } catch (e) {
     console.log(e);
