@@ -44,7 +44,7 @@ const UploadAvatarForm = () => {
           <UserAvatar avatarPath={user.avatarPath} />
         </div>
         <div className="mt-4 flex flex-col-reverse">
-          <div className="relative w-fit m-1">
+          <div className="relative m-1 w-fit">
             <input
               type="file"
               className="absolute inset-0 z-50 opacity-0"
@@ -57,7 +57,7 @@ const UploadAvatarForm = () => {
 
           <button
             onClick={onRemoveAvatarClick}
-            className="ml-16 rounded bg-red-500 py-2 m-1 px-4 text-white hover:bg-red-700"
+            className="m-1 ml-16 rounded bg-red-500 py-2 px-4 text-white hover:bg-red-700"
           >
             Remove avatar
           </button>

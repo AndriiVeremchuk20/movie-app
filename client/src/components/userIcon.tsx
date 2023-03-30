@@ -48,7 +48,8 @@ export const UserIcon = () => {
                   className="flex w-full rounded-t-md bg-red-500 px-3 py-3 text-xl"
                   href={appRoutes.admin.admin}
                 >
-                  <MdOutlineAdminPanelSettings className="text-3xl" /> Stats Panel
+                  <MdOutlineAdminPanelSettings className="text-3xl" /> Stats
+                  Panel
                 </Link>
                 <Link
                   className="flex w-full rounded-t-md bg-red-500 px-3 py-3 text-xl"
@@ -86,7 +87,7 @@ export const UserIcon = () => {
               <AiFillHeart className="mx-3 text-2xl text-white" />{" "}
               <div>Liked Movies</div>
             </Link>
-            
+
             <div
               onClick={onLogoutClick}
               className="flex w-full px-3 py-3 text-xl"

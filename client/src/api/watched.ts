@@ -27,12 +27,9 @@ const addWatch = async (movieId: string) => {
 
 const getWatched = async () => {
   const token = Token.get();
-  const resporse = await client.get<Array<BaseMovie>>(
-    paths.getWatched,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const resporse = await client.get<Array<BaseMovie>>(paths.getWatched, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
   return resporse.data;
 };

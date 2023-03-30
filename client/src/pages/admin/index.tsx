@@ -164,7 +164,9 @@ const AdminPanel = () => {
                     statData?.registrations.map((i) => i[1])
                   )}
                 />
-                <div className="mt-10 text-2xl font-bold text-white">Most Activity users Stats</div>
+                <div className="mt-10 text-2xl font-bold text-white">
+                  Most Activity users Stats
+                </div>
                 <div className="flex">
                   <div>
                     <Pie

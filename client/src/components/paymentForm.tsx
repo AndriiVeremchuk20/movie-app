@@ -23,14 +23,14 @@ const PaymentForm: React.FC = () => {
   });
 
   const onCardChange = useCallback((e: any) => {
-    setCard(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setCard((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
 
   const onBuyPremiumClick = () => {
     buyPremium.mutate();
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (
       /^\d{16}$/.test(card.num) &&
       /^\d{4}$/.test(card.data) &&
@@ -40,7 +40,7 @@ const PaymentForm: React.FC = () => {
     } else {
       setIsDisabledButton(true);
     }
-  },[card]);
+  }, [card]);
 
   return (
     <div className="h-auto w-[550px] rounded-3xl border-[4px] border-inherit border-black bg-[url('/img/bg-credit-card.jpg')] bg-cover">

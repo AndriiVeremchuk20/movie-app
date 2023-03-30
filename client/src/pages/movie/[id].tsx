@@ -28,24 +28,24 @@ const MoviePage = () => {
   });
 
   const deleteMutation = useMutation(admin.movies.deleteMovie, {
-    onSuccess(data){
+    onSuccess(data) {
       console.log(data);
       alert("Delete succes");
       setCurrentMovie(null);
       router.replace(appRoutes.home);
     },
-    onError(e){
+    onError(e) {
       console.log(e);
-    }
+    },
   });
 
-  const onDeleteClick = useCallback(()=>{
-    if(currentMovie){
-      if(confirm("Do you want to delete this movie?")){
+  const onDeleteClick = useCallback(() => {
+    if (currentMovie) {
+      if (confirm("Do you want to delete this movie?")) {
         deleteMutation.mutate(currentMovie.id);
       }
     }
-  },[currentMovie])
+  }, [currentMovie]);
 
   const onEditClick = useCallback(() => {
     setShowEditForm(true);
