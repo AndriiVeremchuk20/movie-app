@@ -3,16 +3,21 @@ import { BaseMovie } from "@/types/movie";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useTransition } from "react";
 import { FaSearch } from "react-icons/fa";
 import AutocompleteMoviesSearch from "./autocompleteMoviesSearch";
 import appRoutes from "@/appRoutes";
+
+import ua from "../../public/locales/ua/translation";
+import en from "../../public/locales/en/translation";
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [foundMovies, setFoundMovies] = useState<Array<BaseMovie>>([]);
   const debounce = useDebounce(searchText, 1000);
   const router = useRouter();
+  const t = router.locale === "en" ? en : ua;
+
 
   const searchMutation = useMutation(movies.searchMovies, {
     onSuccess(data) {
@@ -72,8 +77,8 @@ export const SearchBar = () => {
           value={searchText}
           onChange={onInputChange}
           max={50}
-          placeholder={"Search..."}
-          className={`w-96  py-1 px-3 text-xl outline-none`}
+          placeholder={`${t.search.placeholder}`}
+          className={`w-96  px-3 py-1 text-xl outline-none`}
         />
         <button
           type="submit"
@@ -86,3 +91,4 @@ export const SearchBar = () => {
     </div>
   );
 };
+

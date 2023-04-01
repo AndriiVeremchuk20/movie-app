@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import Footer from "@/components/footer";
 import { UpButton } from "@/components/upButton";
 import Token from "@/utils/token";
+import { appWithTranslation, AppWithTranslation } from "next-i18next";
 
 const AppWrapper = (props: any) => {
   return <QueryClientProvider client={new QueryClient()} {...props} />;
@@ -40,12 +41,12 @@ const AppInner = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} />;
 };
 
-export default function App(props: AppProps) {
+function App(props: AppProps) {
   return (
     <>
       <AppWrapper>
         <Header />
-        <AppInner {...props} />
+      <AppInner {...props} />
         <Footer />
       </AppWrapper>
       <ChangeThemeButton />
@@ -53,3 +54,5 @@ export default function App(props: AppProps) {
     </>
   );
 }
+
+export default appWithTranslation(App);

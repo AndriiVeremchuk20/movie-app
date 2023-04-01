@@ -35,7 +35,7 @@ const SortFilterPanel = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex">
-        <div className="mr-1">Sort by:</div>
+        <div className="mr-1">Sort:</div>
         <select defaultValue={"DATE_DOWN"} {...register("sort")}>
           <option value={"DATE_DOWN"}>Date down</option>
           <option value={"DATE_UP"}>Date up</option>

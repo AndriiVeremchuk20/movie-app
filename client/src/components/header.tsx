@@ -1,12 +1,13 @@
 import { appUserAtom } from "@/atom";
 import { useAtom } from "jotai";
-import React from "react";
+import React, { FC } from "react";
+import { ChangeLanguage } from "./changeLanguage";
 import { Logo } from "./logo";
 import ScrollBar from "./scrollBar";
 import { SearchBar } from "./searchBar";
 import { UserIcon } from "./userIcon";
 
-export const Header = () => {
+export const Header: FC = () => {
   const [user] = useAtom(appUserAtom);
 
   return (
@@ -16,7 +17,10 @@ export const Header = () => {
           <Logo />
         </div>
         <SearchBar />
-        <UserIcon />
+        <div className="flex">
+          <ChangeLanguage />
+          <UserIcon />
+        </div>
       </div>
       <ScrollBar />
       {user && user.role === "ADMIN" ? (
