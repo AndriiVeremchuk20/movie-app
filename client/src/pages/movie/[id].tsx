@@ -24,7 +24,9 @@ const MoviePage = () => {
     onSuccess(data) {
       setCurrentMovie(data);
     },
-    onError(e) {},
+    onError(e) {
+      router.replace(appRoutes.movie.movieNotFound)
+    },
   });
 
   const deleteMutation = useMutation(admin.movies.deleteMovie, {

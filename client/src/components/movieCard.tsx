@@ -23,7 +23,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
   const router = useRouter();
 
   const onCardClick = useCallback(() => {
-    router.push(appRoutes.movie(movie.id));
+    router.push(appRoutes.movie.movie(movie.id));
   }, []);
 
   return (

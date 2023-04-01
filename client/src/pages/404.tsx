@@ -1,3 +1,4 @@
+import appRoutes from "@/appRoutes";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
@@ -11,6 +12,10 @@ const NoPage = () => {
 
   const onBackClick = useCallback(() => {
     router.back();
+  }, []);
+
+  const onHomeClick = useCallback(() => {
+    router.replace(appRoutes.home);
   }, []);
 
   return (
@@ -28,6 +33,12 @@ const NoPage = () => {
               className="m-1 rounded-md bg-sky-500 px-4 py-3 text-xl text-white hover:bg-blue-700 dark:bg-blue-500"
             >
               Back
+            </button>
+            <button
+              onClick={onHomeClick}
+              className="m-1 rounded-md bg-sky-500 px-4 py-3 text-xl text-white hover:bg-blue-700 dark:bg-blue-500"
+            >
+              Home
             </button>
             <button
               onClick={onReloadClic}
