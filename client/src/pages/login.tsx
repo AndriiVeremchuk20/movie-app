@@ -8,9 +8,12 @@ import { isAxiosError } from "axios";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BiShow, BiHide } from "react-icons/bi";
+
+import ua from "../locales/ua/translation";
+import en from "../locales/en/translation";
 
 type Inputs = {
   email: string;
@@ -21,7 +24,9 @@ const Login = () => {
   const [showPassword, setStowPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [, setAppUser] = useAtom(appUserAtom);
-  const route = useRouter();
+  const router = useRouter();
+  const t = router.locale === "en" ? en : ua;
+
 
   const {
     register,
@@ -32,7 +37,7 @@ const Login = () => {
   const loginMutation = useMutation(auth.login, {
     onSuccess() {
       authMutation.mutate();
-      route.push(appRoutes.home);
+      router.push(appRoutes.home);
     },
     onError(e) {
       if (isAxiosError(e) && e.response) {
@@ -63,12 +68,12 @@ const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={`m-auto flex h-auto w-96 flex-col rounded-xl bg-neutral-900 bg-opacity-60 p-6 shadow-2xl`}
       >
-        <div className="font-mono text-3xl font-bold text-white">Login</div>
+        <div className="font-mono text-3xl font-bold text-white">{t.login.title}</div>
         <div className="flex flex-col">
           <input
             type="email"
             className="m-2 w-80 rounded p-2 text-xl placeholder-slate-600 shadow-lg outline-none dark:bg-slate-300"
-            placeholder="Email"
+            placeholder={t.login.email}
             {...register("email", {
               required: true,
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -83,7 +88,7 @@ const Login = () => {
             <input
               className="m-2 w-72 rounded px-4 py-2 text-xl placeholder-slate-600 shadow-lg outline-none dark:bg-slate-300"
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              placeholder={t.login.password}
               {...register("password", {
                 required: true,
                 minLength: 4,
@@ -109,11 +114,14 @@ const Login = () => {
         >
           {loginMutation.isLoading ? (
             <div className="m-auto">
-              {" "}
               <Loader />
             </div>
           ) : (
-            "Login"
+            <>
+            {
+              t.login.title
+            }
+            </>
           )}
         </button>
         <div className="flex w-full justify-center">
@@ -121,7 +129,7 @@ const Login = () => {
             href={appRoutes.registration}
             className="text-xl text-blue-300 underline"
           >
-            Registration
+            {t.login.register}
           </Link>
         </div>
         <div className={`h-auto w-full bg-red-700 text-xl text-white`}>

@@ -12,10 +12,9 @@ export const ChangeLanguage = () => {
   };
 
   return (
-    <select defaultValue={locale} onChange={changeLanguage}>
-      <option hidden>eee</option>
-      <option value={"ua"}>UA</option>
-      <option value={"en"}>EN</option>
+    <select className=" bg-inherit dark:text-white text-black outline-none text-2xl" defaultValue={locale} onChange={changeLanguage}>
+      <option value={"ua"} className="bg-neutral-500 dark:text-white text-black outline-none text-2xl">🇺🇦 UA</option>
+      <option value={"en"} className="bg-neutral-500 dark:text-white text-black outline-none text-2xl">🇺🇸 EN</option>
     </select>
   );
 };

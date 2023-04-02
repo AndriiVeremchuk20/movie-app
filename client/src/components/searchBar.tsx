@@ -8,8 +8,8 @@ import { FaSearch } from "react-icons/fa";
 import AutocompleteMoviesSearch from "./autocompleteMoviesSearch";
 import appRoutes from "@/appRoutes";
 
-import ua from "../../public/locales/ua/translation";
-import en from "../../public/locales/en/translation";
+import ua from "../locales/ua/translation";
+import en from "../locales/en/translation";
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -17,8 +17,7 @@ export const SearchBar = () => {
   const debounce = useDebounce(searchText, 1000);
   const router = useRouter();
   const t = router.locale === "en" ? en : ua;
-
-
+  
   const searchMutation = useMutation(movies.searchMovies, {
     onSuccess(data) {
       console.log(data);

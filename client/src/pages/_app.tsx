@@ -29,6 +29,7 @@ const AppInner = ({ Component, pageProps }: AppProps) => {
     },
     onError(e) {
       console.log(e);
+      Token.clear();
     },
   });
 

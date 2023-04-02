@@ -10,6 +10,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { BiShow, BiHide } from "react-icons/bi";
 import auth from "../api/auth";
 
+import ua from "../locales/ua/translation";
+import en from "../locales/en/translation";
+import Head from "next/head";
+
 type Inputs = {
   firstName: string;
   lastName: string;
@@ -24,6 +28,7 @@ const Registration = () => {
   const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const router = useRouter();
+  const t = router.locale === "en" ? en : ua; 
 
   const {
     register,
@@ -66,19 +71,23 @@ const Registration = () => {
   };
 
   return (
+    <>
+    <Head>
+      <title>{t.registration.title}</title>
+    </Head>
     <div className="flex h-screen bg-[url('/img/bg-login-light.jpg')] dark:bg-[url('/img/bg-login-dark.jpg')] dark:bg-cover">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={`m-auto flex h-auto w-auto flex-col rounded-xl bg-neutral-900 bg-opacity-60 p-6 shadow-2xl  dark:bg-neutral-800 dark:bg-opacity-60`}
       >
         <div className="font-mono text-3xl font-bold text-white">
-          Registration
+          {t.registration.title}
         </div>
         <div className="flex flex-col">
           <input
             type="text"
             className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
-            placeholder="First name"
+            placeholder={t.registration.f_name}
             {...register("firstName", {
               required: true,
               minLength: 2,
@@ -93,7 +102,7 @@ const Registration = () => {
           <input
             type="text"
             className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
-            placeholder="Last name"
+            placeholder={t.registration.l_name}
             {...register("lastName", {
               required: true,
               minLength: 2,
@@ -110,7 +119,7 @@ const Registration = () => {
             min="1"
             max="100"
             className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
-            placeholder="Age"
+            placeholder={t.registration.age}
             {...register("age", {
               required: true,
             })}
@@ -123,7 +132,7 @@ const Registration = () => {
           <input
             type="email"
             className="m-2 w-80 rounded p-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
-            placeholder="Email"
+            placeholder={t.registration.email}
             {...register("email", {
               required: true,
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -138,7 +147,7 @@ const Registration = () => {
             <input
               className="m-2 w-72 rounded px-4 py-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              placeholder={t.registration.password}
               {...register("password", {
                 required: true,
                 minLength: 4,
@@ -162,7 +171,7 @@ const Registration = () => {
             <input
               className="m-2 w-72 rounded px-4 py-2 text-xl placeholder-slate-700 shadow-lg outline-none dark:bg-slate-300"
               type={showRepeatPassword ? "text" : "password"}
-              placeholder="Repeat password"
+              placeholder={t.registration.rep_password}
               {...register("repeatPassword", {
                 required: true,
                 minLength: 4,
@@ -186,7 +195,7 @@ const Registration = () => {
           className="my-3 flex h-auto w-full justify-center bg-blue-600 py-2 hover:bg-blue-400"
           type="submit"
         >
-          {isLoading ? <Loader /> : "Registration"}
+          {isLoading ? <Loader /> : <>{t.registration.title}</>}
         </button>
 
         {isError ? (
@@ -200,11 +209,12 @@ const Registration = () => {
             href={appRoutes.login}
             className="text-xl text-blue-300 underline"
           >
-            Login
+            {t.registration.login}
           </Link>
         </div>
       </form>
     </div>
+    </>
   );
 };
 

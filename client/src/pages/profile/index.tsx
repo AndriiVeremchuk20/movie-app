@@ -12,10 +12,14 @@ import { isAuthed } from "@/utils/isAuthed";
 import appRoutes from "@/appRoutes";
 import watched from "@/api/watched";
 
+import en from "@/locales/en/translation";
+import ua from "@/locales/ua/translation";
+
 const Profile = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const router = useRouter();
   const [watchedMovies, setWatchedMovies] = useState<Array<BaseMovie>>([]);
+  const t = router.locale === "en"? en : ua;
 
   const deleteAccountMutation = useMutation(auth.deleteAccount, {
     onSuccess(data) {
@@ -61,22 +65,22 @@ const Profile = () => {
                   <div>
                     {user.firstName} {user.lastName}
                   </div>
-                  <div>Age: {user.age} y.o.</div>
-                  <a href={`mailto:${user.email}`}>Email: {user.email}</a>
-                  <div>Liked movies: {user.likes.length}</div>
-                  <div>Added to watch later: {user.watchLater.length}</div>
-                  <div>Watched: {user.watched}</div>
+                  <div>{t.profile.age}: {user.age}</div>
+                  <a href={`mailto:${user.email}`}>{t.profile.email}: {user.email}</a>
+                  <div>{t.profile.likedMovies}: {user.likes.length}</div>
+                  <div>{t.profile.addedwl}: {user.watchLater.length}</div>
+                  <div>{t.profile.watched}: {user.watched}</div>
                 </div>
                 <button
                   onClick={onDeleteAccountClick}
                   className="ml-20 h-fit w-fit rounded-md border-2 border-red-700 bg-red-200 p-4 text-red-700"
                 >
-                  Delete account
+                  {t.profile.deleteAccount}
                 </button>
               </div>
               <div className="my-3">
                 <div className="text-2xl font-bold text-white">
-                  Watched movies:
+                  {t.profile.watched}:
                 </div>
                 <MoviesList moviesList={watchedMovies} />
               </div>

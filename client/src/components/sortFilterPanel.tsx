@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import ua from "@/locales/ua/translation";
+import en from "@/locales/en/translation";
+
 interface SelectValues {
   sort?: string;
   filter?: string;
@@ -11,6 +14,7 @@ interface SelectValues {
 const SortFilterPanel = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<SelectValues>();
+  const t = router.locale === "en"?en:ua;
 
   const onSubmit: SubmitHandler<SelectValues> = (data) => {
     router.push({
@@ -35,14 +39,14 @@ const SortFilterPanel = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex">
-        <div className="mr-1">Sort:</div>
+        <div className="mr-1">{t.filterPanel.sort}:</div>
         <select defaultValue={"DATE_DOWN"} {...register("sort")}>
-          <option value={"DATE_DOWN"}>Date down</option>
-          <option value={"DATE_UP"}>Date up</option>
-          <option value={"NAME_UP"}>Name up</option>
-          <option value={"NAME_DOWN"}>Name down</option>
-          <option value={"LIKES"}>Likes</option>
-          <option value={"WATCHED"}>Watched</option>
+          <option value={"DATE_DOWN"}>{t.filterPanel.dt_dw}</option>
+          <option value={"DATE_UP"}>{t.filterPanel.dt_up}</option>
+          <option value={"NAME_UP"}>{t.filterPanel.n_up}</option>
+          <option value={"NAME_DOWN"}>{t.filterPanel.n_dw}</option>
+          <option value={"LIKES"}>{t.filterPanel.likes}</option>
+          <option value={"WATCHED"}>{t.filterPanel.watched}</option>
         </select>
       </div>
 

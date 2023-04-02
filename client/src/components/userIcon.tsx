@@ -10,10 +10,16 @@ import appRoutes from "@/appRoutes";
 import { AiFillCrown } from "react-icons/ai";
 import { Role } from "@/types/user";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { useRouter } from "next/router";
+
+import en from "@/locales/en/translation";
+import ua from "@/locales/ua/translation";
 
 export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const [showDropMenu, setShowDropMenu] = useState<boolean>(false);
+  const router = useRouter();
+  const t = router.locale==="en"?en:ua;
 
   const onIconClick = useCallback(() => {
     setShowDropMenu((prev) => !prev);
@@ -71,35 +77,35 @@ export const UserIcon = () => {
               href={appRoutes.profile.index}
               className="flex w-full px-3 py-3 text-xl "
             >
-              <AiOutlineUser className="mx-3 text-2xl" /> <div>Profile</div>
+              <AiOutlineUser className="mx-3 text-2xl" /> <div>{t.userIcon.profile}</div>
             </Link>
             <Link
               href={appRoutes.profile.watchLater}
               className="flex w-full px-3 py-3 text-xl text-white"
             >
               <AiOutlineEye className="mx-3 text-2xl text-white" />{" "}
-              <div>Watch later</div>
+              <div>{t.userIcon.watchLater}</div>
             </Link>
             <Link
               href={appRoutes.profile.liked}
               className="flex w-full px-3 py-3 text-xl text-white"
             >
               <AiFillHeart className="mx-3 text-2xl text-white" />{" "}
-              <div>Liked Movies</div>
+              <div>{t.userIcon.likedMovies}</div>
             </Link>
 
             <div
               onClick={onLogoutClick}
               className="flex w-full px-3 py-3 text-xl"
             >
-              <RiLogoutBoxLine className="mx-3 text-2xl" /> <div>Logout</div>
+              <RiLogoutBoxLine className="mx-3 text-2xl" /> <div>{t.userIcon.logout}</div>
             </div>
             {user && !user.isPremium ? (
               <Link
                 href={appRoutes.premium}
                 className="flex w-full rounded-b-md bg-yellow-600 px-3 py-3 text-xl"
               >
-                <AiFillCrown /> Premium
+                <AiFillCrown /> {t.userIcon.premium}
               </Link>
             ) : null}
           </div>
@@ -114,14 +120,14 @@ export const UserIcon = () => {
         href={appRoutes.login}
         className="text-blue-600 underline dark:text-blue-300"
       >
-        Login
+        {t.userIcon.login}
       </Link>
       /
       <Link
         className="text-blue-600 underline dark:text-blue-300"
         href={appRoutes.registration}
       >
-        Registration
+        {t.userIcon.reg}
       </Link>
     </div>
   );
