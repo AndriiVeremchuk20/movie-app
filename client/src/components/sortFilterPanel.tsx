@@ -14,7 +14,7 @@ interface SelectValues {
 const SortFilterPanel = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<SelectValues>();
-  const t = router.locale === "en"?en:ua;
+  const t = router.locale === "en" ? en : ua;
 
   const onSubmit: SubmitHandler<SelectValues> = (data) => {
     router.push({
@@ -51,22 +51,24 @@ const SortFilterPanel = () => {
       </div>
 
       <div className="flex">
-        <div className="mr-1">Genre:</div>
+        <div className="mr-1">{t.filterPanel.genre}:</div>
         <select defaultValue={"ALL"} {...register("filter")}>
-          <option value={"All"}>All</option>
-          <option value={"ACTION"}>Action</option>
-          <option value={"ADVENTURE"}>Adventure</option>
-          <option value={"ANIMATION"}>Animation</option>
-          <option value={"COMEDY"}>Comedy</option>
-          <option value={"CRIME"}>Crime</option>
-          <option value={"DRAMA"}>Drama</option>
-          <option value={"FANTASY"}>Fantasy</option>
-          <option value={"HORROR"}>Horror</option>
-          <option value={"MYSTERY"}>Mystery</option>
-          <option value={"ROMANCE"}>Romance</option>
-          <option value={"SCIENCE_FICTION"}>Science fiction</option>
-          <option value={"THRILLER"}>Thriller</option>
-          <option value={"WESTERN"}>Western</option>
+          <option value={"All"}>{t.genres["ALL"]}</option>
+          <option value={"ACTION"}>{t.genres["ACTION"]}</option>
+          <option value={"ADVENTURE"}>{t.genres["ADVENTURE"]}</option>
+          <option value={"ANIMATION"}>{t.genres["ANIMATION"]}</option>
+          <option value={"COMEDY"}>{t.genres["COMEDY"]}</option>
+          <option value={"CRIME"}>{t.genres["CRIME"]}</option>
+          <option value={"DRAMA"}>{t.genres["DRAMA"]}</option>
+          <option value={"FANTASY"}>{t.genres["FANTASY"]}</option>
+          <option value={"HORROR"}>{t.genres["HORROR"]}</option>
+          <option value={"MYSTERY"}>{t.genres["MYSTERY"]}</option>
+          <option value={"ROMANCE"}>{t.genres["ROMANCE"]}</option>
+          <option value={"SCIENCE_FICTION"}>
+            {t.genres["SCIENCE_FICTION"]}
+          </option>
+          <option value={"THRILLER"}>{t.genres["THRILLER"]}</option>
+          <option value={"WESTERN"}>{t.genres["WESTERN"]}</option>{" "}
         </select>
       </div>
       <div className="flex child:mx-3">
@@ -74,13 +76,13 @@ const SortFilterPanel = () => {
           type="submit"
           className="text-blue-900 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-900"
         >
-          Submit
+          {t.filterPanel.submit}
         </button>
         <button
           type="reset"
           className="text-blue-900 underline hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-900"
         >
-          Reset
+          {t.filterPanel.reset}
         </button>
       </div>
     </form>

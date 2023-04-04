@@ -9,6 +9,9 @@ import React, { useCallback } from "react";
 import IsPremiumMark from "./isPremiumMark";
 import WatchLaterButton from "./watchLaterButton";
 
+import en from "@/locales/en/translation";
+import ua from "@/locales/ua/translation";
+
 interface PropsMovieCard {
   movie: BaseMovie;
 }
@@ -21,7 +24,7 @@ const cutName = (name: string, maxSpaces: number) => {
 
 const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
   const router = useRouter();
-
+  const t = router.locale === "en" ? en : ua;
   const onCardClick = useCallback(() => {
     router.push(appRoutes.movie.movie(movie.id));
   }, []);
@@ -40,7 +43,7 @@ const MovieCard: React.FC<PropsMovieCard> = ({ movie }) => {
       <div className="mx-2 mt-1 flex justify-between">
         <div onClick={onCardClick} className={`text-white`}>
           <div className={`text-md`}>{getShortName(movie.name, 13)}</div>
-          <div className="text-sm">{movie.genre}</div>
+          <div className="text-sm">{t.genres[movie.genre]}</div>
           <div className={`text-sm`}>{movie.postedAt.slice(0, 4)}</div>
         </div>
         <div className="my-auto">

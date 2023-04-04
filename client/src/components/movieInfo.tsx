@@ -4,9 +4,15 @@ import { useAtom } from "jotai";
 import React from "react";
 import IsPremiumMark from "./isPremiumMark";
 import { AiFillStar } from "react-icons/ai";
+import { useRouter } from "next/router";
+
+import en from "@/locales/en/translation";
+import ua from "@/locales/ua/translation";
 
 const MovieInfo = () => {
   const [movie] = useAtom(currentMovieAtom);
+  const router = useRouter();
+  const t = router.locale === "en" ? en : ua;
 
   if (movie)
     return (
@@ -29,7 +35,7 @@ const MovieInfo = () => {
                   <AiFillStar className="text-2xl text-yellow-400" />
                 ) : null}
               </div>
-              <div>{movie.genre}</div>
+              <div>{t.genres[movie.genre]}</div>
             </div>
 
             <div className="text-sm">{movie.postedAt.slice(0, 10)}</div>

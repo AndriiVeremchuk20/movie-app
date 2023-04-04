@@ -9,12 +9,16 @@ import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import ua from "@/locales/ua/translation";
+import en from "@/locales/en/translation";
 
 export const Premium = () => {
   const [user] = useAtom(appUserAtom);
   const [movies, setMovies] = useState<Array<BaseMovie>>([]);
   const router = useRouter();
+  const t = router.locale === "en"? en: ua;
 
   const getPremiumMovies = useMutation(premium.getPremiumMovies, {
     onSuccess(data) {
@@ -37,17 +41,17 @@ export const Premium = () => {
     return (
       <>
         <Head>
-          <title>Premium</title>
+          <title>{t.premiumPage.title}</title>
         </Head>
         <div className="flex max-h-fit min-h-screen justify-center  bg-[url('/img/bg-login-light.jpg')] bg-cover dark:bg-[url('/img/bg-login-dark.jpg')] dark:bg-cover">
-          <div className="mt-36 mb-10 flex w-screen flex-col  bg-neutral-500 bg-opacity-40 pb-10 dark:bg-neutral-800 dark:bg-opacity-50 md:w-3/4">
-            <div className="flex h-fit w-full bg-yellow-600 py-2 text-6xl font-bold text-white">
-              Premium
+          <div className="mb-10 mt-36 flex w-screen flex-col  bg-neutral-500 bg-opacity-40 pb-10 dark:bg-neutral-800 dark:bg-opacity-50 md:w-3/4">
+            <div className="flex h-fit w-full bg-yellow-600 py-3 text-6xl font-bold text-white">
+              {t.premiumPage.title}
             </div>
-            <div className="mt-3 ml-4 text-2xl text-white">
+            <div className="ml-4 mt-3 text-2xl text-white">
               {!user.isPremium
-                ? `Buy premium you get access to movies that are only available for premium user.`
-                : `You're alredy premium`}
+                ? t.premiumPage.msgForNotPremium
+                : t.premiumPage.msgForPremium}
             </div>
             <div className="m-3">
               <Recommendations movies={movies} />
@@ -61,23 +65,8 @@ export const Premium = () => {
                   </div>
                 </div>
               ) : (
-                <div className="mx-10 text-xl text-black dark:text-white">
-                  Dear {user.firstName},<br /> We would like to take this
-                  opportunity to express our sincere gratitude for choosing Get
-                  Movie as your preferred streaming service. <br /> We
-                  appreciate your decision to upgrade to our premium
-                  subscription and trust that you will enjoy the enhanced
-                  benefits that come with it. At Get Movie, we are committed to
-                  providing our customers with the best possible streaming
-                  experience. <br /> We take pride in our extensive collection
-                  of movies and TV shows, which is constantly updated to ensure
-                  that you have access to the latest and greatest content. Your
-                  decision to upgrade to our premium subscription not only helps
-                  us to continue providing you with high-quality content but
-                  also supports our ongoing efforts to improve our services.
-                  Once again, thank you for choosing Get Movie, and we hope that
-                  you will enjoy your premium subscription to the fullest.
-                  Sincerely, GetMovie
+                <div className="mx-10 bg-neutral-200 p-2 text-xl text-black dark:bg-neutral-700 dark:text-white">
+                  {t.premiumPage.textForPremium(user.firstName)}
                 </div>
               )}
             </div>

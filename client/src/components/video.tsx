@@ -11,6 +11,10 @@ import LikeButton from "./likeButton";
 import ShareButton from "./shareButton";
 import WatchLaterButton from "./watchLaterButton";
 import { AiFillEye } from "react-icons/ai";
+import { useRouter } from "next/router";
+
+import en from "@/locales/en/translation";
+import ua from "@/locales/ua/translation";
 
 // for correct counting of views it is
 // better to use onEnded event in video tag
@@ -19,6 +23,8 @@ const Video = () => {
   const [movie, setMovie] = useAtom(currentMovieAtom);
   const [user] = useAtom(appUserAtom);
   const [isWatch, setIsWatch] = useState<boolean>(false);
+  const router = useRouter();
+  const t = router.locale === "en"?en:ua;
 
   const onVideoPlay = useCallback(() => {
     if (!isWatch && movie) {
@@ -42,12 +48,12 @@ const Video = () => {
           <div className="flex h-96 w-full rounded-t-lg bg-black">
             <div className="m-auto">
               <div className="flex text-2xl text-white">
-                <div className="px-1"> Only for</div>
+                <div className="px-1">{t.premiumPage.onlyFor}</div>
                 <Link
                   href={appRoutes.premium}
                   className="font-bold text-yellow-600"
                 >
-                  Premium
+                  {t.premiumPage.title}
                 </Link>
               </div>
             </div>

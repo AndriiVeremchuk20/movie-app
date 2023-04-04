@@ -3,6 +3,10 @@ import premium from "@/api/premium";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
+
+import ua from "@/locales/ua/translation";
+import en from "@/locales/en/translation";
+
 interface CreditCard {
   num: string;
   data: string;
@@ -14,6 +18,7 @@ const PaymentForm: React.FC = () => {
   const [isDisabledDutton, setIsDisabledButton] = useState<boolean>(true);
 
   const router = useRouter();
+  const t = router.locale === "en"? en: ua;
 
   const buyPremium = useMutation(premium.buyPremium, {
     onSuccess() {
@@ -46,12 +51,13 @@ const PaymentForm: React.FC = () => {
     <div className="h-auto w-[550px] rounded-3xl border-[4px] border-inherit border-black bg-[url('/img/bg-credit-card.jpg')] bg-cover">
       <div className="flex w-full flex-wrap gap-2 p-3">
         <label className="relative flex w-full flex-col">
-          <span className="mb-3 text-xl font-bold text-white">Card number</span>
+          <span className="mb-3 text-xl font-bold text-white">{t.premiumPage.card.cardNumber}</span>
           <input
             className="peer rounded-md border-2 border-gray-200 py-2 pl-12 pr-2 placeholder-gray-300"
             type="text"
             name="num"
             placeholder="0000 0000 0000 0000"
+            autoComplete="off"
             maxLength={16}
             onChange={onCardChange}
           />
@@ -74,7 +80,7 @@ const PaymentForm: React.FC = () => {
         <div className=" mt-[100px] mb-8 flex w-full justify-around pr-5">
           <label className="relative flex w-36 flex-col">
             <span className="mb-3 text-xl font-bold text-white">
-              Expire date
+              {t.premiumPage.card.expireDate}
             </span>
             <input
               className="peer rounded-md border-2 border-gray-200 py-2 pl-12 pr-2 placeholder-gray-300"
@@ -82,6 +88,7 @@ const PaymentForm: React.FC = () => {
               placeholder="MM/YY"
               name="data"
               maxLength={4}
+              autoComplete="off"
               onChange={onCardChange}
             />
             <svg
@@ -105,7 +112,6 @@ const PaymentForm: React.FC = () => {
               CVC/CVV
               <span className="group relative">
                 <span className="absolute -right-2 top-1/2 hidden w-max translate-x-full -translate-y-1/2 transform items-center justify-center bg-black px-2 py-1 text-xs text-white group-hover:flex">
-                  {" "}
                   Hey ceci est une infobulle !
                 </span>
                 <svg
@@ -128,6 +134,7 @@ const PaymentForm: React.FC = () => {
               className="peer rounded-md border-2 border-gray-200 py-2 pl-12 pr-2 placeholder-gray-300"
               type="text"
               placeholder="&bull;&bull;&bull;"
+              autoComplete="off"
               maxLength={3}
               name="ccv"
               onChange={onCardChange}

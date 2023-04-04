@@ -6,7 +6,21 @@ export interface BaseMovie {
   posterPath: string;
   postedAt: string;
   isForPremium: boolean;
-  genre: string;
+  genre:
+    | "ALL"
+    | "ACTION"
+    | "ADVENTURE"
+    | "ANIMATION"
+    | "COMEDY"
+    | "CRIME"
+    | "DRAMA"
+    | "FANTASY"
+    | "HORROR"
+    | "MYSTERY"
+    | "ROMANCE"
+    | "SCIENCE_FICTION"
+    | "THRILLER"
+    | "WESTERN";
 }
 
 export interface Movie extends BaseMovie {

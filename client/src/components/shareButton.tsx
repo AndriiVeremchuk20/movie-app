@@ -12,7 +12,7 @@ const ShareButton = () => {
 
   return (
     <button
-      title="Share to"
+      title="Share to/Надіслати"
       className={`text-3xl focus:text-green-600`}
       onClick={onShareClick}
     >
