@@ -12,6 +12,8 @@ router.put("/", authMiddleware, async (req: Request, res: Response) => {
       data: { isPremium: true },
     });
 
+    //artificial delay!!
+    setTimeout(()=>{}, 3000);
     
     res.status(200).send({ msg: "Done" });
   } catch (e) {
