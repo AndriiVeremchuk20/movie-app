@@ -2,13 +2,13 @@ export default {
   search: {
     placeholder: "Пошук",
   },
-  login:{
+  login: {
     title: "Вхід",
     email: "Почта",
     password: "Пароль",
     register: "Зареєструватися",
   },
-  registration:{
+  registration: {
     f_name: "Ім'я",
     l_name: "Призвище",
     age: "Вік",
@@ -16,9 +16,9 @@ export default {
     password: "Пароль",
     rep_password: "Повторіть пароль",
     title: "Реєстрація",
-    login: "Вхід"
+    login: "Вхід",
   },
-  userIcon:{
+  userIcon: {
     login: "Вхід",
     reg: "Реєстрація",
     profile: "Профіль",
@@ -27,7 +27,7 @@ export default {
     logout: "Вихід",
     premium: "Преміум",
   },
-  profile:{
+  profile: {
     age: "Вік",
     email: "Пошта",
     likedMovies: "Всього лайкнуто фільмів",
@@ -35,7 +35,7 @@ export default {
     watched: "Переглянуто",
     deleteAccount: "Видалити акаунт",
   },
-  filterPanel:{
+  filterPanel: {
     sort: "Сортувати",
     dt_up: "Від старих до нових",
     dt_dw: "Від нових до старих",
@@ -45,9 +45,9 @@ export default {
     watched: "За переглядами",
     submit: "Примінити",
     reset: "Скинути",
-    genre: "Жанри"
+    genre: "Жанри",
   },
-  genres:{
+  genres: {
     ALL: "Всі",
     ACTION: "Бойовик",
     ADVENTURE: "Пригоди",
@@ -61,7 +61,7 @@ export default {
     ROMANCE: "Романтика",
     SCIENCE_FICTION: "Наукова фантастика",
     THRILLER: "Трилер",
-    WESTERN: "Вестерн",    
+    WESTERN: "Вестерн",
   },
   premiumPage: {
     title: "Преміум",
@@ -82,11 +82,13 @@ export default {
     вмісту, а також підтримує наші постійні зусилля щодо вдосконалення наших
     послуги. Ще раз дякуємо вам і нам за вибір Get Movie
     сподіваюся, що вам сподобається преміум-підписка.`,
-    msgForNotPremium: "Купивши преміум-підписку ви отримуєте достуб до багатьох фільмів які доступні лише для преміум користувачів",
-    card:{
+    msgForNotPremium:
+      "Купивши преміум-підписку ви отримуєте достуб до багатьох фільмів які доступні лише для преміум користувачів",
+    card: {
       cardNumber: "Номер Карти",
       expireDate: "Термін Карти",
+      error: "Упс.. Сталася помилка, спробуйте пізніше.",
+      success: "Платіж успішний.",
     },
   },
-  
-}
+};

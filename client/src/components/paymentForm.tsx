@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 import ua from "@/locales/ua/translation";
 import en from "@/locales/en/translation";
+import { Loader } from "./loader";
 
 interface CreditCard {
   num: string;
@@ -22,7 +23,9 @@ const PaymentForm: React.FC = () => {
 
   const buyPremium = useMutation(premium.buyPremium, {
     onSuccess() {
-      router.reload();
+      setTimeout(()=>{
+        router.reload();
+      }, 800)
     },
     onError() {},
   });
@@ -46,6 +49,20 @@ const PaymentForm: React.FC = () => {
       setIsDisabledButton(true);
     }
   }, [card]);
+
+  if(buyPremium.isLoading){
+    return(<div>
+      <Loader/>
+    </div>)
+  }
+
+  else if(buyPremium.isError){
+    return(<div className="bg-red-500 font-bold text-black text-2xl p-4">{t.premiumPage.card.error}</div>)
+  }
+
+  else if(buyPremium.isSuccess){
+    return(<div className="bg-green-500 font-bold text-black text-2xl p-4">{t.premiumPage.card.success}</div>)
+  }
 
   return (
     <div className="h-auto w-[550px] rounded-3xl border-[4px] border-inherit border-black bg-[url('/img/bg-credit-card.jpg')] bg-cover">
@@ -160,7 +177,7 @@ const PaymentForm: React.FC = () => {
             type="submit"
             disabled={isDisabledDutton}
             onClick={onBuyPremiumClick}
-            className="h-full w-full rounded-b-2xl bg-orange-400 text-xl font-bold text-white hover:bg-orange-600 disabled:bg-gray-500"
+            className="h-full w-full rounded-b-2xl bg-yellow-600 text-xl font-bold text-white hover:bg-orange-600 disabled:bg-gray-500"
           >
             Buy
           </button>

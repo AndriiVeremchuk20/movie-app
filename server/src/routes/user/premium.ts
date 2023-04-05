@@ -13,9 +13,10 @@ router.put("/", authMiddleware, async (req: Request, res: Response) => {
     });
 
     //artificial delay!!
-    setTimeout(()=>{}, 3000);
+    setTimeout(()=>{
+      res.status(200).send({ msg: "Done" });
+    }, 3000);
     
-    res.status(200).send({ msg: "Done" });
   } catch (e) {
     console.log(e);
     res.status(500).send({ msg: "Server error" });
