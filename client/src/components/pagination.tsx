@@ -27,7 +27,7 @@ const Pagination: React.FC<PropPagination> = ({ pages, currentPage }) => {
     <div className="mt-3 flex w-full justify-center text-2xl font-bold text-white">
       <div className="flex ">
         <div className="flex">
-          {arr.map((i) => (
+          {arr.length >1?arr.map((i) => (
             <div
               key={i}
               className={`m-1 cursor-pointer  rounded-sm bg-neutral-700 p-2 ${
@@ -39,7 +39,7 @@ const Pagination: React.FC<PropPagination> = ({ pages, currentPage }) => {
             >
               {i}
             </div>
-          ))}
+          )): null}
         </div>
       </div>
     </div>

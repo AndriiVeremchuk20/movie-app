@@ -16,6 +16,7 @@ route.get("/", async (req: Request, res: Response) => {
     const search = req.query.search || "";
     const filter = req.query.filter as string;
     const sort = req.query.sort as string;
+    console.log(sort);
 
     const numOfMovies = await prisma.movie.count({
       where: {
@@ -56,10 +57,10 @@ route.get("/", async (req: Request, res: Response) => {
       movies.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sort === "NAME_UP") {
       movies.sort((a, b) => b.name.localeCompare(a.name));
-    } else if (sort === "LIKES") {
-      movies.sort((a, b) => b.likes.length - a.likes.length);
-    } else if (sort === "WATCHED"){
+    }  else if (sort === "WATCHED"){
       movies.sort((a, b) => b.watched.length - a.watched.length);
+    }else if (sort === "LIKES") {
+      movies.sort((a, b) => b.likes.length - a.likes.length);
     }
 
     res.status(200).send({
