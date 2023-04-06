@@ -19,7 +19,7 @@ const Profile = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const router = useRouter();
   const [watchedMovies, setWatchedMovies] = useState<Array<BaseMovie>>([]);
-  const t = router.locale === "en"? en : ua;
+  const t = router.locale === "en" ? en : ua;
 
   const deleteAccountMutation = useMutation(auth.deleteAccount, {
     onSuccess(data) {
@@ -57,19 +57,29 @@ const Profile = () => {
           <title>{user.firstName}</title>
         </Head>
         <div className="flex max-h-fit min-h-screen w-screen justify-center bg-[url('/img/bg-profile-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-profile-dark.jpg')] dark:bg-fixed">
-          <div className=" mt-28 mb-10 flex h-auto flex-col justify-center bg-neutral-900 bg-opacity-60 pb-10 dark:bg-neutral-900 dark:bg-opacity-60 md:w-3/4">
+          <div className=" mb-10 mt-28 flex h-auto flex-col justify-center bg-neutral-900 bg-opacity-60 pb-10 dark:bg-neutral-900 dark:bg-opacity-60 md:w-3/4">
             <div className="m-auto">
               <div className="mt-6 flex bg-sky-600 bg-opacity-30 p-5 shadow-md shadow-sky-900">
                 <UploadAvatarForm />
-                <div className="my-5 mx-3 text-2xl text-white">
+                <div className="mx-3 my-5 text-2xl text-white">
                   <div>
                     {user.firstName} {user.lastName}
                   </div>
-                  <div>{t.profile.age}: {user.age}</div>
-                  <a href={`mailto:${user.email}`}>{t.profile.email}: {user.email}</a>
-                  <div>{t.profile.likedMovies}: {user.likes.length}</div>
-                  <div>{t.profile.addedwl}: {user.watchLater.length}</div>
-                  <div>{t.profile.watched}: {user.watched}</div>
+                  <div>
+                    {t.profile.age}: {user.age}
+                  </div>
+                  <a href={`mailto:${user.email}`}>
+                    {t.profile.email}: {user.email}
+                  </a>
+                  <div>
+                    {t.profile.likedMovies}: {user.likes.length}
+                  </div>
+                  <div>
+                    {t.profile.addedwl}: {user.watchLater.length}
+                  </div>
+                  <div>
+                    {t.profile.watched}: {user.watched}
+                  </div>
                 </div>
                 <button
                   onClick={onDeleteAccountClick}

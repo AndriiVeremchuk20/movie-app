@@ -18,7 +18,7 @@ const ChangeTheme = () => {
   return (
     <button
       onClick={onButtonClick}
-      className="fixed top-28 left-20 rounded-full bg-neutral-800 p-4 text-2xl outline-none dark:bg-neutral-300"
+      className="fixed left-20 top-28 rounded-full bg-neutral-800 p-4 text-2xl outline-none dark:bg-neutral-300"
     >
       {isDark ? <BsFillSunFill className="text-white" /> : <BsFillMoonFill />}
     </button>

@@ -24,7 +24,7 @@ const Video = () => {
   const [user] = useAtom(appUserAtom);
   const [isWatch, setIsWatch] = useState<boolean>(false);
   const router = useRouter();
-  const t = router.locale === "en"?en:ua;
+  const t = router.locale === "en" ? en : ua;
 
   const onVideoPlay = useCallback(() => {
     if (!isWatch && movie) {

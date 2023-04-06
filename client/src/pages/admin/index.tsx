@@ -146,7 +146,7 @@ const AdminPanel = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex max-h-fit min-h-screen justify-center bg-gradient-to-r from-sky-900 to-neutral-900 ">
-        <div className="mt-24 mb-10 flex h-auto justify-center bg-neutral-700 bg-opacity-50 p-9 pb-10">
+        <div className="mb-10 mt-24 flex h-auto justify-center bg-neutral-700 bg-opacity-50 p-9 pb-10">
           <div className=" w-[900px]">
             {statData ? (
               <>

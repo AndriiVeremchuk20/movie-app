@@ -28,11 +28,11 @@ const login = async (body: LoginRequestBody) => {
 
 const authentication = async () => {
   const token = Token.get();
-    const response = await client.get<AuthResponseData>(paths.auth, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    Token.set(response.data.token);
-    return response.data;
+  const response = await client.get<AuthResponseData>(paths.auth, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  Token.set(response.data.token);
+  return response.data;
 };
 
 const deleteAccount = async () => {

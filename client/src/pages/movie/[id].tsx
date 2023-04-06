@@ -25,7 +25,7 @@ const MoviePage = () => {
       setCurrentMovie(data);
     },
     onError(e) {
-      router.replace(appRoutes.movie.movieNotFound)
+      router.replace(appRoutes.movie.movieNotFound);
     },
   });
 
@@ -83,12 +83,12 @@ const MoviePage = () => {
                 <div className="mt-3 flex child:mx-2">
                   <button
                     onClick={onEditClick}
-                    className={`bg-orange-500 py-1 px-3 font-bold text-white`}
+                    className={`bg-orange-500 px-3 py-1 font-bold text-white`}
                   >
                     Edit
                   </button>
                   <button
-                    className={`bg-red-600 py-1 px-3 font-bold text-white `}
+                    className={`bg-red-600 px-3 py-1 font-bold text-white `}
                     onClick={onDeleteClick}
                   >
                     Delete

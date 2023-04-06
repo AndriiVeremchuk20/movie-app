@@ -13,7 +13,7 @@ const Footer = () => {
         href="https://github.com/AndriiVeremchuk20"
         target={"_blank"}
         rel={"noreferrer"}
-        className={`mt-3 mr-4 flex w-fit text-4xl`}
+        className={`mr-4 mt-3 flex w-fit text-4xl`}
       >
         <BsGithub className="mr-2" /> <div>Git</div>
       </a>

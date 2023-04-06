@@ -18,7 +18,7 @@ export const Premium = () => {
   const [user] = useAtom(appUserAtom);
   const [movies, setMovies] = useState<Array<BaseMovie>>([]);
   const router = useRouter();
-  const t = router.locale === "en"? en: ua;
+  const t = router.locale === "en" ? en : ua;
 
   const getPremiumMovies = useMutation(premium.getPremiumMovies, {
     onSuccess(data) {

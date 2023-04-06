@@ -62,7 +62,7 @@ const Users = () => {
 
   return (
     <div className="flex max-h-fit min-h-screen justify-center bg-gradient-to-r from-sky-700 to-indigo-500">
-      <div className="mt-36 mb-10 flex h-auto w-3/4 justify-center bg-sky-800 bg-opacity-25 pb-10 dark:bg-opacity-50">
+      <div className="mb-10 mt-36 flex h-auto w-3/4 justify-center bg-sky-800 bg-opacity-25 pb-10 dark:bg-opacity-50">
         <div className="m-3 w-full">
           <div className="m-1 flex justify-center">
             <input

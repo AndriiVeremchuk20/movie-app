@@ -3,6 +3,7 @@ import prisma from "../../../prisma";
 import isPremiumMiddleware from "../../middleware/isPremium";
 import { getMovieGenreByName } from "../../utils/getMovieGenreByName";
 import watchedRoute from "./watched";
+import { orderBy } from "../../types/orderBy.model";
 
 const route = Router();
 const LIMIT = 12;
@@ -11,12 +12,39 @@ route.use("/watched", watchedRoute);
 
 route.get("/", async (req: Request, res: Response) => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const skip = (page - 1) * LIMIT;
-    const search = req.query.search || "";
-    const filter = req.query.filter as string;
-    const sort = req.query.sort as string;
-    console.log(sort);
+    const page = parseInt(req.query.page as string) || 1; // curr page
+    const skip = (page - 1) * LIMIT; // max of getting movies
+    const search = req.query.search || ""; // search param
+    const filter = req.query.filter as string; // filter param for gengres
+    const sort = req.query.sort as string; // sort param
+
+    const orderByArr: orderBy = [];
+
+    switch (sort) {
+      case "DATE_UP":
+        orderByArr.push({ postedAt: "asc" });
+        break;
+      case "DATE_DOWN":
+        orderByArr.push({ postedAt: "desc" });
+        break;
+      case "LIKES":
+        orderByArr.push({ likes: { _count: "desc" } });
+        break;
+      case "WATCHED":
+        orderByArr.push({ watched: { _count: "desc" } });
+        break;
+      case "NAME_UP":
+        orderByArr.push({ name: "desc" });
+        break;
+      case "NAME_DOWN":
+        orderByArr.push({ name: "asc" });
+
+        break;
+
+      default:
+        orderByArr.push({ postedAt: "desc" });
+        break;
+    }
 
     const numOfMovies = await prisma.movie.count({
       where: {
@@ -46,25 +74,18 @@ route.get("/", async (req: Request, res: Response) => {
         likes: true,
         watched: true,
       },
-      orderBy: [
-        { postedAt: `${sort === "DATE_UP" ? "asc" : "desc"}` },
-      ],
+      orderBy: orderByArr,
+
       take: LIMIT,
       skip: skip,
     });
 
-    if (sort === "NAME_DOWN") {
-      movies.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sort === "NAME_UP") {
-      movies.sort((a, b) => b.name.localeCompare(a.name));
-    }  else if (sort === "WATCHED"){
-      movies.sort((a, b) => b.watched.length - a.watched.length);
-    }else if (sort === "LIKES") {
-      movies.sort((a, b) => b.likes.length - a.likes.length);
-    }
-
     res.status(200).send({
-      movies: movies.map((movie) => ({ ...movie, likes: movie.likes.length, watched: movie.watched.length })),
+      movies: movies.map((movie) => ({
+        ...movie,
+        likes: movie.likes.length,
+        watched: movie.watched.length,
+      })),
       pages: Math.ceil(numOfMovies / LIMIT),
       page: page,
     });

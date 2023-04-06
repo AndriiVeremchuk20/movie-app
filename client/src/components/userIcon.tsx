@@ -19,7 +19,7 @@ export const UserIcon = () => {
   const [user, setUser] = useAtom(appUserAtom);
   const [showDropMenu, setShowDropMenu] = useState<boolean>(false);
   const router = useRouter();
-  const t = router.locale==="en"?en:ua;
+  const t = router.locale === "en" ? en : ua;
 
   const onIconClick = useCallback(() => {
     setShowDropMenu((prev) => !prev);
@@ -47,7 +47,7 @@ export const UserIcon = () => {
           </div>
         </div>
         {showDropMenu ? (
-          <div className="text-1xl absolute top-24 right-3 h-auto w-72 cursor-pointer rounded-md bg-neutral-500 text-white shadow-sm shadow-black child-hover:bg-neutral-800">
+          <div className="text-1xl absolute right-3 top-24 h-auto w-72 cursor-pointer rounded-md bg-neutral-500 text-white shadow-sm shadow-black child-hover:bg-neutral-800">
             {user && user.role === Role.admin ? (
               <>
                 <Link
@@ -77,7 +77,8 @@ export const UserIcon = () => {
               href={appRoutes.profile.index}
               className="flex w-full px-3 py-3 text-xl "
             >
-              <AiOutlineUser className="mx-3 text-2xl" /> <div>{t.userIcon.profile}</div>
+              <AiOutlineUser className="mx-3 text-2xl" />{" "}
+              <div>{t.userIcon.profile}</div>
             </Link>
             <Link
               href={appRoutes.profile.watchLater}
@@ -98,7 +99,8 @@ export const UserIcon = () => {
               onClick={onLogoutClick}
               className="flex w-full px-3 py-3 text-xl"
             >
-              <RiLogoutBoxLine className="mx-3 text-2xl" /> <div>{t.userIcon.logout}</div>
+              <RiLogoutBoxLine className="mx-3 text-2xl" />{" "}
+              <div>{t.userIcon.logout}</div>
             </div>
             {user && !user.isPremium ? (
               <Link

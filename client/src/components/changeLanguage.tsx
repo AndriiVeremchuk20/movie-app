@@ -12,9 +12,23 @@ export const ChangeLanguage = () => {
   };
 
   return (
-    <select className=" mx-3 bg-inherit dark:text-white text-black outline-none text-xl" defaultValue={locale} onChange={changeLanguage}>
-      <option value={"ua"} className="bg-neutral-500 dark:text-white text-black outline-none text-2xl">🇺🇦 UA</option>
-      <option value={"en"} className="bg-neutral-500 dark:text-white text-black outline-none text-2xl">🇺🇸 EN</option>
+    <select
+      className=" mx-3 bg-inherit text-xl text-black outline-none dark:text-white"
+      defaultValue={locale}
+      onChange={changeLanguage}
+    >
+      <option
+        value={"ua"}
+        className="bg-neutral-500 text-2xl text-black outline-none dark:text-white"
+      >
+        🇺🇦 UA
+      </option>
+      <option
+        value={"en"}
+        className="bg-neutral-500 text-2xl text-black outline-none dark:text-white"
+      >
+        🇺🇸 EN
+      </option>
     </select>
   );
 };

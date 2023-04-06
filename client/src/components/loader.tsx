@@ -2,7 +2,7 @@ import React from "react";
 
 export const Loader = () => {
   return (
-    <div role="status" className="w-full f-full">
+    <div role="status" className="f-full w-full">
       <svg
         aria-hidden="true"
         className="mr-2 h-8 w-8 animate-spin fill-neutral-900 text-gray-200"

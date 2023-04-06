@@ -47,7 +47,7 @@ function App(props: AppProps) {
     <>
       <AppWrapper>
         <Header />
-      <AppInner {...props} />
+        <AppInner {...props} />
         <Footer />
       </AppWrapper>
       <ChangeThemeButton />

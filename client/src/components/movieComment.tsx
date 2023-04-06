@@ -10,7 +10,7 @@ const MovieComment = () => {
 
   if (movie)
     return (
-      <div className="mb-4 flex flex-col rounded-md bg-neutral-900 bg-opacity-40 py-5  px-20">
+      <div className="mb-4 flex flex-col rounded-md bg-neutral-900 bg-opacity-40 px-20  py-5">
         {user ? (
           <div className="flex w-full justify-center">
             <WriteComment />

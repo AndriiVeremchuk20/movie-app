@@ -3,7 +3,6 @@ import premium from "@/api/premium";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
-
 import ua from "@/locales/ua/translation";
 import en from "@/locales/en/translation";
 import { Loader } from "./loader";
@@ -19,13 +18,13 @@ const PaymentForm: React.FC = () => {
   const [isDisabledDutton, setIsDisabledButton] = useState<boolean>(true);
 
   const router = useRouter();
-  const t = router.locale === "en"? en: ua;
+  const t = router.locale === "en" ? en : ua;
 
   const buyPremium = useMutation(premium.buyPremium, {
     onSuccess() {
-      setTimeout(()=>{
+      setTimeout(() => {
         router.reload();
-      }, 800)
+      }, 800);
     },
     onError() {},
   });
@@ -50,25 +49,33 @@ const PaymentForm: React.FC = () => {
     }
   }, [card]);
 
-  if(buyPremium.isLoading){
-    return(<div>
-      <Loader/>
-    </div>)
-  }
-
-  else if(buyPremium.isError){
-    return(<div className="bg-red-500 font-bold text-black text-2xl p-4">{t.premiumPage.card.error}</div>)
-  }
-
-  else if(buyPremium.isSuccess){
-    return(<div className="bg-green-500 font-bold text-black text-2xl p-4">{t.premiumPage.card.success}</div>)
+  if (buyPremium.isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  } else if (buyPremium.isError) {
+    return (
+      <div className="bg-red-500 p-4 text-2xl font-bold text-black">
+        {t.premiumPage.card.error}
+      </div>
+    );
+  } else if (buyPremium.isSuccess) {
+    return (
+      <div className="bg-green-500 p-4 text-2xl font-bold text-black">
+        {t.premiumPage.card.success}
+      </div>
+    );
   }
 
   return (
-    <div className="h-auto w-[550px] rounded-3xl border-[4px] border-inherit border-black bg-[url('/img/bg-credit-card.jpg')] bg-cover">
+    <div className="h-auto w-[550px] rounded-3xl border-[4px] border-black border-inherit bg-[url('/img/bg-credit-card.jpg')] bg-cover">
       <div className="flex w-full flex-wrap gap-2 p-3">
         <label className="relative flex w-full flex-col">
-          <span className="mb-3 text-xl font-bold text-white">{t.premiumPage.card.cardNumber}</span>
+          <span className="mb-3 text-xl font-bold text-white">
+            {t.premiumPage.card.cardNumber}
+          </span>
           <input
             className="peer rounded-md border-2 border-gray-200 py-2 pl-12 pr-2 placeholder-gray-300"
             type="text"
@@ -80,7 +87,7 @@ const PaymentForm: React.FC = () => {
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute bottom-0 left-0 -mb-0.5 h-6 w-6 translate-x-1/2 -translate-y-1/2 transform text-black peer-placeholder-shown:text-gray-300"
+            className="absolute bottom-0 left-0 -mb-0.5 h-6 w-6 -translate-y-1/2 translate-x-1/2 transform text-black peer-placeholder-shown:text-gray-300"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -94,7 +101,7 @@ const PaymentForm: React.FC = () => {
           </svg>
         </label>
 
-        <div className=" mt-[100px] mb-8 flex w-full justify-around pr-5">
+        <div className=" mb-8 mt-[100px] flex w-full justify-around pr-5">
           <label className="relative flex w-36 flex-col">
             <span className="mb-3 text-xl font-bold text-white">
               {t.premiumPage.card.expireDate}
@@ -110,7 +117,7 @@ const PaymentForm: React.FC = () => {
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute bottom-0 left-0 -mb-0.5 h-6 w-6 translate-x-1/2 -translate-y-1/2 transform text-black peer-placeholder-shown:text-gray-300"
+              className="absolute bottom-0 left-0 -mb-0.5 h-6 w-6 -translate-y-1/2 translate-x-1/2 transform text-black peer-placeholder-shown:text-gray-300"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -128,7 +135,7 @@ const PaymentForm: React.FC = () => {
             <span className="mb-3 flex items-center gap-3 text-xl font-bold text-white">
               CVC/CVV
               <span className="group relative">
-                <span className="absolute -right-2 top-1/2 hidden w-max translate-x-full -translate-y-1/2 transform items-center justify-center bg-black px-2 py-1 text-xs text-white group-hover:flex">
+                <span className="absolute -right-2 top-1/2 hidden w-max -translate-y-1/2 translate-x-full transform items-center justify-center bg-black px-2 py-1 text-xs text-white group-hover:flex">
                   Hey ceci est une infobulle !
                 </span>
                 <svg
@@ -158,7 +165,7 @@ const PaymentForm: React.FC = () => {
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="absolute bottom-0 left-0 -mb-0.5 h-6 w-6 translate-x-1/2 -translate-y-1/2 transform text-black peer-placeholder-shown:text-gray-300"
+              className="absolute bottom-0 left-0 -mb-0.5 h-6 w-6 -translate-y-1/2 translate-x-1/2 transform text-black peer-placeholder-shown:text-gray-300"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

@@ -27,7 +27,6 @@ const Login = () => {
   const router = useRouter();
   const t = router.locale === "en" ? en : ua;
 
-
   const {
     register,
     handleSubmit,
@@ -68,7 +67,9 @@ const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={`m-auto flex h-auto w-96 flex-col rounded-xl bg-neutral-900 bg-opacity-60 p-6 shadow-2xl`}
       >
-        <div className="font-mono text-3xl font-bold text-white">{t.login.title}</div>
+        <div className="font-mono text-3xl font-bold text-white">
+          {t.login.title}
+        </div>
         <div className="flex flex-col">
           <input
             type="email"
@@ -117,11 +118,7 @@ const Login = () => {
               <Loader />
             </div>
           ) : (
-            <>
-            {
-              t.login.title
-            }
-            </>
+            <>{t.login.title}</>
           )}
         </button>
         <div className="flex w-full justify-center">

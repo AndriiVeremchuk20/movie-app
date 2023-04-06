@@ -17,7 +17,7 @@ export const SearchBar = () => {
   const debounce = useDebounce(searchText, 1000);
   const router = useRouter();
   const t = router.locale === "en" ? en : ua;
-  
+
   const searchMutation = useMutation(movies.searchMovies, {
     onSuccess(data) {
       console.log(data);
@@ -90,4 +90,3 @@ export const SearchBar = () => {
     </div>
   );
 };
-

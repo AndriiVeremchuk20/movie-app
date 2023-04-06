@@ -45,7 +45,7 @@ const EditMovieForm: React.FC<PropEditMovieForm> = ({
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 z-10 flex h-full w-screen bg-gray-500 bg-opacity-50">
+    <div className="fixed left-0 top-0 z-10 flex h-full w-screen bg-gray-500 bg-opacity-50">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={` m-auto mt-24 w-fit rounded-md bg-cyan-700 p-2`}

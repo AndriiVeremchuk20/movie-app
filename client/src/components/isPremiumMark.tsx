@@ -14,7 +14,7 @@ interface PropIsPremiumMark {
 
 const IsPremiumMark: React.FC<PropIsPremiumMark> = ({ isForPremium }) => {
   const router = useRouter();
-  const t = router.locale === "en"? en: ua;
+  const t = router.locale === "en" ? en : ua;
   const [user] = useAtom(appUserAtom);
   const premiumLink = (
     <Link
