@@ -70,7 +70,7 @@ const Login = () => {
         <div className="font-mono text-3xl font-bold text-white">
           {t.login.title}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <input
             type="email"
             className="m-2 w-80 rounded p-2 text-xl placeholder-slate-600 shadow-lg outline-none dark:bg-slate-300"
