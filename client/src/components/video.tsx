@@ -60,6 +60,7 @@ const Video = () => {
           </div>
         ) : (
           <video
+            poster="/img/moviesPoster.jpg"
             onPlay={onVideoPlay}
             className={`h-auto w-full rounded-t-lg outline-none`}
             controls
