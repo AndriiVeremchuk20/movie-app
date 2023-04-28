@@ -50,7 +50,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex max-h-fit min-h-screen justify-center bg-[url('/img/bg-index-light.jpg')] bg-cover bg-fixed dark:bg-[url('/img/bg-index-dark.jpg')] dark:bg-fixed">
-        <div className=" mb-10 mt-24 flex h-auto justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
+        <div className=" mb-10 mt-24 flex h-auto w-[1400px] justify-center bg-neutral-500 bg-opacity-40 p-9 pb-10 dark:bg-neutral-700 dark:bg-opacity-50">
           <div>
             {query.search ? (
               <div className="m-2 text-2xl">{`Results for "${query.search}" :`}</div>
