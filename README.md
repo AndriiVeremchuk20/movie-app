@@ -83,7 +83,7 @@ Administrator:
 ## Getting Started
 ### Database
 
-To start database move to [file](.databaseDocker/docker-compose.yml), in terminal and write:
+To start database move to [file](./databaseDocker/docker-compose.yml), in terminal and write:
 
 ```
 docker-compose up
