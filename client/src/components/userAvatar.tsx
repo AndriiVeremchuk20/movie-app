@@ -16,8 +16,8 @@ const UserAvatar: React.FC<PropsUserAvatar> = ({ avatarPath }) => {
           className={`h-full w-full rounded-full`}
         />
       ) : (
-        <div>
-          <BiUserCircle className={`h-full w-full rounded-full`} />
+        <div className="h-full w-full">	
+          <BiUserCircle className={`h-full w-full`} />
         </div>
       )}
     </div>
