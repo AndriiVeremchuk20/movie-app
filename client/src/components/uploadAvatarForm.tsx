@@ -54,13 +54,13 @@ const UploadAvatarForm = () => {
               Change avatar
             </button>
           </div>
-
+		{
+			user.avatarPath?
           <button
             onClick={onRemoveAvatarClick}
             className="m-1 ml-16 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-700"
-          >
-            Remove avatar
-          </button>
+		> Remove avatar </button> : null
+		}
         </div>
       </div>
     );
